@@ -3,9 +3,9 @@ CREATE TABLE post (
    content VARCHAR(1000) NOT NULL,
    title VARCHAR(20) NOT NULL,
    post_date DATE NOT NULL,
-   customer_id INT NOT NULL,
-   category_id VARCHAR(2),
+   customer_id VARCHAR(20) NOT NULL,
+   post_category_id VARCHAR(2) NOT NULL,
 
    FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
-   FOREIGN KEY(category_id) REFERENCES category(category_id)
+   FOREIGN KEY(post_category_id) REFERENCES post_category(post_category_id)
 );

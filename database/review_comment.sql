@@ -4,6 +4,7 @@ CREATE TABLE review_comment(
    review_id INT NOT NULL,
    content VARCHAR(100) NOT NULL,
    posted_date DATE NOT NULL,
-   -- FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+
+   FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
    FOREIGN KEY(review_id) REFERENCES review(review_id)
 );
