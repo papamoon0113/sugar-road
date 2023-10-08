@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,11 +11,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostDTO {
-	private int postId;
-	private String content;
-	private String title;
-	private LocalDateTime postDate;
-	private String customerId;
-	private String postCategoryId;
+public class DessertDTO {
+    private String dessertId;
+    private String dessertDesc;
 }
