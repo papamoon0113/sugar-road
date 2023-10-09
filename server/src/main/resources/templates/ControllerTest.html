@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>[[${title}]]</title>
+</head>
+<body>
+  <h1 th:text="${title}">컨트롤러 연결이 되지 않았습니다.</h1>
+  <hr/>
+  <ul th:each="dto:${dtos}">
+    <li th:text="${dto.title}"></li>
+    <li th:text="${dto.content}"></li>
+  </ul>
+</body>
+</html>
