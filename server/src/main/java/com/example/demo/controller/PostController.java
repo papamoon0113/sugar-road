@@ -28,6 +28,16 @@ public class PostController {
 				.postCategoryId("_D")
 				.build()
 		);
+		dtos.add(
+			PostDTO.builder()
+				.postId(2)
+				.content("우헤헤 한글날인데 강의 듣는다")
+				.title("우헤헤 오늘 빨간날인데")
+				.postDate(LocalDateTime.of(2023, 10, 9, 9, 0))
+				.customerId("sejong king")
+				.postCategoryId("_D")
+				.build()
+		);
 
 		mav.addObject("title", "GET /post");
 		mav.addObject("dtos", dtos);
@@ -38,7 +48,7 @@ public class PostController {
 	@GetMapping("/post_dto")
 	public ResponseEntity<?> readPostDTO(HttpServletRequest req){
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println("HTTP 호출 : " + req.getHeader("referer"));
 		List<PostDTO> dtos = new ArrayList<>();
 		dtos.add(
 			PostDTO.builder()
@@ -47,6 +57,16 @@ public class PostController {
 				.title("테스트")
 				.postDate(LocalDateTime.of(2023, 8, 17, 9, 0))
 				.customerId("papamoon0113")
+				.postCategoryId("_D")
+				.build()
+		);
+		dtos.add(
+			PostDTO.builder()
+				.postId(2)
+				.content("우헤헤 한글날인데 강의 듣는다")
+				.title("우헤헤 오늘 빨간날인데")
+				.postDate(LocalDateTime.of(2023, 10, 9, 9, 0))
+				.customerId("sejong king")
 				.postCategoryId("_D")
 				.build()
 		);

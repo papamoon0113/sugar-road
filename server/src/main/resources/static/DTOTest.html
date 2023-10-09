@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+  const CONTEXT = "/post_dto";
+  const host = "http://localhost:1023"
+
+  class HTTP {
+  static async request(api, method, data , contentType = "application/json"){
+    let options = {};
+    options.headers = new Headers({"Content-Type" : contentType});
+    options.url = this.backendHost + api;
+    options.method = method;
+
+    if (data && contentType == "application/json"){
+      options.body = JSON.stringify(data);
+    }
+
+    return fetch(options.url, options)
+        .then(response => {return response.json()})
+        .catch(error => console.log(error));
+    }
+  }
+
+  Object.defineProperty(HTTP, "backendHost", {
+    value : host + CONTEXT
+  });
+
+  let btn = document.createElement("button");
+  btn.textContent = "Console 확인해보세요.";
+  btn.addEventListener("click", ()=>{HTTP.request("", "GET").then(json => console.log(json))})
+  document.body.appendChild(btn);
+</script>
+</html>
