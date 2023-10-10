@@ -9,18 +9,32 @@
   <link rel="stylesheet" href="css/example.css">
   <title>Home</title>
   <style>
+    .loader {
+      border: 8px solid #f3f3f3; /* Light grey */
+      border-top: 8px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+    }
 
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
 
   <div class="app-body">
-      <div class="content">
+      <div class="content infinite-scroll">
         <img src = "images/ExampleStoreDetail.png" class = "screen" usemap="#clickmap"/>
 <!--        <map name="clickmap">-->
 <!--          <area shape="rect" coords="20,200,180,400" href="/ExampleStoreDetail.html">-->
 <!--        </map>-->
-        <img src = "images/ExampleReview.png" style="width:190px"/>
+        <div id = "review">
+          <img src = "images/ExampleReview.png" style="width:190px"/>
+        </div>
       </div>
     <div class="btn-group nav" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary nav-button" onclick="location.href='/ExampleHome.html'">H</button>
@@ -32,4 +46,27 @@
   </div>
   <h3>가게 정보 상세 <br> 밑에 리뷰</h3>
 </body>
+<script>
+  const target = document.querySelector('.infinite-scroll');
+  let i = 0;
+  function update() {
+    let newReview = new Image(190); // 이 부분 나중에 AJAX로 수정하면 됨
+    newReview.src = "images/ExampleReview.png";
+<!--    for(let i = 0; i < 3; i++){-->
+        target.appendChild(newReview);
+<!--    }-->
+  }
+  target.addEventListener('scroll',()=>{
+    console.log(window.scrollY);
+    console.log(window.innerHeight);
+    console.log(document.documentElement.scrollHeight);
+    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && i++ < 20){
+      update();
+    }
+  });
+
+
+
+
+</script>
 </html>

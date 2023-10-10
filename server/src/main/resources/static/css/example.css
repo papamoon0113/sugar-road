@@ -43,3 +43,8 @@ body {
   max-height : 424px;
 }
 
+.infinite-scroll {
+    display: flex;
+    flex-wrap: wrap;
+}
+
