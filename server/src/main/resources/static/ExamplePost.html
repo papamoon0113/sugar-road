@@ -9,14 +9,29 @@
   <link rel="stylesheet" href="css/example.css">
   <title>Home</title>
   <style>
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #F1ABCC;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 2s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
 
   <div class="app-body">
-      <div class="content">
+      <div class="content infinite-scroll">
         <img src = "images/ExamplePost.png" class = "screen" usemap="#clickmap"/>
+        <img src = "images/ExampleReview.png" class = "screen"/>
       </div>
     <div class="btn-group nav" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary nav-button" onclick="location.href='/ExampleHome.html'">H</button>
@@ -28,4 +43,46 @@
   </div>
   <h3>게시글 세부</h3>
 </body>
+<script>
+  const target = document.querySelector('.infinite-scroll');
+let i = 0;
+let flag = true;
+
+function update() {
+  let newReview = new Image();
+  newReview.src = "images/ExampleReview.png";
+  newReview.classList.add("screen");
+  target.appendChild(newReview);
+}
+
+function asyncUpdate(){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("async Update!");
+        }, 1500);
+    });
+}
+
+target.addEventListener("scrollend", (e) => {
+    if (flag) {
+        flag = false;
+        let loader = document.createElement("div");
+        loader.classList.add("loader");
+        target.append(loader);
+        let msg = document.createElement("div");
+        msg.textContent = "response waiting...";
+        msg.style.fontSize = "0.5em";
+        target.append(msg);
+
+        // 이 밑 부분 나중에 AJAX로 수정하면 됨
+        asyncUpdate().then((v)=>{
+          console.log(v);
+          flag = true;
+          loader.remove();
+          msg.remove();
+          update();
+        });
+    }
+});
+</script>
 </html>
