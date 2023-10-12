@@ -30,16 +30,15 @@
     </div>
   </div>
   <h3>홈 화면<br/>
-    Request :
+    Request : GET /post ... GET /store ... GET /review ... 또는 GET /like
     <br/>
-    Controller 이름 :
+    Controller 이름 : PostController StoreController ReviewController 또는 LikeController
     <br/>
-    @ :
+    @ : GetMapping("/post ...") GetMapping("/store ...") GetMapping("/review ...") 또는 GetMapping("/Like ...")
     <br/>
-    Method 이름 :
+    Method 이름 : readPost ... readStore ... readReview ... 또는 readLike ...
     <br/>
-    Return 타입 :
-    <br/>
-    잘 모르겠으면 ExampleMap 보시오...</h3>
+    Return 타입 : DTO(일 가능성이 높을듯)
+    </h3>
 </body>
 </html>
