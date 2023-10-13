@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PostCommentDTO {
 	private int postCommentId;
-	private String memberId;
+	private String customerId;
 	private int postId;
 	private String content;
 	private LocalDateTime postedDate;
