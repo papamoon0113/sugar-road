@@ -18,4 +18,5 @@ public class PostCommentDTO {
 	private int postId;
 	private String content;
 	private LocalDateTime postedDate;
+	private int parentComment;
 }

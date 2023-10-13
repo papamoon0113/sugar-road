@@ -42,15 +42,15 @@
     </div>
   </div>
   <h3>가게 정보 상세 <br> 밑에 리뷰<br/>
-    Request :
+    Request : Get /store, Get /review
     <br/>
-    Controller 이름 :
+    Controller 이름 : StoreController, ReviewController
     <br/>
-    @ :
+    @ : @GetMapping({"/store", "/review"})
     <br/>
-    Method 이름 :
+    Method 이름 : readStore, readReview
     <br/>
-    Return 타입 :
+    Return 타입 : ModelAndView or storeDTO[], reviewDTO[]
     <br/>
     잘 모르겠으면 ExampleMap 보시오...</h3>
 </body>
