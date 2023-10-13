@@ -11,10 +11,10 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
-	private String customerId;
-	private String customerPassword;
-	private String customerName;
+public class UserDTO {
+	private String userId;
+	private String userPassword;
+	private String userName;
 	private String nickname;
 	private String email;
 	private byte[] image;

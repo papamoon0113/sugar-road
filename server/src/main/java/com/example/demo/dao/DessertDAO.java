@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface DessertMapper {
+public interface DessertDAO {
 
 	@Insert("insert into dessert (dessert_id, dessert_desc) values (#{dessertId}, #{dessertDesc})")
 	public boolean createDessert(DessertDTO dto);

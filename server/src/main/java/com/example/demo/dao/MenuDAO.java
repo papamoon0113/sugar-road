@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface MenuMapper {
+public interface MenuDAO {
 
 	@Insert("insert into menu (store_id, "
 								+ "menu_name, price, menu_desc, dessert_id, image) "
