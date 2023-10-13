@@ -14,9 +14,9 @@ import lombok.Setter;
 public class MenuDTO {
 	private int menuId;
 	private int storeId;
-	private String name;
+	private String menuName;
 	private int price;
-	private String description;
+	private String menuDesc;
 	private String dessertId;
 	private byte[] image;
 }

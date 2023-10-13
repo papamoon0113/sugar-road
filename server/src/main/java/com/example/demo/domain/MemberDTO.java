@@ -11,7 +11,11 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
-	private String customerId;
-	private String customerPassword;
+public class MemberDTO {
+	private String memberId;
+	private String memberPassword;
+	private String memberName;
+	private String nickname;
+	private String email;
+	private String image;
 }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ReviewDTO {
     private int reviewId;
-    private String customerId;
+    private String memberId;
     private int storeId;
     private String content;
     private LocalDateTime postedDate;

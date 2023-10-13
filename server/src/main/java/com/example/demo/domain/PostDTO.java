@@ -16,7 +16,7 @@ public class PostDTO {
 	private int postId;
 	private String content;
 	private String title;
-	private LocalDateTime postDate;
-	private String customerId;
+	private LocalDateTime postedDate;
+	private String memberId;
 	private String postCategoryId;
 }
