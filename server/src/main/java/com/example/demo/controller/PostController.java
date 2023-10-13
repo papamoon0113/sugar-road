@@ -23,8 +23,8 @@ public class PostController {
 				.postId(1)
 				.content("테스트입니다.")
 				.title("테스트")
-				.postDate(LocalDateTime.of(2023, 8, 17, 9, 0))
-				.customerId("papamoon0113")
+				.postedDate(LocalDateTime.of(2023, 8, 17, 9, 0))
+				.memberId("papamoon0113")
 				.postCategoryId("_D")
 				.build()
 		);
@@ -33,8 +33,8 @@ public class PostController {
 				.postId(2)
 				.content("우헤헤 한글날인데 강의 듣는다")
 				.title("우헤헤 오늘 빨간날인데")
-				.postDate(LocalDateTime.of(2023, 10, 9, 9, 0))
-				.customerId("sejong king")
+				.postedDate(LocalDateTime.of(2023, 10, 9, 9, 0))
+				.memberId("sejong king")
 				.postCategoryId("_D")
 				.build()
 		);
@@ -55,8 +55,8 @@ public class PostController {
 				.postId(1)
 				.content("테스트입니다.")
 				.title("테스트")
-				.postDate(LocalDateTime.of(2023, 8, 17, 9, 0))
-				.customerId("papamoon0113")
+				.postedDate(LocalDateTime.of(2023, 8, 17, 9, 0))
+				.memberId("papamoon0113")
 				.postCategoryId("_D")
 				.build()
 		);
@@ -65,8 +65,8 @@ public class PostController {
 				.postId(2)
 				.content("우헤헤 한글날인데 강의 듣는다")
 				.title("우헤헤 오늘 빨간날인데")
-				.postDate(LocalDateTime.of(2023, 10, 9, 9, 0))
-				.customerId("sejong king")
+				.postedDate(LocalDateTime.of(2023, 10, 9, 9, 0))
+				.memberId("sejong king")
 				.postCategoryId("_D")
 				.build()
 		);
