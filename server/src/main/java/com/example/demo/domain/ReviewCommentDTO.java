@@ -19,4 +19,5 @@ public class ReviewCommentDTO {
     private int reviewId;
     private String content;
     private LocalDateTime postedDate;
+    private int parentComment;
 }

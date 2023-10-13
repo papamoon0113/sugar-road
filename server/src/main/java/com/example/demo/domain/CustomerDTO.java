@@ -14,4 +14,8 @@ import lombok.Setter;
 public class CustomerDTO {
 	private String customerId;
 	private String customerPassword;
+	private String customerName;
+	private String nickname;
+	private String email;
+	private byte[] image;
 }
