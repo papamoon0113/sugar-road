@@ -5,11 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/post/write" method="POST">
+<form action="/post/write" enctype="multipart/form-data" method="POST">
     <input type="text" name="content">
     <input type="text" name="title">
     <input type="text" name="userId">
     <input type="text" name="postCategoryId">
+    <input type="file" name="image">
     <input type="submit">
 </form>
 </body>

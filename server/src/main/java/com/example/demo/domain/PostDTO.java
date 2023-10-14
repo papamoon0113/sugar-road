@@ -19,4 +19,6 @@ public class PostDTO {
 	private LocalDateTime postedDate;
 	private String userId;
 	private String postCategoryId;
+	private byte[] postImage;
+	private String img;
 }
