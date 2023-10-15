@@ -24,5 +24,5 @@ public interface StoreDAO {
 
     //D id 기준으로 가게 정보 삭제
     @Delete("delete from store where store_id = ${id}")
-    public boolean deleteStore(String id);
+    public boolean deleteStore(int id);
 }
