@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -17,5 +18,6 @@ public class UsersDTO {
 	private String userName;
 	private String nickname;
 	private String userEmail;
-	private byte[] image;
+	private String userImagePath;
+	private MultipartFile image;
 }
