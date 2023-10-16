@@ -14,13 +14,20 @@ class Review extends HTMLElement {
     readJson(json){
       console.log(json);
       Object.values(json).forEach((r) => {
-        let newReview = document.createElement("div");
-        newReview.appendChild(document.createTextNode(r['reviewId'] + "/"));
-        newReview.appendChild(document.createTextNode(r['userId'] + "/"));
-        newReview.appendChild(document.createTextNode(r['content'] + "/"));
-        newReview.appendChild(document.createTextNode(r['postedDate'] + "/"));
-        newReview.appendChild(document.createTextNode(r['star'] + "/"));
-        this.appendChilde(newReview);
+          let newReview = document.createElement("div");
+          newReview.appendChild(document.createTextNode(r['reviewId'] + "/"));
+          newReview.appendChild(document.createTextNode(r['userId'] + "/"));
+          newReview.appendChild(document.createTextNode(r['content'] + "/"));
+          newReview.appendChild(document.createTextNode(r['postedDate'] + "/"));
+          newReview.appendChild(document.createTextNode(r['star'] + "/"));
+          this.appendChild(newReview);
+//          let newReviewRecommendBtn = document.createElement("button", {
+//              is:"custom-recommendation",
+//              "data-userId" : "추천테스트용",
+//              "data-referenceType":"R",
+//              "data-referenceId":r['reviewId']
+//          });
+//          newReview.appendChild(newReviewRecommendBtn);
       })
     }
   }

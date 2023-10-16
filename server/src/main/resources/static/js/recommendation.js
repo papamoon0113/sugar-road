@@ -37,5 +37,6 @@ class Recommendation extends HTMLButtonElement {
   }
 
 customElements.define("custom-recommendation", Recommendation, { extends: "button" });
-
+//<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button>
+//<script src="/js/recommendation.js"></script>
 // export default Recommendation;

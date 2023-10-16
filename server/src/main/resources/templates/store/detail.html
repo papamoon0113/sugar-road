@@ -16,6 +16,9 @@
 <img th:src="@{|${list.storeImagePath}|}" alt="가게 대표 이미지" width="200px">
 <a th:href="@{/editView(storeId=${list.storeId})}">가게 수정</a><br/>
 <a th:href="@{/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
-<div>리뷰</div>
+<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
+<custom-review th:data-storeId=${list.storeId}></custom-review>
 </body>
+<script src="/js/recommendation.js"></script>
+<script src="/js/review.js"></script>
 </html>

@@ -13,7 +13,6 @@ public interface StoreDAO {
 
     // 선택한 게시물 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
-
     public StoreDTO readSelectStore(int storeId);
 
     //R 유동적 불러오기 (wherlt re절 컬럼명 = 값)

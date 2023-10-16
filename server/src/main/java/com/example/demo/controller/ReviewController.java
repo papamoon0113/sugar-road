@@ -23,7 +23,7 @@ public class ReviewController {
 
 	@GetMapping("/review")
 	@ResponseBody
-	public List<ReviewDTO> readReviewByStoreId(@RequestParam("store_id") int storeId) {
+	public List<ReviewDTO> readReviewByStoreId(@RequestParam("storeId") int storeId) {
 		return reviewDAO.readReviewBy("store_id", String.valueOf(storeId));
 	}
 
