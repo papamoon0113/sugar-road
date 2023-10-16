@@ -12,12 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreDTO {
-	private String storeId;
+	// storeId(String -> int), storeId,storeName,address,phoneNumber,
+	// storeDesc,latitude,longitude, storeImagePath, userId 남기기
+	private int storeId;
 	private String storeName;
 	private String address;
 	private String phoneNumber;
 	private String storeDesc;
 	private float latitude;
 	private float longitude;
-	private byte[] image;
+	private String storeImagePath;
+	private String userId;
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>가게정보수정</h3>
+<form method="post" action="/edit">
+    <input type="hidden" name="storeId" th:value="${list.storeId}">
+    가게명<input type="text" name="storeName" th:value="${list.storeName}"><br/>
+    가게번호<input type="text" name="phoneNumber" th:value="${list.phoneNumber}"><br/>
+    가게주소<input type="text" name="address" th:value="${list.address}"><br/>
+    <!--    가게메뉴<input type="text" ><br/>-->
+    <!--    메뉴 이미지 선택 <input type="file" multiple name="image"><br/>-->
+    대표 이미지<input type="file" name="image"><br/>
+    설명<input type="text" name="storeDesc" th:value="${list.storeDesc}"><br/>
+    <button type="submit">등록</button>
+    <button>취소</button>
+</form>
+</body>
+</html>
