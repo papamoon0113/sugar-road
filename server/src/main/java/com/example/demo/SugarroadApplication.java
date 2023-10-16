@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @MapperScan(value = {"com.example.demo.dao"})
 public class SugarroadApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SugarroadApplication.class, args);
 	}
