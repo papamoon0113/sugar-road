@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.MenuDAO;
 import com.example.demo.dao.StoreDAO;
+import com.example.demo.domain.MenuDTO;
 import com.example.demo.domain.StoreDTO;
 import jakarta.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import java.util.UUID;
 public class StoreController {
     @Autowired
     StoreDAO dao;
+    @Autowired
+    MenuDAO mdao;
     @Autowired
     ServletContext context;
     ModelAndView mav = new ModelAndView();
@@ -51,33 +55,61 @@ public class StoreController {
     }
 
     @PostMapping("/write") // 가게 등록
-    public ModelAndView createStore(StoreDTO dto, MultipartRequest mreq) {
-        MultipartFile file = mreq.getFile("file");
-        String path = "C:/kosastudy/springedu/src/main/resources/static/storeImgs/";
-        File isDir = new File(path);
+    public ModelAndView createStore(StoreDTO dto, MultipartRequest mreq, String[] menuName ) {
+        System.out.println("menuName:"+menuName);
+        System.out.println("menuName개수:"+menuName.length);
+        MultipartFile storeFile = mreq.getFile("file");
+        List<MultipartFile> menuList = mreq.getFiles("menuImages");
+        System.out.println("list개수:" + menuList.size());
+        String storePath = "C:/storeImgs/";
+        String menuPath = "C:/menuImgs/";
+        File isDir = new File(storePath);
         if (!isDir.isDirectory()) {
             isDir.mkdir();
         }
+       isDir = new File(menuPath);
+        if (!isDir.isDirectory()) {
+            isDir.mkdir();
+        }
+        String storeFileName = saveFile(storeFile, storePath);
+        dto.setStoreImagePath("/storeImgs/" + storeFileName);
+        int result = dao.createStore(dto);
+        if (result>0) {
+            for (int i =0; i<menuList.size(); i++) {
+                String menuFileName = saveFile(menuList.get(i), menuPath);
+                MenuDTO menuDto = new MenuDTO();
+                menuDto.setMenuImagePath("/menuImgs/" + menuFileName);
+                menuDto.setStoreId(dto.getStoreId());// 앞서 저장한 가게 ID를 설정
+                menuDto.setMenuName(menuName[i]); // 메뉴 이름 저장
+                boolean menuResult = mdao.createMenu(menuDto); // 메뉴 정보를 저장
+                if (!menuResult ) {
+                    mav.addObject("msg", "메뉴 정보 저장에 실패했습니다.");
+                    mav.setViewName("store/write");
+                    return mav;
+                }
+            }
+            mav.addObject("msg", "가게 및 메뉴가 정상적으로 등록되었습니다.");
+        } else {
+            mav.addObject("msg", "가게 정보 저장에 실패했습니다.");
+        }
+
+        mav.addObject("list", dao.readStore());
+        mav.setViewName("store/store");
+        return mav;
+    }
+    // 파일 저장을 위한 메소드
+    private String saveFile(MultipartFile file, String savePath) {
         String uuid = UUID.randomUUID().toString();
         String fileName = uuid + "_" + file.getOriginalFilename();
-        String fileInfo = path + fileName;
+        String fileInfo = savePath + fileName;
         try {
             File f = new File(fileInfo);
             file.transferTo(f);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("오류가 발생했습니다");
+            System.out.println("파일 저장 중 오류가 발생했습니다");
         }
-        dto.setStoreImagePath("/storeImgs/" + fileName);
-        int result = dao.createStore(dto);
-        if (result > 0) {
-            mav.addObject("list", dao.readStore());
-            mav.addObject("msg", "가게가 정상적으로 등록되었습니다.");
-        } else {
-            mav.addObject("msg", "추출된 결과가 없습니다.");
-        }
-        mav.setViewName("store/store");
-        return mav;
+        return fileName;
     }
 
     @GetMapping("/editView") // 수정할 가게 내용 내보내기

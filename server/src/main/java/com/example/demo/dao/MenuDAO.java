@@ -12,9 +12,8 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface MenuDAO {
 
-	@Insert("insert into menu (store_id, "
-								+ "menu_name, price, menu_desc, dessert_id, image) "
-								+ "values (#{storeId}, #{menuName}, #{price}, #{menuDesc}, #{dessertId}, #{image})")
+	@Insert("insert into menu (store_id, menu_name,  menu_image_path) "
+								+ "values (#{storeId}, #{menuName}, #{menuImagePath})")
 	public boolean createMenu(MenuDTO dto);
 
 	@Select("select menu_id, store_id, menu_name, price, menu_desc, dessert_id, image from menu")

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,10 +10,15 @@
 <form method="post" action="/write" enctype="multipart/form-data" >
     <!--  input에 required 추가  -->
     가게명<input type="text" name="storeName"><br/>
-    가게번호<input type="text" name="phoneNumber"><br/>
+    가게번호<input type="number" name="phoneNumber"><br/>
     가게주소<input type="text" name="address"><br/>
-    <!--    가게메뉴<input type="text" ><br/>-->
-    <!--    메뉴 이미지 선택 <input type="file" name="menuImages" multiple><br/>-->
+<!-- 메뉴 체크박스로 바꾸기..?? -->
+    메뉴1 이름<input type="text" name="menuName"><br/>
+    메뉴1 이미지<input type="file" name="menuImages"><br/>
+    메뉴2 이름<input type="text" name="menuName"><br/>
+    메뉴2 이미지<input type="file" name="menuImages"><br/>
+    메뉴3 이름<input type="text" name="menuName"><br/>
+    메뉴3 이미지<input type="file" name="menuImages"><br/>
     대표 이미지<input type="file" name="file"><br/>
     설명<input type="text" name="storeDesc"><br/>
     <button type="submit">등록</button>

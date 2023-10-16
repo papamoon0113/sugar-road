@@ -12,6 +12,8 @@
 </head>
 <body>
 <h3>가게정보 리스트</h3>
+<button>최신 등록순</button>
+<button>좋아요 많은 가게 순</button>
 <div>
     <div id="post" th:if="${list}" th:each="dto : ${list}">
         가게명:

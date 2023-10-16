@@ -12,8 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreDTO {
-	// storeId(String -> int), storeId,storeName,address,phoneNumber,
-	// storeDesc,latitude,longitude, storeImagePath, userId 남기기
 	private int storeId;
 	private String storeName;
 	private String address;
