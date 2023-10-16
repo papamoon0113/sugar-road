@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Review Detail</h1>
+<hr/>
+<ul>
+  <li th:text="${reviewDTO.reviewId}"></li>
+  <li th:text="${reviewDTO.userId}"></li>
+  <li th:text="${reviewDTO.storeId}"></li>
+  <li th:text="${reviewDTO.content}"></li>
+  <li th:text="${reviewDTO.postedDate}"></li>
+  <li th:text="${reviewDTO.star}"></li>
+</ul>
+<!-- <button is = "recommendation-btn" th:data-userId="${reviewDTO.userId}" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button> -->
+<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button>
+</body>
+<script src="/js/recommendation.js"></script>
+</html>
