@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:if="${dto}">
+    <h3 th:text="${dto.title}"></h3>
+    <th:block th:each=" image :${dto.postImage}">
+        <img th:src="${image}" width="100px" alt="img">
+    </th:block>
+    <a th:href=@{/post/delete(id=${dto.postId})}>삭제</a>
+    <a th:href=@{/post/edit(id=${dto.postId})}>수정</a>
+    <a th:href=@{/post}>홈</a>
+</th:block>
+
+</body>
+</html>
