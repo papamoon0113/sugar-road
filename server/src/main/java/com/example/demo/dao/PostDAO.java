@@ -10,8 +10,11 @@ public interface PostDAO {
     @Insert("insert into post (content, title, posted_date, user_id, post_category_id) values (#{content}, #{title},now(),#{userId}, #{postCategoryId})")
     public boolean createPost(PostDTO dto);
 
-    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post")//post_image
+    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post")
     public List<PostDTO> readPost();
+
+    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post order by ${cn} ${order}")
+    public List<PostDTO> readPostOrderBY(@Param("cn") String columnName, @Param("order") String order);
 
     @Update("update post set content = #{content}, title = #{title}, posted_date = now(), user_id = #{userId}, post_category_id = #{postCategoryId}"
             + "where post_id = #{postId}")

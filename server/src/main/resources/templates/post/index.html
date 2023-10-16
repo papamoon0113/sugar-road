@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<!--<h1>자유 게시판</h1>-->
+<!--<form action="/post" method="GET">-->
+<!--    <input type="radio" name="category" value="review">-->
+<!--    <input type="radio" name="category" value=""-->
+<!--</form>-->
 <th:block th:if="${list}" th:each="l:${list}">
     <a th:href=@{/post/detail(id=${l.postId})}>
         <p th:text="${l.postId}"></p>

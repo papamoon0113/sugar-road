@@ -14,6 +14,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.core.io.Resource;
@@ -34,6 +35,31 @@ public class PostController {
     @Autowired
     PostCommentDAO postCommentDAO;
 
+    boolean checkLongin(HttpSession session){
+        System.out.println("nowLogin:"+session.getAttribute("nowLogin"));
+        return session.getAttribute("nowLogin") != null;//
+    }
+    //이미지 저장 method
+    List<PostImageDTO> saveImage(PostDTO dto){
+        System.out.println("saveImage 실행");
+        String path = "/images/post";
+        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post/";
+        List<PostImageDTO> imageList = new ArrayList<>();
+        for (MultipartFile mfile : dto.getUploadImages()) {
+            String uuid = UUID.randomUUID().toString();
+            String fileName = uuid + mfile.getOriginalFilename();
+            PostImageDTO postImageDTO = new PostImageDTO();
+            try {
+                File f = new File(abPath + fileName);
+                mfile.transferTo(f);
+                postImageDTO.setPostImagePath(path + "/" + fileName);
+                imageList.add(postImageDTO);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return imageList;
+    }
     @ModelAttribute("path")
     String getRequestServletPath(HttpServletRequest request) {
         return request.getServletPath();
@@ -41,12 +67,18 @@ public class PostController {
 
     @GetMapping("")
     public ModelAndView readPost(@RequestParam(required = false) String search,
-                                 @RequestParam(required = false) String order) {
+                                 @RequestParam(required = false) String cn,
+                                 @RequestParam(required = false) String order,
+                                 HttpSession session) {
+
         ModelAndView mav = new ModelAndView();
         System.out.println("index 실행");
-        //byte to img
-        List<PostDTO> list = postDAO.readPost();
-        //image경로 받기
+        List<PostDTO> list;
+        if(cn != null && order != null){
+            list = postDAO.readPostOrderBY(cn, order);
+        }else {
+            list = postDAO.readPost();
+        }
         for (PostDTO p : list) {
             int id = p.getPostId();
             List<String> iList = postImageDAO.readPostImage(id);
@@ -62,31 +94,22 @@ public class PostController {
     }
 
     @GetMapping("/write")
-    public void writePage() {
+    public String writePage(HttpSession session) {
+        if(!checkLongin(session)){
+            System.out.println("로그인 필요");
+            return "redirect:/users/login.html";
+        }
+        return "post/write";
     }
 
     @PostMapping("/write")//userId session에서 받기
-    public String insertPost(PostDTO dto) {
+    public String insertPost(PostDTO dto, HttpSession session) {
         System.out.println("파일 개수:"+dto.getUploadImages().length);
-        String path = "/images/post";
+
         List<PostImageDTO> imageList = new ArrayList<>();
 
         if(!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
-            System.out.println("실행됨");
-            for (MultipartFile mfile : dto.getUploadImages()) {
-                String uuid = UUID.randomUUID().toString();
-                String fileName = uuid + mfile.getOriginalFilename();
-                System.out.println();
-                PostImageDTO postImageDTO = new PostImageDTO();
-                try {
-                    File f = new File("C:/git/sugar-road/server/src/main/resources/static/images/post/" + fileName);
-                    mfile.transferTo(f);
-                    postImageDTO.setPostImagePath(path + "/" + fileName);
-                    imageList.add(postImageDTO);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            imageList=saveImage(dto);//이미지 저장 및 dto 경로 저장
         }
         else{
             System.out.println("실행 안됨");
@@ -154,28 +177,13 @@ public class PostController {
                 }
             }
         }else{
-            System.out.println("실행안됨");
+            System.out.println("이미지 수정 실행안됨");
         }
         //이미지 저장
-        String path = "/images/post";
         List<PostImageDTO> imageList = new ArrayList<>();
 
         if(!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
-            System.out.println("실행됨");
-            for (MultipartFile mfile : dto.getUploadImages()) {
-                String uuid = UUID.randomUUID().toString();
-                String fileName = uuid + mfile.getOriginalFilename();
-                System.out.println();
-                PostImageDTO postImageDTO = new PostImageDTO();
-                try {
-                    File f = new File("C:/git/sugar-road/server/src/main/resources/static/images/post/" + fileName);
-                    mfile.transferTo(f);
-                    postImageDTO.setPostImagePath(path + "/" + fileName);
-                    imageList.add(postImageDTO);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            imageList=saveImage(dto);//이미지 저장
         }
         else{
             System.out.println("실행 안됨");
