@@ -16,8 +16,20 @@
 <img th:src="@{|${list.storeImagePath}|}" alt="가게 대표 이미지" width="200px">
 <a th:href="@{/editView(storeId=${list.storeId})}">가게 수정</a><br/>
 <a th:href="@{/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
-<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
+<button is = "custom-recommendation" th:if="${session.nowLogin != null}" th:data-userId="${session.nowLogin}" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
+<th:block th:if="${session.nowLogin != null}">
+    <form method = "post" action = "/review/write" enctype='application/json'>
+        <input type ="hidden" name ="userId" th:value="${session.nowLogin}" required><br>
+        <input type ="hidden" name ="storeId" th:value="${list.storeId}" required><br>
+
+        <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
+        <input type ="number" name ="star" required><br>
+        <input type = "submit" value = "리뷰 작성">
+    </form>
+</th:block>
 <custom-review th:data-storeId=${list.storeId}></custom-review>
+<footer th:insert="ui/nav :: nav"></footer>
+
 </body>
 <script src="/js/recommendation.js"></script>
 <script src="/js/review.js"></script>

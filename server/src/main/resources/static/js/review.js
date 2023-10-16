@@ -14,12 +14,13 @@ class Review extends HTMLElement {
     readJson(json){
       console.log(json);
       Object.values(json).forEach((r) => {
-          let newReview = document.createElement("div");
+          let newReview = document.createElement("a");
           newReview.appendChild(document.createTextNode(r['reviewId'] + "/"));
           newReview.appendChild(document.createTextNode(r['userId'] + "/"));
           newReview.appendChild(document.createTextNode(r['content'] + "/"));
           newReview.appendChild(document.createTextNode(r['postedDate'] + "/"));
           newReview.appendChild(document.createTextNode(r['star'] + "/"));
+          newReview.href = "/review/detail?id=" +  r['reviewId'];
           this.appendChild(newReview);
 //          let newReviewRecommendBtn = document.createElement("button", {
 //              is:"custom-recommendation",

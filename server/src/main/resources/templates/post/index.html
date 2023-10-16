@@ -21,5 +21,7 @@
 <br>
 <input type="button" onclick="location.href='/post/write'" value="작성하기">
 <h3 th:if="${msg}" th:text="${msg}"></h3>
+<footer th:insert="ui/nav :: nav"></footer>
+
 </body>
 </html>

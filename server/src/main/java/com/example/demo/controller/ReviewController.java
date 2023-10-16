@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dao.RecommendationDAO;
 import com.example.demo.dao.ReviewDAO;
 import com.example.demo.domain.ReviewDTO;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ public class ReviewController {
 	}
 
 	@GetMapping("/review/detail")
-	public ModelAndView detailReview(@RequestParam("id") int id) {
+	public ModelAndView detailReview(@RequestParam("id") int id, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reviewDTO", reviewDAO.readReviewBy("review_id", String.valueOf(id)).get(0));
 		mav.setViewName("review/detail.html");
