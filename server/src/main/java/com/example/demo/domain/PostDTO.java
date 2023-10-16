@@ -1,10 +1,12 @@
 package com.example.demo.domain;
 
+import java.nio.channels.MulticastChannel;
 import java.time.LocalDateTime;
 
 import lombok.*;
 import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -19,6 +21,6 @@ public class PostDTO {
 	private LocalDateTime postedDate;
 	private String userId;
 	private String postCategoryId;
-	private byte[] postImage;
-	private String img;
+	private String[] postImage;
+	private MultipartFile[] uploadImages;
 }

@@ -7,20 +7,22 @@ import java.util.List;
 
 @Mapper
 public interface PostDAO {
-    @Insert("insert into post (content, title, posted_date, user_id, post_category_id, post_image) values (#{content}, #{title},now(),#{userId}, #{postCategoryId}, #{postImage})")
+    @Insert("insert into post (content, title, posted_date, user_id, post_category_id) values (#{content}, #{title},now(),#{userId}, #{postCategoryId})")
     public boolean createPost(PostDTO dto);
 
-    @Select("select post_id postId, content, title, posted_date postedDate, user_id userId, post_category_id postCategoryId, post_image postImage from post")//post_image
+    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post")//post_image
     public List<PostDTO> readPost();
 
-    @Update("update post set content = #{content}, title = #{title}, postedDate = now(), user_id = #{userId}, post_category_id = #{post_category_id}, post_image = #{postImage}"
+    @Update("update post set content = #{content}, title = #{title}, posted_date = now(), user_id = #{userId}, post_category_id = #{postCategoryId}"
             + "where post_id = #{postId}")
     public boolean updatePost(PostDTO dto);
 
     @Delete("delete from post where post_id = #{postId}")
-    public boolean deletePost(int post_id);
+    public boolean deletePost(String postId);
 
-    @Select("select post_id postId, content, title, posted_date postedDate, user_id userId, post_category_id postCategoryId, post_image postImage  from post where  ${cn} = #{v}")
+    @Select("select post_id , content, title, posted_date , user_id , post_category_id from post where  ${cn} = #{v}")
     public List<PostDTO> readPostBy(@Param("cn") String columnName, @Param("v") String value);
 
+    @Select("select max(post_id) from post")
+    public int readMaxPost();
 }
