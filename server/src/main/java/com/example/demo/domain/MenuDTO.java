@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuDTO {
+	// menuId, menuName, price, menuDesc, storeId, menuImagePath 필드 남기기
 	private int menuId;
-	private int storeId;
 	private String menuName;
 	private int price;
 	private String menuDesc;
-	private String dessertId;
-	private byte[] image;
+	private int storeId;
+	private String menuImagePath;
 }
