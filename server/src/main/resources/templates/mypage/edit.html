@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<th:block th:if="${userInfo}">
+<div>
+    <h1>[[${userInfo.userId}]] 프로필 변경</h1>
+    <form action="/users/edit" method="post" target="iframe1">
+        <input type="hidden" name="userId" th:value="${userInfo.userId}">
+        PW : <input type="password" name="userPassword"><br>
+        이름 : <input type="text" name="userName" th:value="${userInfo.userName}"><br>
+        별명 : <input type="text" name="nickname" th:value="${userInfo.nickname}"><br>
+        email : <input type="text" name="userEmail" th:value="${userInfo.userEmail}"><br>
+        <input type="submit" value="변경">
+    </form>
+</div>
+</th:block>
+<iframe id="iframe1" name="iframe1"></iframe>
+</body>
+</html>

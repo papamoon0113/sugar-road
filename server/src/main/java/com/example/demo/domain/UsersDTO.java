@@ -16,6 +16,6 @@ public class UsersDTO {
 	private String userPassword;
 	private String userName;
 	private String nickname;
-	private String email;
+	private String userEmail;
 	private byte[] image;
 }
