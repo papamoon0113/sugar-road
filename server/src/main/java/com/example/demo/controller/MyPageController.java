@@ -9,27 +9,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
 public class MyPageController {
+
     @Autowired
     UsersDAO usersDAO;
 
-    @RequestMapping("/mypage")
-    public ModelAndView userInfo(HttpSession session){
+    @RequestMapping({"/mypage", "/mypage/edit", "/mypage/delete"})
+    public ModelAndView userInfo(HttpSession session,
+                                 HttpServletRequest request){
      ModelAndView mav = new ModelAndView();
-     mav.setViewName("/mypage/index");
+     String requestUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        //리퀘스트 받은 URL 정보
+     if(requestUrl.equals("/mypage")){ //mypage에서 리퀘스트 받으면
+         mav.setViewName("/mypage/index"); //mypage/index로 전달
+     }
+
+     if(requestUrl.equals("/mypage/edit")){ //mypage/edit에서 리퀘스트 받으면
+         mav.setViewName("/mypage/edit"); //mypage/edit로 전달
+     }
+
+     if(requestUrl.equals("/mypage/delete")){ //mypage/delete에서 리퀘스트 받으면
+         mav.setViewName("/mypage/delete"); //mypage/delete로 전달
+     }
 
      //현재 유저 정보를 DB조회하는 코드
         //임의로 test01으로 고정하여 테스트
      //List<UsersDTO> nowUserSelect = usersDAO.readUserBy("user_id", "test01");
 
      String nowLoginId = (String) session.getAttribute("nowLogin");
-     System.out.println(nowLoginId);
+     System.out.println("현재 로그인 중인 ID : " + nowLoginId); //현재 로그인 중인 ID
      List<UsersDTO> nowUserSelect = usersDAO.readUserBy("user_id", nowLoginId);
 
      if(nowUserSelect.isEmpty()){
@@ -72,37 +86,42 @@ public class MyPageController {
         return result += "정보가 수정되었습니다";
     }
 
-    @RequestMapping(value = "/logOut")
-    public String logOut(HttpServletRequest servletRequest){
-        //세션 불러오되 세션이 있으면 생성하지 않기 (false)
-        HttpSession session = servletRequest.getSession(false);
-        if(session != null){
-            session.invalidate(); //세션 종료
-        }
+    @RequestMapping(value = "/logout")
+    public String logOut(HttpServletRequest request){
+        //세션 객체가 있으면 새로 생성하지 않고 세션을 가져옴
+        HttpSession session = request.getSession(false);
 
-        return "/users/login.html"; //로그인 화면으로 돌아감
+        if(session != null){ //세션이 존재하면
+            session.invalidate(); //세션 초기화 (종료 아님)
+        }
+        return "redirect:/users/login.html"; //로그인 화면으로 돌아감
     }
 
     @RequestMapping(value = "/users/delete", method = RequestMethod.POST)
     @ResponseBody
     public String usersDelete(UsersDTO deleteUser,
-                              HttpServletRequest servletRequest){
-        List<UsersDTO> selectPwdId = usersDAO.readUserBy("user_password", deleteUser.getUserPassword());
+                              HttpServletRequest request){
+        System.out.println("탈퇴하려는 회원 ID : " + deleteUser.getUserId());
 
-        if(selectPwdId.isEmpty()){ //입력한 패스워드와 일치하는 회원정보가 조회되지 않으면
+        List<UsersDTO> selectDeleteId = usersDAO.readUserBy("user_id", deleteUser.getUserId());
+        //삭제하려는 회원정보 조회
+
+        if(!(selectDeleteId.get(0).getUserPassword().equals(deleteUser.getUserPassword()))){
+            //입력한 패스워드와 일치하지 않으면
             System.out.println("패스워드를 다시 입력해주세요");
             return "패스워드를 다시 입력해주세요";
         } else {
-            String deleteId = selectPwdId.get(0).getUserId(); //조회된 리스트 중 첫번째행 유저ID 추출
+            if(usersDAO.deleteUser(deleteUser.getUserId())){ //삭제하려는 유저의 정보를 삭제
+                //세션 객체가 있으면 새로 생성하지 않고 세션을 가져옴
+                HttpSession session = request.getSession(false);
 
-            if(usersDAO.deleteUser(deleteId)){ //리스트 첫번째행 유저ID의 정보를 삭제
-                //세션 불러오되 세션이 있으면 생성하지 않기 (false)
-                HttpSession session = servletRequest.getSession(false);
-                if(session != null){
-                    session.invalidate(); //세션 종료
+                if(session != null){ //세션이 존재하면
+                    session.invalidate(); //세션 초기화
                 }
+
                System.out.println("탈퇴되었습니다");
                 return "redirect:/users/login.html"; //로그인 화면으로 이동
+                //@ResponseBody 어노테이션 제거 예정
             }
         }
         return "오류가 발생했습니다";
