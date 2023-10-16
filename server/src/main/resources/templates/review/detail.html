@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Review Detail</h1>
+<hr/>
+<ul th:each="reviewDTO:${dtos}">
+  <li th:text="${reviewDTO.reviewId}"></li>
+  <li th:text="${reviewDTO.userId}"></li>
+  <li th:text="${reviewDTO.storeId}"></li>
+  <li th:text="${reviewDTO.content}"></li>
+  <li th:text="${reviewDTO.postedDate}"></li>
+  <li th:text="${reviewDTO.star}"></li>
+</ul>
+<button id = "recommendation"></button>
+</body>
+<script>
+  let recommendationBtn = document.querySelector("#recommendation");
+
+  recommendationBtn.addEventListener("click", function(){
+      fetch("/recommendation/readCount?type=R&referenceId=13")
+        .then((response) => {
+            //let json = response.json();
+            // this.recommendationCheck = json.recommendationCheck;
+            //this.textContent = json.recommendationCount;
+            this.textContent = "추천 : " + response;
+            console.log(response);
+            //if (this.recommendationCheck == true){
+            //  this.style.backgroundColor = 'red';
+            //}
+            //else {
+            //  this.style.backgroundColor = 'blue';
+            //}
+        });
+  });
+</script>
+</html>

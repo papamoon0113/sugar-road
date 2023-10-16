@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Review Write</h1>
+<hr/>
+<form method = "post" action = "/review/write" enctype='application/json'>
+  <input type ="text" name ="userId"
+         placeholder="userId" required><br>
+  <input type ="number" name ="storeId" required><br>
+
+  <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
+  <input type ="number" name ="star" required><br>
+  <input type = "submit" value = "제출">
+</form>
+</body>
+</html>
