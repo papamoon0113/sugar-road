@@ -7,7 +7,7 @@
 <body>
 <h1>Review Detail</h1>
 <hr/>
-<ul th:each="reviewDTO:${dtos}">
+<ul>
   <li th:text="${reviewDTO.reviewId}"></li>
   <li th:text="${reviewDTO.userId}"></li>
   <li th:text="${reviewDTO.storeId}"></li>
@@ -15,26 +15,8 @@
   <li th:text="${reviewDTO.postedDate}"></li>
   <li th:text="${reviewDTO.star}"></li>
 </ul>
-<button id = "recommendation"></button>
+<!-- <button is = "recommendation-btn" th:data-userId="${reviewDTO.userId}" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button> -->
+<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button>
 </body>
-<script>
-  let recommendationBtn = document.querySelector("#recommendation");
-
-  recommendationBtn.addEventListener("click", function(){
-      fetch("/recommendation/readCount?type=R&referenceId=13")
-        .then((response) => {
-            //let json = response.json();
-            // this.recommendationCheck = json.recommendationCheck;
-            //this.textContent = json.recommendationCount;
-            this.textContent = "추천 : " + response;
-            console.log(response);
-            //if (this.recommendationCheck == true){
-            //  this.style.backgroundColor = 'red';
-            //}
-            //else {
-            //  this.style.backgroundColor = 'blue';
-            //}
-        });
-  });
-</script>
+<script src="/js/recommendation.js"></script>
 </html>

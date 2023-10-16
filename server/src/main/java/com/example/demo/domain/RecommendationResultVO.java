@@ -12,6 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecommendationResultVO {
-	private int recommendationCount;
-	private Boolean recommendationCheck;
+	private int count;
+	private Boolean check;
 }

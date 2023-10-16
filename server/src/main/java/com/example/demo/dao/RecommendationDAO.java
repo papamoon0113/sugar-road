@@ -31,9 +31,12 @@ public interface RecommendationDAO {
     @Insert("insert into recommendation (reference_type, reference_id, user_id, posted_date) values (#{referenceType}, #{referenceId}, #{userId}, now())")
     public boolean createRecommendation(RecommendationDTO dto);
 
-    @Delete("delete from recommendation where recommendation_id = #{id}")
-    public boolean deleteRecommendation(int id);
+    @Delete("delete from recommendation where reference_type=#{referenceType} and reference_id = #{referenceId} and user_id = #{userId}")
+    public boolean deleteRecommendation(RecommendationDTO dto);
 
     @Select("select count(*) from recommendation where reference_type=#{referenceType} and reference_id = #{referenceId}")
     public int readRecommendationCount(RecommendationDTO dto);
+
+    @Select("select count(*) from recommendation where reference_type=#{referenceType} and reference_id = #{referenceId} and user_id = #{userId}")
+    public boolean checkRecommendation(RecommendationDTO dto);
 }

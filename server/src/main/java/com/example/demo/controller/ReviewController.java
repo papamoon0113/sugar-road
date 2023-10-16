@@ -30,7 +30,7 @@ public class ReviewController {
 	@GetMapping("/review/detail")
 	public ModelAndView detailReview(@RequestParam("id") int id) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("dtos", reviewDAO.readReviewBy("review_id", String.valueOf(id)));
+		mav.addObject("reviewDTO", reviewDAO.readReviewBy("review_id", String.valueOf(id)).get(0));
 		mav.setViewName("review/detail.html");
 		return mav;
 	}

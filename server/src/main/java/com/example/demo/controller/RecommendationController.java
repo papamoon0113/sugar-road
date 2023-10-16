@@ -23,22 +23,39 @@ public class RecommendationController {
 		return recommendationDAO.readRecommendation(dto);
 	}
 
-	@GetMapping("/recommendation/readCount")
+	@GetMapping("/recommendation/count")
+	@ResponseBody
 	public int readRecommendationCount(RecommendationDTO dto){
 		return recommendationDAO.readRecommendationCount(dto);
 	}
 
-	@PostMapping("/recommendation/write")
+	@GetMapping("/recommendation/check")
 	@ResponseBody
-	public Boolean writeRecommendation(RecommendationDTO dto){
+	public RecommendationResultVO checkRecommendation(RecommendationDTO dto){
+		return RecommendationResultVO.builder()
+			.count(recommendationDAO.readRecommendationCount(dto))
+			.check(recommendationDAO.checkRecommendation(dto))
+			.build();
+	}
+
+	@GetMapping("/recommendation/write")
+	@ResponseBody
+	public RecommendationResultVO writeRecommendation(RecommendationDTO dto){
 		System.out.println(dto.toString());
-		return recommendationDAO.createRecommendation(dto);
+		return RecommendationResultVO.builder()
+			.check(recommendationDAO.createRecommendation(dto))
+			.count(recommendationDAO.readRecommendationCount(dto))
+			.build();
 	}
 
 	@GetMapping("/recommendation/delete")
 	@ResponseBody
-	public Boolean deleteRecommendation(@RequestParam("id") int id){
-		return recommendationDAO.deleteRecommendation(id);
+	public RecommendationResultVO deleteRecommendation(RecommendationDTO dto){
+		System.out.println(dto.toString());
+		return RecommendationResultVO.builder()
+			.check(!recommendationDAO.deleteRecommendation(dto))
+			.count(recommendationDAO.readRecommendationCount(dto))
+			.build();
 	}
 
 }
