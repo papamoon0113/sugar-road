@@ -100,7 +100,7 @@ public class StoreController {
         return mav;
     }
     @GetMapping("/delete") // 가게 삭제(모달창으로 확인받기)
-    public ModelAndView deleteStore(String storeId) {
+    public ModelAndView deleteStore(int storeId) {
         boolean result = dao.deleteStore(storeId);
         if (result) {
             mav.addObject("list", dao.readStore());

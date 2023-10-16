@@ -24,5 +24,5 @@ public interface ReviewDAO {
 
     //D id 기준으로 리뷰 글 삭제
     @Delete("delete from review where review_id = ${id}")
-    public boolean deleteReview(String id);
+    public boolean deleteReview(int id);
 }
