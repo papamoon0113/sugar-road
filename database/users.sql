@@ -4,5 +4,5 @@ CREATE TABLE users (
    user_name VARCHAR(20) NOT NULL,
    nickname VARCHAR(20) NOT NULL,
    user_email VARCHAR(20) NOT NULL,
-   image BLOB NULL
+   user_image_path varchar(255)
 );
