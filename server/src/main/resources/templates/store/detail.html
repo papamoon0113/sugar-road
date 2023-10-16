@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>가게 정보 상세 페이지</h3>
+<!--작성자-->
+가게명: <div th:text="${list.storeName}" ></div>
+가게 주소: <div th:text="${list.address}" ></div>
+가게번호: <div th:text="${list.phoneNumber}" ></div>
+가게설명: <div th:text="${list.storeDesc}" ></div>
+가게아이디: <div th:text="${list.storeId}" ></div>
+<img th:src="@{|${list.storeImagePath}|}" alt="가게 대표 이미지" width="200px">
+<a th:href="@{/editView(storeId=${list.storeId})}">가게 수정</a><br/>
+<a th:href="@{/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
+<div>리뷰</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:if="${list}" th:each="l:${list}">
+    <a th:href=@{/post/detail(id=${l.postId})}>
+        <p th:text="${l.postId}"></p>
+<!--        <p th:text="${l.content}"></p>-->
+
+        <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
+    </a>
+</th:block>
+<br>
+<input type="button" onclick="location.href='/post/write'" value="작성하기">
+<h3 th:if="${msg}" th:text="${msg}"></h3>
+</body>
+</html>
