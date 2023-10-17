@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Review Write</h1>
+<hr/>
+<form method = "post" action = "/review/edit">
+  <input th:value="${reviewDTO.userId}" type ="text" name ="userId"
+         placeholder="userId" required><br>
+  <input th:value="${reviewDTO.storeId}" type ="number" name ="storeId" required><br>
+
+  <textarea th:text="${reviewDTO.content}" cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
+  <input th:value="${reviewDTO.postedDate}" type = "date" name="postedDate">
+  <input th:value="${reviewDTO.star}" type ="number" name ="star" required><br>
+  <input th:value="${reviewDTO.reviewId}" type ="hidden" name ="reviewId"><br>
+  <input type = "submit" value = "제출">
+  <input type = "button" value = "삭제" th:onclick="|location.href='@{/review/delete(id=${reviewDTO.reviewId})}'|">
+</form>
+<footer th:insert="ui/nav :: nav"></footer>
+
+</body>
+<script>
+
+</script>
+</html>

@@ -7,12 +7,13 @@
 <body>
 <div>
     <h1>회원가입</h1>
-    <form id="myForm" action="/users/signup" method="post" target="iframe1">
+    <form id="myForm" action="/users/signup" method="post" enctype="multipart/form-data" target="iframe1">
         ID : <input type="text" name="userId" required><br>
         PW : <input type="password" name="userPassword" required><br>
         이름 : <input type="text" name="userName" required><br>
         별명 : <input type="text" name="nickname" required><br>
         email : <input type="text" name="userEmail" required><br>
+        프로필사진 : <input type="file" name="image"><br>
     <input type="submit" value="회원가입">
 </form>
 </div>
@@ -27,6 +28,12 @@
 </div>
 <br>
 <iframe id="iframe1" name="iframe1"></iframe>
-
+<footer>
+    <button onclick="location.href = '/users/login.html'">로그인</button>
+    <button onclick="fetch('/users/login?userId=test_id&userPassword=1234', {method : 'POST'}); this.textContent= 'test_id';">바로 로그인</button>
+    <button onclick="location.href = '/store'">가게</button>
+    <button onclick="location.href = '/post'">게시판</button>
+    <button onclick="location.href = '/mypage'">마이페이지</button>
+</footer>
 </body>
 </html>

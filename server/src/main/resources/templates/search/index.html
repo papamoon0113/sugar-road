@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>검색</title>
+</head>
+<body>
+<h1>검색</h1>
+<div>
+<form action="/search" method="post">
+    검색어 입력 :
+    <input type="text" name="searchWord">
+    <input type="submit" value="검색">
+</form>
+</div>
+<div>
+
+</div>
+=======
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/search" method="GET">
+        <input type="text" name="search">
+    </form>
+    <hr>
+<div th:if="${postList}">
+    <h2>post</h2>
+    <th:block th:each="post : ${postList}">
+        <a th:href="@{/review/detail(id=${post.postId})}">
+            <h3 th:text="|${post.title}:${post.content}|"></h3>
+        </a>
+    </th:block>
+</div>
+<div th:if="${reviewList}">
+    <h2>review</h2>
+    <th:block th:each="review : ${reviewList}">
+        <a th:href="@{/review/detail(id=${review.reviewId})}">
+            <h3 th:text="${review.content}"></h3>
+        </a>
+    </th:block>
+</div>
+<div th:if="${storeList}">
+    <h2>store</h2>
+    <th:block th:each="store : ${storeList}">
+        <a th:href="@{/detail(storeId=${store.storeId})}">
+            <h3 th:text="|${store.storeName}|"></h3>
+        </a>
+    </th:block>
+</div>
+<h3 th:if="${search}" th:text="${search}"></h3>
+    <footer th:insert="ui/nav :: nav"></footer>
+>>>>>>> 3254908c4460ac75288f1e2ee252cd9fefa419ef
+</body>
+</html>

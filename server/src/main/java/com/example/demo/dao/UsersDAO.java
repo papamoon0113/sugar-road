@@ -26,26 +26,6 @@ public interface UsersDAO {
 		+ " where user_id = #{userId}")
 	public boolean updateUserAll(UsersDTO dto);
 
-	@Update("update users set "
-			+ "user_password = #{up}"
-			+ " where user_id = #{id}")
-	public boolean updateUserPassword(@Param("up") String userPassword, @Param("id") String userId);
-
-	@Update("update users set "
-			+ "user_name = #{un}"
-			+ " where user_id = #{id}")
-	public boolean updateUserName(@Param("un") String userName, @Param("id") String userId);
-
-	@Update("update users set "
-			+ "nickname = #{un}"
-			+ " where user_id = #{id}")
-	public boolean updateUserNick(@Param("un") String userNick, @Param("id") String userId);
-
-	@Update("update users set "
-			+ "user_email = #{em}"
-			+ " where user_id = #{id}")
-	public boolean updateUserEmail(@Param("em") String email, @Param("id") String userId);
-
 	@Delete("delete from users where user_id = #{userId}")
 	public boolean deleteUser(String userId);
 
