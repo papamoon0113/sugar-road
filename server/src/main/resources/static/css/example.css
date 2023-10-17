@@ -16,6 +16,8 @@ body {
   height : 427px;
   overflow-y: scroll;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .content::-webkit-scrollbar {

@@ -18,4 +18,11 @@ public class TestController {
 		mav.setViewName("test");
 		return mav;
 	}
+
+	@GetMapping("/example")
+	public ModelAndView uiExample(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("ui/example");
+		return mav;
+	}
 }
