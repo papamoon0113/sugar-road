@@ -2,37 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
+    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="css/post.css">
 </head>
 <body>
-<div class="container">
+<div class="app-body">
+    <div class="content">
     <div class="header">
-        <h1>자유게시판</h1>
+        <h3>자유게시판</h3>
     </div>
 <div class="category"></div>
     <div class="search">
         <form action="/post" method="GET">
             <input type="text" name="search">
-            <input type="submit">
+            <img src="/images/icons/search.png">
         </form>
     </div>
-<div class="post-list">
-<th:block th:if="${list}" th:each="l:${list}">
+
+<div class="post-list" th:if="${list}" th:each="l:${list}">
     <div class="post-thumbnail" style="border: 1px solid black;">
     <a th:href=@{/post/detail(id=${l.postId})}>
-        <p th:text="${l.title}"></p>
-        <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
-        <p th:text="${l.content}"></p>
+        <table>
+            <tr>
+                <th>
+                    <p th:text="${l.title}"></p>
+                    <!--   댓글 수           -->
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p th:text="${l.content}"></p>
+                </td>
+            </tr>
+        </table>
     </a>
     </div>
-</th:block>
 </div>
 
 <input type="button" onclick="location.href='/post/write'" value="작성하기">
 <h3 th:if="${msg}" th:text="${msg}"></h3>
+
+    </div>
+<footer th:insert="ui/nav :: nav"></footer>
+
 </div>
-<footer th:insert="ui/navbar :: navbar"></footer>
-
-
 </body>
 </html>

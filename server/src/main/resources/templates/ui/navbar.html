@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
 <body>
 <footer th:fragment="navbar">
+  <div class="navbar">
   <a href="/home"><img src="/images/icons/home.png"></a>
 <!--  <button onclick="fetch('/users/login?userId=test_id&userPassword=1234', {method : 'POST'}); this.textContent= 'test_id';">바로 로그인</button>-->
   <a href="/search"><img src="/images/icons/search.png"></a>
   <a href="/store"><img src="/images/icons/store.png"></a>
   <a href="/post"><img src="/images/icons/chat.png"></a>
   <a href="/mypage"><img src="/images/icons/user.png"></a>
+  </div>
 </footer>
 </body>
 </html>
