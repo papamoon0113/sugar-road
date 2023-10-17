@@ -10,13 +10,24 @@ public interface PostDAO {
     @Insert("insert into post (content, title, posted_date, user_id, post_category_id) values (#{content}, #{title},now(),#{userId}, #{postCategoryId})")
     public boolean createPost(PostDTO dto);
 
-    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post")
+    @Select("select post_id, content, title, posted_date, user_id, post_category_id from post")
     public List<PostDTO> readPost();
 
-    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post order by ${cn} ${order}")
-    public List<PostDTO> readPostOrderBY(@Param("cn") String columnName, @Param("order") String order);
-    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post where content like '%${search}%' or title like '%{search}%'")
+//    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post order by ${cn} ${order}")
+//    public List<PostDTO> readPostOrderBY(@Param("cn") String columnName, @Param("order") String order);
+
+    @Select("<script>select post_id, content, title, posted_date, user_id, post_category_id from post " +
+            "<where>" +
+            "<if test='search != null'> content like concat('%',#{search},'%') or title like concat('%',#{search},'%')</if>" +
+            "</where>" +
+            "<if test='cn != null'> order by ${cn} </if>" +
+            "<if test='order != null'> ${order} </if> " +
+            "</script>")
+    public List<PostDTO> readPostOrderBy(@Param("search") String search, @Param("cn")String columnName,@Param("order") String order);
+
+    @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post where content like '%${search}%' or title like '%${search}%'")
     public List<PostDTO> readPostBySearch(String search);
+
     @Update("update post set content = #{content}, title = #{title}, posted_date = now(), user_id = #{userId}, post_category_id = #{postCategoryId}"
             + "where post_id = #{postId}")
     public boolean updatePost(PostDTO dto);

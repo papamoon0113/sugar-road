@@ -14,6 +14,9 @@ public interface ReviewDAO {
     @Select("select review_id, user_id, store_id, content, posted_date, star from review where ${cn} = #{v}")
     public List<ReviewDTO> readReviewBy(@Param("cn") String columnName, @Param("v") String value);
 
+    //R 검색어에 맞게 불러오기
+    @Select("select review_id, user_id, store_id, content, posted_date, star from review where content like '%${search}%' ")
+    public List<ReviewDTO> readReviewSearch(String search);
     //U id 기준으로 리뷰 글 수정 (글내용, 별점, 리뷰 대상 가게id)
     @Update("update review set content = #{content}, star = #{star}, review_image_path = #{reviewImagePath}  where review_id = #{reviewId}")
     public boolean updateReview(ReviewDTO dto);
