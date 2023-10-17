@@ -12,6 +12,9 @@
 </head>
 <body>
 <h3>가게정보 리스트</h3>
+<button>정렬</button>
+<!--<button>최신 등록순</button>-->
+<!--<button>좋아요 많은 가게 순</button>-->
 <div>
     <div id="post" th:if="${list}" th:each="dto : ${list}">
         가게명:
@@ -20,10 +23,10 @@
         <div th:text="${dto.storeDesc}"></div>
         가게id:
         <div th:text="${dto.storeId}"></div>
-        <a th:href="@{/detail(storeId=${dto.storeId})}">상세페이지로</a><br/>
+        <a th:href="@{/store/detail(storeId=${dto.storeId})}">상세페이지로</a><br/>
         <!--    대표이미지 출력    -->
     </div>
-    <a th:href="@{/write}">가게 작성</a>
+    <a th:href="@{/store/write}">가게 작성</a>
     <h3 th:if="${msg}" th:text="${ msg }"></h3>
 </div>
 <footer th:insert="ui/nav :: nav"></footer>

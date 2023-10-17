@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import com.example.demo.domain.StoreDTO;
 import org.apache.ibatis.annotations.*;
 
@@ -10,15 +12,17 @@ public interface StoreDAO {
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude  from store")
     public List<StoreDTO> readStore();
 
+    // 선택한 게시물 가게정보, 메뉴 불러오기
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
+    public StoreDTO readSelectStoreBy(int storeId);
     @Select("select store_name from store")
     public List<String> readStoreName();
-    // 선택한 게시물 불러오기
-    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
-    public StoreDTO readSelectStore(int storeId);
+
 
     //R 유동적 불러오기 (wherlt re절 컬럼명 = 값)
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where ${cn} = #{v}")
     public List<StoreDTO> readStoreBy(@Param("cn") String columnName, @Param("v") String value);
+
     //R 가게 이름으로 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_name like '%${search}%'")
     public List<StoreDTO> readStoreSearch(String search);

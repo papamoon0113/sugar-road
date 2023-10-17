@@ -6,16 +6,73 @@
     <title>Title</title>
 </head>
 <body>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9f0b153df219037e9402a0154f2ca62&libraries=services"></script>
+
 <h3>가게 정보 상세 페이지</h3>
 <!--작성자-->
-가게명: <div th:text="${list.storeName}" ></div>
-가게 주소: <div th:text="${list.address}" ></div>
-가게번호: <div th:text="${list.phoneNumber}" ></div>
-가게설명: <div th:text="${list.storeDesc}" ></div>
-가게아이디: <div th:text="${list.storeId}" ></div>
-<img th:src="@{|${list.storeImagePath}|}" alt="가게 대표 이미지" width="200px">
-<a th:href="@{/editView(storeId=${list.storeId})}">가게 수정</a><br/>
-<a th:href="@{/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
+
+가게명: <div th:text="${list.storeName}"></div>
+가게 주소: <div th:text="${list.address}"></div>
+가게번호: <div th:text="${list.phoneNumber}"></div>
+가게설명: <div th:text="${list.storeDesc}"></div>
+가게 대표 이미지: <img th:src="@{|${list.storeImagePath}|}" alt="가게 대표 이미지" width="200px">
+
+<div>가게 메뉴:</div>
+<div th:each="mList : ${mlist}">
+    메뉴 이미지: <img th:src="@{|${mList.menuImagePath}|}" alt="메뉴 이미지" width="200px">
+    메뉴 이름: <div th:text="${mList.menuName}"></div>
+    </div>
+</div>
+</div>
+<a th:href="@{/store/editView(storeId=${list.storeId})}">가게 수정</a><br/>
+<a th:href="@{/store/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
+<div>리뷰</div>
+
+<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
+
+<div id="map" style="width:500px;height:400px;"></div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var container = document.getElementById('map');
+
+    var options = {
+        <!--   지도 가운데로 위도/경도 좌표값 대입하고 이동-->
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+
+    <!-- 지도 생성-->
+    var map = new kakao.maps.Map(container, options);
+
+    <!-- 확대 축소 기능의 줌 컨트롤러 생성 -->
+    var zoomControl = new kakao.maps.ZoomControl();
+    <!-- 줌 컨트롤러를 지도 위에 추가 (오른쪽 위치) -->
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    <!-- 주소-좌표 변환 객체를 생성-->
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    <!-- 주소로 좌표를 검색합니다-->
+    geocoder.addressSearch([[${list.address}]], function(result, status){
+        if(status === kakao.maps.services.Status.OK){
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            <!--결과값으로 받은 위치를 마커로 표시-->
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            <!-- 지도의 중심을 검색 결과값을 받은 위치로 이동시킵니다-->
+            map.setCenter(coords);
+        }
+    });
+
+    /*]]>*/
+</script>
+
 <button is = "custom-recommendation" th:if="${session.nowLogin != null}" th:data-userId="${session.nowLogin}" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
 <th:block th:if="${session.nowLogin != null}">
     <form method = "post" action = "/review/write" enctype='application/json'>
@@ -29,7 +86,6 @@
 </th:block>
 <custom-review th:data-storeId=${list.storeId}></custom-review>
 <footer th:insert="ui/nav :: nav"></footer>
-
 </body>
 <script src="/js/recommendation.js"></script>
 <script src="/js/review.js"></script>

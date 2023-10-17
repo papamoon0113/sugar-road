@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>검색</title>
+</head>
+<body>
+<h1>검색</h1>
+<div>
+<form action="/search" method="post">
+    검색어 입력 :
+    <input type="text" name="searchWord">
+    <input type="submit" value="검색">
+</form>
+</div>
+<div>
+
+</div>
+=======
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -35,5 +54,6 @@
 </div>
 <h3 th:if="${search}" th:text="${search}"></h3>
     <footer th:insert="ui/nav :: nav"></footer>
+>>>>>>> 3254908c4460ac75288f1e2ee252cd9fefa419ef
 </body>
 </html>
