@@ -16,10 +16,17 @@
     </th:block>
     <a th:href=@{/post}>홈</a>
 </th:block>
-<<<<<<< HEAD
+<h4>댓글 작성</h4>
+<th:block th:if="${session.nowLogin != null}">
+    <form method = "post" action = "/comment/post/write">
+        <input type ="hidden" name ="userId" th:value="${session.nowLogin}" required><br>
+        <input type ="hidden" name ="postId" th:value="${dto.postId}" required><br>
+        <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
+        <input type = "submit" value = "댓글 작성">
+    </form>
+</th:block>
 <footer th:insert="ui/nav :: nav"></footer>
-=======
->>>>>>> 3cce3b7b8a6222ae3917af94a2eccfcf865998a8
+
 
 </body>
 </html>

@@ -22,6 +22,7 @@ class Review extends HTMLElement {
           newReview.appendChild(document.createTextNode(r['star'] + "/"));
           newReview.href = "/review/detail?id=" +  r['reviewId'];
           this.appendChild(newReview);
+          this.appendChild(document.createElement("br"));
 //          let newReviewRecommendBtn = document.createElement("button", {
 //              is:"custom-recommendation",
 //              "data-userId" : "추천테스트용",

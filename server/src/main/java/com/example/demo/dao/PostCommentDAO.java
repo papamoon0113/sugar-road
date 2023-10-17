@@ -8,7 +8,11 @@ import java.util.List;
 @Mapper
 public interface PostCommentDAO {
     @Insert("insert into post_comment ( content, posted_date, post_id, user_id, parent_comment) " +
-            "values (#{content},#{postedDate},#{postId},#{memberId},#{parentComment})")
+            "values (#{content},#{postedDate},#{postId},#{userId},#{parentComment})")
+    public boolean createPostCommentChild(PostCommentDTO dto);
+
+    @Insert("insert into post_comment ( content, posted_date, post_id, user_id) " +
+        "values (#{content},#{postedDate},#{postId},#{userId})")
     public boolean createPostComment(PostCommentDTO dto);
 
     @Select("select post_comment_id, content, posted_date, post_id, user_id, parent_comment from post_comment")

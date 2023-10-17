@@ -13,7 +13,7 @@
 <body>
 <h3>가게정보 리스트</h3>
 <div>
-    <div id="post" th:if="${list}" th:each="dto : ${list}">
+    <div id="post" th:if="${list}" th:each="dto:${list}">
         가게명:
         <div th:text="${dto.storeName}"></div>
         가게설명:

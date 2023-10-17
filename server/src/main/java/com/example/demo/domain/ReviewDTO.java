@@ -11,6 +11,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -23,8 +24,8 @@ public class ReviewDTO {
     private String userId;
     private int storeId;
     private String content;
-
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime postedDate;
     private int star;
+    private String reviewImagePath;
+    private MultipartFile uploadImage;
 }

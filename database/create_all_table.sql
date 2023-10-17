@@ -68,14 +68,14 @@ CREATE TABLE post_comment (
    post_id INT NOT NULL,
    content VARCHAR(100) NOT NULL,
    posted_date DATE NOT NULL,
-   parent_comment INT NOT NULL,
+   parent_comment INT,
    
    FOREIGN KEY(user_id) REFERENCES users(user_id),
    FOREIGN KEY(post_id) REFERENCES post(post_id) ON DELETE CASCADE
 );
 
 ALTER TABLE post_comment
-ADD FOREIGN KEY(parent_comment) REFERENCES post_comment(post_comment_id);
+ADD FOREIGN KEY(parent_comment) REFERENCES post_comment(post_comment_id) ON DELETE CASCADE;
 
 CREATE TABLE review (
    review_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -96,14 +96,14 @@ CREATE TABLE review_comment(
    review_id INT NOT NULL,
    content VARCHAR(100) NOT NULL,
    posted_date DATE NOT NULL,
-   parent_comment INT NOT NULL,
+   parent_comment INT,
 
    FOREIGN KEY(user_id) REFERENCES users(user_id),
    FOREIGN KEY(review_id) REFERENCES review(review_id) ON DELETE CASCADE
 );
 
 ALTER TABLE review_comment
-ADD FOREIGN KEY(parent_comment) REFERENCES review_comment(review_comment_id);
+ADD FOREIGN KEY(parent_comment) REFERENCES review_comment(review_comment_id) ON DELETE CASCADE;
 
 CREATE TABLE recommendation(
    recommendation_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -112,5 +112,5 @@ CREATE TABLE recommendation(
    reference_id INT NOT NULL,
    posted_date DATE NOT NULL,
    
-   FOREIGN KEY(user_id) REFERENCES users(user_id)
+   FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

@@ -7,15 +7,15 @@
 <body>
 <h1>Review Write</h1>
 <hr/>
-<form method = "post" action = "/review/write" enctype='application/json'>
-  <input type ="text" name ="userId"
-         placeholder="userId" required><br>
-  <input type ="number" name ="storeId" required><br>
-
-  <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
-  <input type ="number" name ="star" required><br>
-  <input type = "submit" value = "제출">
-</form>
+<th:block th:if="${session.nowLogin != null}">
+  <form method = "post" action = "/review/write">
+    <input type ="hidden" name ="userId" th:value="${session.nowLogin}" required><br>
+    <input type ="hidden" name ="storeId" th:value="${storeId}" required><br>
+    <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
+    <input type ="number" name ="star" required><br>
+    <input type = "submit" value = "리뷰 작성">
+  </form>
+</th:block>
 <footer th:insert="ui/nav :: nav"></footer>
 
 </body>

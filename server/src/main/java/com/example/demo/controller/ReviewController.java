@@ -37,16 +37,19 @@ public class ReviewController {
 	}
 
 	@PostMapping("/review/write")
-	@ResponseBody
-	public Boolean writeReview(ReviewDTO dto) {
+//	@ResponseBody
+	public String writeReview(ReviewDTO dto) {
 		System.out.println(dto.toString());
-		return reviewDAO.createReview(dto);
+		reviewDAO.createReview(dto);
+//		return "redirect:/store/detail?storeId=" + dto.getStoreId();
+		return "redirect:/detail?storeId=" + dto.getStoreId();
 	}
 
 	@GetMapping("/review/write")
-	public ModelAndView writeReview() {
+	public ModelAndView writeReview(@RequestParam("storeId") int storeId) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("review/write.html");
+		mav.addObject("storeId", storeId);
+		mav.setViewName("review/write");
 		return mav;
 	}
 
@@ -54,7 +57,7 @@ public class ReviewController {
 	public ModelAndView editReview(@RequestParam("id") int id) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reviewDTO", reviewDAO.readReviewBy("review_id", String.valueOf(id)).get(0));
-		mav.setViewName("review/edit.html");
+		mav.setViewName("review/edit");
 		return mav;
 	}
 

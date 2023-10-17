@@ -16,6 +16,7 @@
   <input th:value="${reviewDTO.postedDate}" type = "date" name="postedDate">
   <input th:value="${reviewDTO.star}" type ="number" name ="star" required><br>
   <input th:value="${reviewDTO.reviewId}" type ="hidden" name ="reviewId"><br>
+  <input type="file" name="uploadImage" multiple><br>
   <input type = "submit" value = "제출">
   <input type = "button" value = "삭제" th:onclick="|location.href='@{/review/delete(id=${reviewDTO.reviewId})}'|">
 </form>
