@@ -5,15 +5,29 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <a href="javascript:history.back(01)">뒤로가기</a>
+        <h3>자유 게시판</h3>
+    </div>
+
 <th:block th:if="${dto}">
+    <div class="post-detail">
     <h3 th:text="${dto.title}"></h3>
     <th:block th:each=" image :${dto.postImage}">
         <img th:src="${image}" width="100px" alt="img">
     </th:block>
+    </div>
+    <div class="post-comment">
+        <p>댓글 영역</p>
+    </div>
+
+    <div class="post-button">
     <th:block th:if="${session.nowLogin}==${dto.userId}">
         <a th:href=@{/post/delete(id=${dto.postId})}>삭제</a>
         <a th:href=@{/post/edit(id=${dto.postId})}>수정</a>
     </th:block>
+    </div>
     <a th:href=@{/post}>홈</a>
 </th:block>
 <h4>댓글 작성</h4>
@@ -26,7 +40,6 @@
     </form>
 </th:block>
 <footer th:insert="ui/nav :: nav"></footer>
-
 
 </body>
 </html>

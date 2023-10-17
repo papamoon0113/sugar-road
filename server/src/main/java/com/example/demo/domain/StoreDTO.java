@@ -6,14 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreDTO {
-	// storeId(String -> int), storeId,storeName,address,phoneNumber,
-	// storeDesc,latitude,longitude, storeImagePath, userId 남기기
 	private int storeId;
 	private String storeName;
 	private String address;
@@ -23,4 +23,6 @@ public class StoreDTO {
 	private float longitude;
 	private String storeImagePath;
 	private String userId;
+	private List<MenuDTO> menuList;
+
 }

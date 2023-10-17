@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h1>글 작성</h1>
+    </div>
+    <div class="post-content">
 <p th:text="${path}"></p>
     <form th:action="${path}" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="postId" th:value="${dto}? ${dto.postId} : 0">
@@ -23,9 +28,13 @@
             </label>
             </th:block>
         </th:block>
-
-        <input type="submit">
+        <div class="button">
+            <input type="button" value="취소" onclick="history.back(-1)">
+            <input type="submit">
+        </div>
     </form>
+    </div>
+</div>
 <<<<<<< HEAD
 <footer th:insert="ui/nav :: nav"></footer>
 =======
