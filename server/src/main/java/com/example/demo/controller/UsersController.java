@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.UsersDAO;
 import com.example.demo.domain.UsersDTO;
+import com.example.demo.util.ImageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import java.util.UUID;
 public class UsersController {
     @Autowired
     UsersDAO usersDAO;
-
+    @Autowired
+    ImageUtil imageUtil;
     //회원가입
     @RequestMapping(value = "/users/signup", method = RequestMethod.POST)
     @ResponseBody
@@ -28,20 +30,21 @@ public class UsersController {
         //ModelAndView mav = new ModelAndView();
 
         //선택한 파일로 프로필 이미지 삽입
-        String path = "/images/users";
+//        String path = "/images/users";
 
         MultipartFile imageFile = newbieDTO.getImage();
-
-        String uuid = UUID.randomUUID().toString(); //중복 파일이 존재하면 앞머리에 랜덤표식 설정
-        String fileName = uuid + imageFile.getOriginalFilename();
-
-        try{
-            File f = new File("C:\\kosastudy\\sugar-road\\server\\src\\main\\resources\\static\\images\\users/" + fileName);
-            imageFile.transferTo(f);
-            newbieDTO.setUserImagePath(path + "/" + fileName);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        String userImagePath = imageUtil.writeImage(imageFile);
+        newbieDTO.setUserImagePath(userImagePath);
+//        String uuid = UUID.randomUUID().toString(); //중복 파일이 존재하면 앞머리에 랜덤표식 설정
+//        String fileName = uuid + imageFile.getOriginalFilename();
+//
+//        try{
+//            File f = new File("C:\\kosastudy\\sugar-road\\server\\src\\main\\resources\\static\\images\\users/" + fileName);
+//            imageFile.transferTo(f);
+//            newbieDTO.setUserImagePath(path + "/" + fileName);
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
 
         if(usersDAO.createUser(newbieDTO)){ //회원 생성 성공 시
             return "회원가입에 성공했습니다";

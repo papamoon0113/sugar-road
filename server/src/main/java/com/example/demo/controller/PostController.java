@@ -35,22 +35,27 @@ public class PostController {
     @Autowired
     PostCommentDAO postCommentDAO;
 
-    boolean checkLongin(HttpSession session){
-        System.out.println("nowLogin:"+session.getAttribute("nowLogin"));
+    boolean checkLongin(HttpSession session) {
+        System.out.println("nowLogin:" + session.getAttribute("nowLogin"));
         return session.getAttribute("nowLogin") != null;//
     }
+
     //이미지 저장 method
-    List<PostImageDTO> saveImage(PostDTO dto){
+    List<PostImageDTO> saveImage(PostDTO dto) {
         System.out.println("saveImage 실행");
         String path = "/images/post";
-        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post/";
+        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post";
+        File isDir = new File(abPath);
+        if (!isDir.isDirectory()) {
+            isDir.mkdirs();
+        }
         List<PostImageDTO> imageList = new ArrayList<>();
         for (MultipartFile mfile : dto.getUploadImages()) {
             String uuid = UUID.randomUUID().toString();
             String fileName = uuid + mfile.getOriginalFilename();
             PostImageDTO postImageDTO = new PostImageDTO();
             try {
-                File f = new File(abPath + fileName);
+                File f = new File(abPath + "/" + fileName);
                 mfile.transferTo(f);
                 postImageDTO.setPostImagePath(path + "/" + fileName);
                 imageList.add(postImageDTO);
@@ -60,6 +65,7 @@ public class PostController {
         }
         return imageList;
     }
+
     @ModelAttribute("path")
     String getRequestServletPath(HttpServletRequest request) {
         return request.getServletPath();
@@ -68,17 +74,20 @@ public class PostController {
     @GetMapping("")
     public ModelAndView readPost(@RequestParam(required = false) String search,
                                  @RequestParam(required = false) String cn,
-                                 @RequestParam(required = false) String order,
-                                 HttpSession session) {
+                                 @RequestParam(required = false) String order) {
 
         ModelAndView mav = new ModelAndView();
         System.out.println("index 실행");
         List<PostDTO> list;
-        if(cn != null && order != null){
+        if(search != null){
+            list = postDAO.readPostBySearch(search);
+        }
+        else if(cn != null && order != null){
             list = postDAO.readPostOrderBY(cn, order);
-        }else {
+        } else {
             list = postDAO.readPost();
         }
+
         for (PostDTO p : list) {
             int id = p.getPostId();
             List<String> iList = postImageDAO.readPostImage(id);
@@ -95,7 +104,7 @@ public class PostController {
 
     @GetMapping("/write")
     public String writePage(HttpSession session) {
-        if(!checkLongin(session)){
+        if (!checkLongin(session)) {
             System.out.println("로그인 필요");
             return "redirect:/users/login.html";
         }
@@ -104,14 +113,13 @@ public class PostController {
 
     @PostMapping("/write")//userId session에서 받기
     public String insertPost(PostDTO dto, HttpSession session) {
-        System.out.println("파일 개수:"+dto.getUploadImages().length);
+        System.out.println("파일 개수:" + dto.getUploadImages().length);
 
         List<PostImageDTO> imageList = new ArrayList<>();
 
-        if(!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
-            imageList=saveImage(dto);//이미지 저장 및 dto 경로 저장
-        }
-        else{
+        if (!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
+            imageList = saveImage(dto);//이미지 저장 및 dto 경로 저장
+        } else {
             System.out.println("실행 안됨");
         }
         if (postDAO.createPost(dto)) {
@@ -137,7 +145,7 @@ public class PostController {
         PostDTO dto = postDAO.readPostBy("post_id", id).get(0);
         System.out.println(dto.getPostId());
         int postId = dto.getPostId();
-		//이미지 정렬
+        //이미지 정렬
         List<String> iList = postImageDAO.readPostImage(postId);
         if (iList != null) {
             dto.setPostImage(iList.toArray(new String[0]));
@@ -150,6 +158,7 @@ public class PostController {
 
     @GetMapping("/edit")
     public ModelAndView updatePost(String id) {
+
         ModelAndView mav = new ModelAndView();
         PostDTO dto = postDAO.readPostBy("post_id", id).get(0);
         List<String> iList = postImageDAO.readPostImage(Integer.parseInt(id));
@@ -166,7 +175,7 @@ public class PostController {
     @PostMapping("/edit")
     public String updatePost(PostDTO dto) {
         //이미지 수정
-        if(dto.getPostImage() != null) {
+        if (dto.getPostImage() != null) {
             System.out.println("실행됨");
             for (String s : dto.getPostImage()) {
                 System.out.println("src:" + s);
@@ -176,16 +185,15 @@ public class PostController {
                     System.out.println("삭제 안됨");
                 }
             }
-        }else{
+        } else {
             System.out.println("이미지 수정 실행안됨");
         }
         //이미지 저장
         List<PostImageDTO> imageList = new ArrayList<>();
 
-        if(!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
-            imageList=saveImage(dto);//이미지 저장
-        }
-        else{
+        if (!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
+            imageList = saveImage(dto);//이미지 저장
+        } else {
             System.out.println("실행 안됨");
         }
         if (postDAO.updatePost(dto)) {

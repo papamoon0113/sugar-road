@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dao.StoreDAO;
 import com.example.demo.domain.StoreDTO;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ public class StoreController {
     }
 
     @GetMapping("/detail") // 가게 상세정보 출력
-    public ModelAndView readSelectStore(int storeId) {
+    public ModelAndView readSelectStore(int storeId, HttpSession session) {
         StoreDTO list = dao.readSelectStore(storeId);
         mav.addObject("list", list);
         mav.setViewName("store/detail");

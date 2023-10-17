@@ -16,7 +16,11 @@
   <li th:text="${reviewDTO.star}"></li>
 </ul>
 <!-- <button is = "recommendation-btn" th:data-userId="${reviewDTO.userId}" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button> -->
-<button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button>
+<button is = "custom-recommendation"  th:if="${session.nowLogin != null}" th:data-userId="${session.nowLogin}" data-referenceType="R" th:data-referenceId="${reviewDTO.reviewId}"></button>
+<button th:if="${session.nowLogin} != ${reviewDTO.userId}" th:onclick="|location.href = '@{/review/edit(id=${reviewDTO.reviewId})}'|">수정</button>
+<button th:if="${session.nowLogin} != ${reviewDTO.userId}" th:onclick="|location.href = '@{/review/delete(id=${reviewDTO.reviewId})}'|">삭제</button>
+<footer th:insert="ui/nav :: nav"></footer>
+
 </body>
 <script src="/js/recommendation.js"></script>
 </html>

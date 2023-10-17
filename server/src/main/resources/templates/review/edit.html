@@ -19,6 +19,8 @@
   <input type = "submit" value = "제출">
   <input type = "button" value = "삭제" th:onclick="|location.href='@{/review/delete(id=${reviewDTO.reviewId})}'|">
 </form>
+<footer th:insert="ui/nav :: nav"></footer>
+
 </body>
 <script>
 

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SearchController {
     @RequestMapping("/search")
-    public ModelAndView searching(String searchWord){
+    public ModelAndView searching(String searchWord) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/search/index");
 
@@ -22,7 +22,7 @@ public class SearchController {
 
         String searchResult = "대충 검색결과";
 
-        if(searchResult == null){ //검색결과가 없으면
+        if (searchResult == null) { //검색결과가 없으면
             mav.addObject("msg", "검색 결과가 없습니다");
         }
 
