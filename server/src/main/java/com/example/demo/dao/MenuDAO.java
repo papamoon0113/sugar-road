@@ -12,23 +12,21 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface MenuDAO {
 
-	@Insert("insert into menu (store_id, "
-								+ "menu_name, price, menu_desc, dessert_id, image) "
-								+ "values (#{storeId}, #{menuName}, #{price}, #{menuDesc}, #{dessertId}, #{image})")
+	@Insert("insert into menu (store_id, menu_name,  menu_image_path) "
+								+ "values (#{storeId}, #{menuName}, #{menuImagePath})")
 	public boolean createMenu(MenuDTO dto);
 
-	@Select("select menu_id, store_id, menu_name, price, menu_desc, dessert_id, image from menu")
+	@Select("select menu_id, store_id, menu_name, price, menu_desc,  image from menu")
 	public List<MenuDTO> readMenu();
 
 	@Update("update menu "
-		+ "set store_id = #{storeId},"
-		+ "menu_name = #{menuName}, price = #{price}, menu_desc = #{menuDesc}, dessert_id = #{dessertId}, image = #{image}"
-		+ "where menu_id = #{menuId}")
+		+ "set menu_name = #{menuName}, price = #{price}, menu_desc = #{menuDesc}, menu_image_path = #{menuImagePath}"
+		+ "where store_id = #{storeId}")
 	public boolean updateMenu(MenuDTO dto);
 
 	@Delete("delete from menu where menu_id = #{menuId}")
 	public boolean deleteMenu(int menuId);
 
-	@Select("select menu_id, store_id, menu_name, price, menu_desc, dessert_id, image from menu where ${cn} = #{v}")
-	public List<MenuDTO> readMenuBy(@Param("cn") String columnName, @Param("v") String value);
+	@Select("select menu_id, menu_name, price, menu_desc, menu_image_path from menu where store_id = #{storeId}")
+	public List<MenuDTO> readMenuBy(int storeId);
 }
