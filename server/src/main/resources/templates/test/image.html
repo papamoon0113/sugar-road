@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Test Image</h1>
+<hr/>
+<h3 th:text="|src : ${imageSrc}|"></h3>
+<img th:src="${imageSrc}">
+</body>
+</html>
