@@ -8,9 +8,10 @@ import org.apache.ibatis.annotations.*;
 public interface StoreDAO {
     //R 다 불러 오는 거 // user_id 추가??
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude  from store")
-
     public List<StoreDTO> readStore();
 
+    @Select("select store_name from store")
+    public List<String> readStoreName();
     // 선택한 게시물 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
     public StoreDTO readSelectStore(int storeId);
@@ -18,7 +19,9 @@ public interface StoreDAO {
     //R 유동적 불러오기 (wherlt re절 컬럼명 = 값)
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where ${cn} = #{v}")
     public List<StoreDTO> readStoreBy(@Param("cn") String columnName, @Param("v") String value);
-
+    //R 가게 이름으로 불러오기
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_name like '%${search}%'")
+    public List<StoreDTO> readStoreSearch(String search);
     // 수정할 가게 내용 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_id =#{storeId}")
 

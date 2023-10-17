@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.*;
 import com.example.demo.domain.*;
+import com.example.demo.util.ImageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.ByteArrayOutputStream;
@@ -34,6 +35,8 @@ public class PostController {
     PostImageDAO postImageDAO;
     @Autowired
     PostCommentDAO postCommentDAO;
+    @Autowired
+    ImageUtil imageUtil;
 
     boolean checkLongin(HttpSession session) {
         System.out.println("nowLogin:" + session.getAttribute("nowLogin"));
@@ -43,25 +46,29 @@ public class PostController {
     //이미지 저장 method
     List<PostImageDTO> saveImage(PostDTO dto) {
         System.out.println("saveImage 실행");
-        String path = "/images/post";
-        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post";
-        File isDir = new File(abPath);
-        if (!isDir.isDirectory()) {
-            isDir.mkdirs();
-        }
+//        String path = "/images/post";
+//        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post";
+//        File isDir = new File(abPath);
+//        if (!isDir.isDirectory()) {
+//            isDir.mkdirs();
+//        }
         List<PostImageDTO> imageList = new ArrayList<>();
         for (MultipartFile mfile : dto.getUploadImages()) {
-            String uuid = UUID.randomUUID().toString();
-            String fileName = uuid + mfile.getOriginalFilename();
-            PostImageDTO postImageDTO = new PostImageDTO();
-            try {
-                File f = new File(abPath + "/" + fileName);
-                mfile.transferTo(f);
-                postImageDTO.setPostImagePath(path + "/" + fileName);
-                imageList.add(postImageDTO);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String postImagePath = imageUtil.writeImage(mfile);
+            PostImageDTO postImageDTO = PostImageDTO.builder().postImagePath(postImagePath).build();
+            imageList.add(postImageDTO);
+//            postImageDTO.setPostImagePath(path + "/" + fileName);
+//            String uuid = UUID.randomUUID().toString();
+//            String fileName = uuid + mfile.getOriginalFilename();
+//            PostImageDTO postImageDTO = new PostImageDTO();
+//            try {
+//                File f = new File(abPath + "/" + fileName);
+//                mfile.transferTo(f);
+//                postImageDTO.setPostImagePath(path + "/" + fileName);
+//                imageList.add(postImageDTO);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
         return imageList;
     }
@@ -77,16 +84,16 @@ public class PostController {
                                  @RequestParam(required = false) String order) {
 
         ModelAndView mav = new ModelAndView();
-        System.out.println("index 실행");
-        List<PostDTO> list;
-        if(search != null){
-            list = postDAO.readPostBySearch(search);
-        }
-        else if(cn != null && order != null){
-            list = postDAO.readPostOrderBY(cn, order);
-        } else {
-            list = postDAO.readPost();
-        }
+        System.out.println("index 실행"+search+cn+order);
+        List<PostDTO> list = postDAO.readPostOrderBy(search, cn , order);
+//        if(search != null){
+//            list = postDAO.readPostBySearch(search);
+//        }
+//        else if(cn != null && order != null){
+//            list = postDAO.readPostOrderBY(cn, order);
+//        } else {
+//            list = postDAO.readPost();
+//        }
 
         for (PostDTO p : list) {
             int id = p.getPostId();
@@ -157,9 +164,13 @@ public class PostController {
     }
 
     @GetMapping("/edit")
-    public ModelAndView updatePost(String id) {
-
+    public ModelAndView updatePost(String id, HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        if (!checkLongin(session)) {
+            mav.setViewName("redirect:/users/login.html");
+            return mav;
+        }
+
         PostDTO dto = postDAO.readPostBy("post_id", id).get(0);
         List<String> iList = postImageDAO.readPostImage(Integer.parseInt(id));
         if (iList != null) {
@@ -212,8 +223,11 @@ public class PostController {
     }
 
     @GetMapping("/delete")
-    public String deletePost(String id) {
-        ModelAndView mav = new ModelAndView();
+    public String deletePost(String id, HttpSession session) {
+        if (!checkLongin(session)) {
+            System.out.println("로그인 필요");
+            return "redirect:/users/login.html";
+        }
         if (postDAO.deletePost(id)) {
             System.out.println("성공");
         } else {
