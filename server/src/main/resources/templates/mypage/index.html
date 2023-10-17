@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>MyPage</title>
+    <style>
+        img{
+            width : 300px;
+        }
+    </style>
 </head>
 <body>
 <div>
     <h1>마이페이지</h1>
-        <table th:if="${userInfo}">
-            <tr th:each="vo : ${userInfo}">
-                <td>[[${vo.userId }]]</td>
-                <td>[[${vo.userName }]]</td>
-                <td>[[${vo.nickname }]]</td>
-                <td>[[${vo.userEmail }]]</td>
-            </tr>
-        </table>
+        <th:block th:if="${userInfo}">
+            <img th:src="${userInfo.userImagePath}">
+            <div th:each="vo : ${userInfo}">
+                <p>아이디 : [[${vo.userId }]]</p>
+                <p>이름 : [[${vo.userName }]]</p>
+                <p>별명 : [[${vo.nickname }]]</p>
+                <p>메일 : [[${vo.userEmail }]]</p>
+            </div>
+        </th:block>
 
-        <h3 th:if="${msg}"  th:text="${ msg }"></h3>
+        <h3 th:if="${msg}"  th:text="${msg}"></h3>
         <hr>
         <a href="/mypage/edit"><button>회원정보 수정</button></a>
         <a href="/logout"><button>로그아웃</button></a>
         <a href="/mypage/delete"><button>회원정보 탈퇴</button></a>
 </div>
+<footer th:insert="ui/nav :: nav"></footer>
 
 </body>
 </html>

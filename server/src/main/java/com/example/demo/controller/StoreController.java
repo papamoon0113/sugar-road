@@ -5,6 +5,7 @@ import com.example.demo.dao.StoreDAO;
 import com.example.demo.domain.MenuDTO;
 import com.example.demo.domain.StoreDTO;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class StoreController {
         mav.setViewName("store/store");
         return mav;
     }
+
     @GetMapping("/store/detail") // 가게 상세정보 출력
     public ModelAndView readSelectStore(int storeId) {
         // store , menu 따로 불러와서 내보내기

@@ -9,10 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class MyPageController {
@@ -39,9 +43,6 @@ public class MyPageController {
      }
 
      //현재 유저 정보를 DB조회하는 코드
-        //임의로 test01으로 고정하여 테스트
-     //List<UsersDTO> nowUserSelect = usersDAO.readUserBy("user_id", "test01");
-
      String nowLoginId = (String) session.getAttribute("nowLogin");
      System.out.println("현재 로그인 중인 ID : " + nowLoginId); //현재 로그인 중인 ID
      List<UsersDTO> nowUserSelect = usersDAO.readUserBy("user_id", nowLoginId);
@@ -57,33 +58,27 @@ public class MyPageController {
     @RequestMapping(value = "/users/edit", method = RequestMethod.POST)
     @ResponseBody
     public String usersEdit(UsersDTO editUser){ //id, pw, 이름, 별명, 이메일 정보 받고
-        String result = editUser.getUserId() + " 회원의<br>";
+        String path = "/images/users";
 
-        if(editUser.getUserPassword() != ""){ //패스워드가 입력되어 있으면
-            if(usersDAO.updateUserPassword(editUser.getUserPassword(), editUser.getUserId())){ //성공 시
-                result += "패스워드<br>";
-            }
+        MultipartFile imageFile = editUser.getImage();
+
+        String uuid = UUID.randomUUID().toString(); //중복 파일이 존재하면 앞머리에 랜덤표식 설정
+        String fileName = uuid + imageFile.getOriginalFilename();
+
+        try{
+            File f = new File("C:\\kosastudy\\sugar-road\\server\\src\\main\\resources\\static\\images\\users/" + fileName);
+            imageFile.transferTo(f);
+            editUser.setUserImagePath(path + "/" + fileName);
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
-        if(editUser.getUserName() != ""){ //이름이 입력되어 있으면
-            if(usersDAO.updateUserName(editUser.getUserName(), editUser.getUserId())){ //성공 시
-                result += "이름<br>";
-            }
+        if(usersDAO.updateUserAll(editUser)){
+            return editUser.getUserId() + "회원의 정보가 수정되었습니다";
+        } else {
+            return "회원정보 수정에 실패했습니다";
         }
 
-        if(editUser.getNickname() != ""){ //닉네임이 입력되어 있으면
-            if(usersDAO.updateUserNick(editUser.getNickname(), editUser.getUserId())){ //성공 시
-                result += "별명<br>";
-            }
-        }
-
-        if(editUser.getUserEmail() != ""){ //메일이 입력되어 있으면
-            if(usersDAO.updateUserEmail(editUser.getUserEmail(), editUser.getUserId())){ //성공 시
-                result += "메일<br>";
-            }
-        }
-
-        return result += "정보가 수정되었습니다";
     }
 
     @RequestMapping(value = "/logout")
@@ -94,6 +89,7 @@ public class MyPageController {
         if(session != null){ //세션이 존재하면
             session.invalidate(); //세션 초기화 (종료 아님)
         }
+        System.out.println("로그아웃");
         return "redirect:/users/login.html"; //로그인 화면으로 돌아감
     }
 
