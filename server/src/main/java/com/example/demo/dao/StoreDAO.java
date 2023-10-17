@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import com.example.demo.domain.StoreDTO;
 import org.apache.ibatis.annotations.*;
 
@@ -8,22 +10,20 @@ import org.apache.ibatis.annotations.*;
 public interface StoreDAO {
     //R 다 불러 오는 거 // user_id 추가??
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude  from store")
-
     public List<StoreDTO> readStore();
 
-    // 선택한 게시물 불러오기
-    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
+    // 메뉴랑 가게 불러오기
+    @Select("select s.store_id, s.store_name, s.address, s.phone_number, s.store_desc, s.store_image_path, m.menu_id, m.menu_name, m.menu_image_path\n" +
+            "from store s inner join menu m on s.store_id = m.store_id")
+    public  Map<String, Object> readStoreAndMenu();
 
-    public StoreDTO readSelectStore(int storeId);
+    // 선택한 게시물 가게정보, 메뉴 불러오기
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
+    public StoreDTO readSelectStoreBy(int storeId);
 
     //R 유동적 불러오기 (wherlt re절 컬럼명 = 값)
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where ${cn} = #{v}")
     public List<StoreDTO> readStoreBy(@Param("cn") String columnName, @Param("v") String value);
-
-    // 수정할 가게 내용 불러오기
-    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_id =#{storeId}")
-
-    public StoreDTO ViewEditStore(int storeId);
 
     //U id 기준으로 가게 정보 수정 (가게이름, 주소, 전화번호, 가게상세설명, 위도, 경도, 사진)
     @Update("update store set store_name = #{storeName}, address= #{address}, phone_number = #{phoneNumber}, store_desc = #{storeDesc}, latitude = #{latitude}, longitude = #{longitude} where store_id = #{storeId}")

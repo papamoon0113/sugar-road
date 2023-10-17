@@ -7,15 +7,18 @@
 </head>
 <body>
 <h3>가게정보수정</h3>
-<form method="post" action="/edit">
+<form method="post" action="/store/edit" enctype="multipart/form-data" >
     <input type="hidden" name="storeId" th:value="${list.storeId}">
     가게명<input type="text" name="storeName" th:value="${list.storeName}"><br/>
-    가게번호<input type="text" name="phoneNumber" th:value="${list.phoneNumber}"><br/>
     가게주소<input type="text" name="address" th:value="${list.address}"><br/>
-    <!--    가게메뉴<input type="text" ><br/>-->
-    <!--    메뉴 이미지 선택 <input type="file" multiple name="image"><br/>-->
-    대표 이미지<input type="file" name="image"><br/>
-    설명<input type="text" name="storeDesc" th:value="${list.storeDesc}"><br/>
+    가게번호<input type="text" name="phoneNumber" th:value="${list.phoneNumber}"><br/>
+    가게설명<input type="text" name="storeDesc" th:value="${list.storeDesc}"><br/>
+
+    <div th:each="menu : ${list.menuList}">
+        메뉴 이름: <input type="text" name="menuNames" th:value="${menu.menuName}"><br/>
+        기존 메뉴 이미지: <img th:src="@{|${menu.menuImagePath}|}" alt="메뉴 이미지" width="200px"><br/>
+        새로운 메뉴 이미지 선택<input type="file" name="menuImages"><br/>
+    </div>
     <button type="submit">등록</button>
     <button>취소</button>
 </form>

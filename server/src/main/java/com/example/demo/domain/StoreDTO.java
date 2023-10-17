@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -21,4 +23,6 @@ public class StoreDTO {
 	private float longitude;
 	private String storeImagePath;
 	private String userId;
+	private List<MenuDTO> menuList;
+
 }
