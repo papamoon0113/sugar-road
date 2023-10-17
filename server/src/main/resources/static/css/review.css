@@ -1,0 +1,44 @@
+.review {
+    background-color : var(--pink1);
+    margin : 2%;
+    border-radius: 5%;
+    padding-top : 0.01%;
+    padding-bottom : 0.01%;
+  }
+  
+  .review-table {
+    width:90%;
+    margin : 4%;
+  }
+  
+  .review-nickname{
+    text-align : left;
+  }
+  
+  .review-star {
+    text-align : left;
+  }
+  
+  .review-date{
+    text-align : right;
+  }
+  
+  .review-content {
+    width : 100%;
+    padding-top:1.5%;
+  }
+  
+  .review-image-box {
+    display : flex;
+    overflow-x : scroll;
+  }
+  
+  .review-image-box::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .review-image {
+    margin-right : 2%;
+    width : 25%;
+    border-radius: 10%;
+  }

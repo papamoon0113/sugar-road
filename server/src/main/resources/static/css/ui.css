@@ -1,3 +1,13 @@
+:root {
+  --pink1:#F7E9ED;
+  --pink2:#F2D6E7;
+  --pink3:#F1ABCC;
+  --skyblue:#C3DCF1;
+  --purple:#AF96C7;
+  --lightgray:#d3d3d3;
+  --fontcolor:#333333;
+}
+
 @font-face {
  font-family: 'NanumBarunGothic';
  font-style: normal;
@@ -9,8 +19,12 @@
 body {
   margin : 0px;
   padding : 0px;
-  background-color : #d3d3d3;
+  background-color : var(--lightgray);
   font-family : 'NanumBarunGothic';
+}
+
+body > * {
+   color : var(--fontcolor);
 }
 
 .app-body {
@@ -29,9 +43,12 @@ body {
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  border : 2px dotted #d3d3d3;
+  border : 2px dotted #d3d3d3;  
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.content, .content > * {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -42,56 +59,62 @@ body {
 
 h1 {
   font-size : 10vw;
+  margin : 0;
 }
 
 h2 {
   font-size : 8vw;
+  margin : 0;
 }
 
 h3 {
   font-size : 6vw;
+  margin : 0;
 }
 
 h4 {
   font-size : 4.5vw;
+  margin : 0;
 }
 
 h5 {
   font-size : 3.5vw;
+  margin : 0;
 }
 
 h6 {
   font-size : 2.5vw;
+  margin : 0;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   .app-body {
-    max-width : 500px;
+    max-width : 600px;
     margin-left : auto;
     margin-right : auto;
   }
-
+  
   h1 {
-    font-size : 50px;
+    font-size : 60px;
   }
-
+  
   h2 {
-    font-size : 40px;
+    font-size : 48px;
   }
-
+  
   h3 {
-    font-size : 30px;
+    font-size : 36px;
   }
 
   h4 {
-    font-size : 22.5px;
+    font-size : 27px;
   }
 
   h5 {
-    font-size : 17.5px;
+    font-size : 21px;
   }
 
   h6 {
-    font-size : 12.5px;
+    font-size : 15px;
   }
 }
