@@ -33,7 +33,7 @@ public class ImageUtil {
 		try{
 			File f = new File(path);
 			imageFile.transferTo(f);
-			return "/" + fileName;
+			return "/images/" + fileName;
 		} catch (IOException e){
 			e.printStackTrace();
 			return "";
