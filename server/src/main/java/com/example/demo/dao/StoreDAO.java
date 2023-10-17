@@ -12,11 +12,6 @@ public interface StoreDAO {
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude  from store")
     public List<StoreDTO> readStore();
 
-    // 메뉴랑 가게 불러오기
-    @Select("select s.store_id, s.store_name, s.address, s.phone_number, s.store_desc, s.store_image_path, m.menu_id, m.menu_name, m.menu_image_path\n" +
-            "from store s inner join menu m on s.store_id = m.store_id")
-    public  Map<String, Object> readStoreAndMenu();
-
     // 선택한 게시물 가게정보, 메뉴 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store where store_id =#{storeId}")
     public StoreDTO readSelectStoreBy(int storeId);
