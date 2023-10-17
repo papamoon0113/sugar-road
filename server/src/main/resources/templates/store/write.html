@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        #plusBtn, #minusBtn{cursor:pointer};
-    </style>
-</head>
-<body>
-<h3>가게정보등록</h3>
-<form method="post" action="/store/write" enctype="multipart/form-data" >
-    <!--  input에 required 추가  -->
-    가게명<input type="text" name="storeName"><br/>
-    가게번호<input type="number" name="phoneNumber"><br/>
-    가게주소<input type="text" name="address"><br/>
-    <div id="menuInputs">
-    메뉴이름<input type="text" name="menuName">
-    메뉴이미지<input type="file" name="menuImages">
-    </div>
-    <div id = "AddMenuResult"></div>
-    <div onclick="addMenu()" id="plusBtn">➕</div>
-    <div onclick="deleteMenu()" id="minusBtn">➖</div>
-    <br/>
-    대표 이미지<input type="file" name="file"><br/>
-    설명<input type="text" name="storeDesc"><br/>
-    <button type="submit">등록</button>
-    <button>취소</button>
-</form>
-<script>
-    let AddMenuResult = document.querySelector("#AddMenuResult").innerHTML;
-        let menuInputs = document.querySelector("#menuInputs");
-   function addMenu() {
-        let newMenuInputs = document.createElement('div');
-        newMenuInputs.innerHTML = "메뉴이름<input type='text' name='menuName'> 메뉴이미지<input type='file' name='menuImages'>";
-        menuInputs.appendChild(newMenuInputs);
-    }
-      function deleteMenu() {
-        let menuCount = menuInputs.childElementCount;
-        if (menuCount > 1) {
-            menuInputs.removeChild(menuInputs.lastChild);
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Title</title>
+      <style>
+        #plusBtn,
+        #minusBtn {
+          cursor: pointer;
         }
-    }
-</script>
-<footer th:insert="ui/nav :: nav"></footer>
-</body>
+        .HeadLine {
+          width: 100%;
+          height: 2px;
+          background-color: #af96c7;
+        }
+        h3{
+            text-align: center;
+        }
+        .inputBox{
+            border-bottom: 1px solid #B4B3B3;
+            width: 100%;
+            height: 7vh;
+        }
+      </style>
+      <!-- <link rel="stylesheet" href="경로/파일이름"> -->
+    </head>
+    <body>
+      <div id="container">
+        <h3>가게정보등록</h3>
+        <div class="HeadLine"></div>
+        <form method="post" action="/store/write" enctype="multipart/form-data">
+          <!--  input에 required 추가  -->
+          <div class="inputBox">
+          가게명<input type="text" name="storeName" /></div>
+          <div class="inputBox">가게번호<input type="number" name="phoneNumber" /></div>
+          <div class="inputBox">가게주소<input type="text" name="address" /></div>
+          <div id="menuInputs"> 
+            메뉴이름<input type="text" name="menuName"/> 메뉴이미지<input type="file" name="menuImages"/>
+            <div id="AddMenuResult"></div>
+          </div>
+          <button type="button" onclick="addMenu()" id="plusBtn">메뉴 추가 ➕</button>
+          <button type="button" onclick="deleteMenu()" id="minusBtn">메뉴 제거 ➖</button>
+          <div class="inputBox">대표 이미지<input type="file" name="file" /><br /></div>
+          <div class="inputBox"> 설명<input type="text" name="storeDesc" /><br /></div>
+          <button type="submit">등록</button>
+          <button>취소</button>
+        </form>
+      </div>
+      <script>
+        let AddMenuResult = document.querySelector("#AddMenuResult").innerHTML;
+        let menuInputs = document.querySelector("#menuInputs");
+        function addMenu() {
+          let newMenuInputs = document.createElement("div");
+          newMenuInputs.innerHTML =
+            "메뉴이름<input type='text' name='menuName'> 메뉴이미지<input type='file' name='menuImages'>";
+          menuInputs.appendChild(newMenuInputs);
+        }
+        function deleteMenu() {
+          let menuCount = menuInputs.childElementCount;
+          if (menuCount > 1) {
+            menuInputs.removeChild(menuInputs.lastChild);
+          }
+        }
+      </script>
+    </body>
+  </html>
 </html>
