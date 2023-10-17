@@ -6,6 +6,19 @@
     <title>Title</title>
 </head>
 <body>
+<script th:inline="javascript" type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9f0b153df219037e9402a0154f2ca62">
+</script>
+<script>
+    /*<![CDATA[*/
+    var lat = /*[[${list.latitude}]]*/;
+    var lng = /*[[${list.longitude}]]*/;
+    var container = document.getElementById('map');
+    var option = {
+        center: new kakao.maps.LatLng(/*[[${list.latitude}]]*/, /*[[${list.longitude}]]*/)
+    };
+    var map = new kakao.maps.Map(container, options);
+    /*]]>*/
+</script>
 <h3>가게 정보 상세 페이지</h3>
 <!--작성자-->
 가게명: <div th:text="${list.storeName}" ></div>
@@ -17,6 +30,7 @@
 <a th:href="@{/editView(storeId=${list.storeId})}">가게 수정</a><br/>
 <a th:href="@{/delete(storeId=${list.storeId})}">가게 삭제</a><br/>
 <button is = "custom-recommendation" data-userId="추천테스트용" data-referenceType="S" th:data-referenceId="${list.storeId}"></button>
+<div id="map" style="width:500px;height:400px;"></div>
 <custom-review th:data-storeId=${list.storeId}></custom-review>
 </body>
 <script src="/js/recommendation.js"></script>
