@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<h1>자유 게시판</h1>-->
+<!--<form action="/post" method="GET">-->
+<!--    <input type="radio" name="category" value="review">-->
+<!--    <input type="radio" name="category" value=""-->
+<!--</form>-->
+<form action="/post" method="GET">
+    <textarea name="search"></textarea>
+    <input type="submit">
+</form>
+<button onclick="getPostList()">클릭</button>
+<!--<th:block th:if="${list}" th:each="l:${list}">-->
+<!--    <a th:href=@{/post/detail(id=${l.postId})}>-->
+<!--        <p th:text="${l.postId}"></p>-->
+<!--&lt;!&ndash;        <p th:text="${l.content}"></p>&ndash;&gt;-->
+<!--        <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">-->
+<!--    </a>-->
+<!--</th:block>-->
+<output id="result"></output>
+<br>
+<input type="button" onclick="location.href='/post/write'" value="작성하기">
+<h3 th:if="${msg}" th:text="${msg}"></h3>
+<script>
+    getPostList = () => {
+        let request = new XMLHttpRequest();
+        request.onload = () => {
+            if(request.status == 200){
+                console.log(request);
+                var result = document.getElementById("result");
+                result.innerHTML = "";
+                let jsonDOM = JSON.parse(request.responseText);
+
+                for(let i in jsonDOM){
+                    result.innerHTML += "<h3>" + jsonDOM[i].postId + "/" +jsonDOM[i].content + "</h3>"
+
+                }
+            }
+        }
+        request.open('GET', '/post', true);
+        request.send();
+    }
+</script>
+</body>
+</html>

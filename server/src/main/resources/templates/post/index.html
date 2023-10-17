@@ -10,16 +10,22 @@
 <!--    <input type="radio" name="category" value="review">-->
 <!--    <input type="radio" name="category" value=""-->
 <!--</form>-->
+<form action="/post" method="GET">
+    <textarea name="search"></textarea>
+    <input type="submit">
+</form>
+<button onclick="getPostList()">클릭</button>
 <th:block th:if="${list}" th:each="l:${list}">
     <a th:href=@{/post/detail(id=${l.postId})}>
         <p th:text="${l.postId}"></p>
 <!--        <p th:text="${l.content}"></p>-->
-
         <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
     </a>
 </th:block>
+<output id="result"></output>
 <br>
 <input type="button" onclick="location.href='/post/write'" value="작성하기">
 <h3 th:if="${msg}" th:text="${msg}"></h3>
+
 </body>
 </html>
