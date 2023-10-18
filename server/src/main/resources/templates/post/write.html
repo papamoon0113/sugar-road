@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
-    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div class="app-body">
     <div class="content">
     <div class="header" style="text-align: center">
-        <h1>글 작성</h1>
+        <h4>글 작성</h4>
         <hr>
     </div>
     <div class="post-content">
-    <form th:action="${path}" enctype="multipart/form-data" method="POST">
+    <form th:action="${path}" enctype="multipart/form-data" method="POST" id="writeForm">
         <input type="hidden" name="postId" th:value="${dto}? ${dto.postId} : 0">
         <input type="text" name="title" style="width: 100%; border: none" placeholder="제목" th:value="${dto}? ${dto.title} : _"><br>
-        <hr style="color: sky-blue;">
-        <textarea name="content" style="width: 100%; height: 50%; border: none" placeholder="내용" th:value="${dto}? ${dto.content} : _"></textarea><br>
+        <hr>
+        <textarea name="content" rows="25" style="width: 100%; border: none" placeholder="내용" th:text="${dto}? ${dto.content} : _"></textarea><br>
         <hr>
         <input type="hidden" name="userId" th:value="${dto}? ${dto.userId} : ${session.nowLogin}"><br>
-        카테고리:<input type="text" name="postCategoryId" th:value="${dto}? ${dto.postCategoryId} : _"><br>
-        이미지:<input type="file" name="uploadImages" multiple><br>
+
+<!--        카테고리:<input type="text" name="postCategoryId" th:value="${dto}? ${dto.postCategoryId} : _"><br>-->
+
+        <input type="file" class="form-control" name="uploadImages" multiple><br>
 
         <th:block th:if="${dto}">
             삭제할 이미지:
@@ -33,11 +37,11 @@
             </label>
             </th:block>
         </th:block>
-        <div class="button">
-            <input type="button" value="취소" onclick="history.back(-1)">
-            <input type="submit">
-        </div>
     </form>
+        <div class="post-button">
+            <button onclick="history.back(-1)">취소</button>
+            <button type="submit" form="writeForm">작성</button>
+        </div>
     </div>
     </div>
 <footer th:insert="ui/nav :: nav"></footer>

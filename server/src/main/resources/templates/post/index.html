@@ -5,40 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
     <link rel="stylesheet" href="css/ui.css">
-    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
+<div class="post-index-container">
 <div class="app-body">
     <div class="content">
-    <div class="header">
-        <h3>자유게시판</h3>
+    <div class="index-header">
+        <h1 class="bold">Free Board</h1>
     </div>
-<div class="category"></div>
-    <div class="search">
+<div class="category">
+    <button onclick="location.href='/post?category=01'">
+        <div class="image-button">
+            <img src="/images/icons/bread.png" height="20px" alt="">
+            <span>빵리뷰</span>
+        </div>
+    </button>
+    <button onclick="location.href='/post?category=02'">
+        <div class="image-button">
+        <img src="/images/icons/daily.png" height="20px"  alt="">
+        <span>일상</span>
+        </div>
+    </button>
+    <button onclick="location.href='/post?category=03'">
+        <div class="image-button">
+        <img src="/images/icons/talk.png" height="20px" alt="">
+        <span>잡담</span>
+        </div>
+    </button>
+</div>
+        <div class="search">
         <form action="/post" method="GET">
-            <input type="text" name="search">
-            <img src="/images/icons/search.png">
+            <img src="/images/icons/search.png" alt="">
+            <input type="text" class="input" name="search" placeholder="검색">
+
         </form>
-    </div>
+        </div>
 
-<div class="post-list" th:if="${list}" th:each="l:${list}">
-    <div class="post-thumbnail" style="border: 1px solid black;">
+<div class="post-list" th:if="${list}" >
+    <div th:each="l:${list}" class="post-thumbnail">
     <a th:href=@{/post/detail(id=${l.postId})}>
-        <table>
-            <tr>
-                <th>
-                    <p th:text="${l.title}"></p>
-                    <!--   댓글 수           -->
-                </th>
-            </tr>
-
+        <table class="v-table">
             <tr>
                 <td>
-                    <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
+                    <p class="t5 bold" th:text="${l.title}"></p><br>
+                </td>
+                <td class="v-table-half right">
+                    <p class="t6">댓글 수: 3</p>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" alt="img">
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="2">
                     <p th:text="${l.content}"></p>
                 </td>
             </tr>
@@ -46,13 +70,13 @@
     </a>
     </div>
 </div>
-
-<input type="button" onclick="location.href='/post/write'" value="작성하기">
-<h3 th:if="${msg}" th:text="${msg}"></h3>
-
+<div class="post-button-index">
+    <button onclick="location.href='/post/write'">작성</button>
+</div>
     </div>
 <footer th:insert="ui/nav :: nav"></footer>
 
+</div>
 </div>
 </body>
 </html>
