@@ -1,3 +1,5 @@
+/* 컬러 변수 선언 */
+/* var(--pink1) -> 이런 식으로 색깔 대신 값 넣으면 됨 */
 :root {
   --pink1:#F7E9ED;
   --pink2:#F2D6E7;
@@ -6,6 +8,55 @@
   --purple:#AF96C7;
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
+  --white:#F5F5F5;  
+}
+
+.pink1 {
+    background-color : var(--pink1);
+}
+
+.pink2 {
+    background-color : var(--pink2);
+}
+
+.pink3 {
+    background-color : var(--pink3);
+}
+
+.skyblue {
+    background-color : var(--skyblue);
+}
+
+.purple {
+    background-color : var(--purple);
+}
+
+.lightgray {
+    background-color : var(--lightgray);
+}
+
+.t-pink1 {
+    color : var(--pink1);
+}
+
+.t-pink2 {
+    color : var(--pink2);
+}
+
+.t-pink3 {
+    color : var(--pink3);
+}
+
+.t-skyblue {
+    color : var(--skyblue);
+}
+
+.t-purple {
+    color : var(--purple);
+}
+
+.t-lightgray {
+    color : var(--lightgray);
 }
 
 @font-face {
@@ -34,7 +85,7 @@ body > * {
   margin-bottom : 0px;
   padding-top : 0.1%;
   display: block;
-  background-color : white;
+  background-color : var(--white);
 }
 
 .content {
@@ -51,6 +102,10 @@ body > * {
 .content, .content > * {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.bold {
+  font-weight : bold;
 }
 
 .content::-webkit-scrollbar {
@@ -102,9 +157,41 @@ h6 {
   margin : 0;
 }
 
-.bold {
-  font-weight : bold;
+.v-container {
+    width : 100%;
+    padding : 1.5%;
 }
+
+.v-item {
+    margin : 1%;
+    padding :2%;
+    width : 91%;
+}
+
+.v-table {
+    width:95%;
+    margin : 2%;
+}
+
+.v-table > tr {
+    padding : 1%;
+}
+
+.v-table-half {
+    width : 50%;
+}
+
+.v-table-third {
+    width : 33.3%;
+}
+
+.v-table-quater {
+    width : 25%;
+}
+
+.right {
+    text-align : right;
+}  
 
 @media screen and (min-width: 600px) {
   .app-body {
@@ -113,6 +200,8 @@ h6 {
     margin-right : auto;
   }
   
+    
+    
   h1 {
     font-size : 60px;
   }
@@ -148,4 +237,9 @@ h6 {
   .t4 {
     font-size : 27px;
   }
+}
+
+/* 완성되면 밑에 지워야 함 */
+table, tr, th, td, div {
+  border : 0.5px dotted green
 }
