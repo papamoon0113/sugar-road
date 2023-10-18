@@ -1,3 +1,64 @@
+/* 컬러 변수 선언 */
+/* var(--pink1) -> 이런 식으로 색깔 대신 값 넣으면 됨 */
+:root {
+  --pink1:#F7E9ED;
+  --pink2:#F2D6E7;
+  --pink3:#F1ABCC;
+  --skyblue:#C3DCF1;
+  --purple:#AF96C7;
+  --lightgray:#d3d3d3;
+  --fontcolor:#333333;
+  --white:#F5F5F5;  
+}
+
+.pink1 {
+    background-color : var(--pink1);
+}
+
+.pink2 {
+    background-color : var(--pink2);
+}
+
+.pink3 {
+    background-color : var(--pink3);
+}
+
+.skyblue {
+    background-color : var(--skyblue);
+}
+
+.purple {
+    background-color : var(--purple);
+}
+
+.lightgray {
+    background-color : var(--lightgray);
+}
+
+.t-pink1 {
+    color : var(--pink1);
+}
+
+.t-pink2 {
+    color : var(--pink2);
+}
+
+.t-pink3 {
+    color : var(--pink3);
+}
+
+.t-skyblue {
+    color : var(--skyblue);
+}
+
+.t-purple {
+    color : var(--purple);
+}
+
+.t-lightgray {
+    color : var(--lightgray);
+}
+
 @font-face {
  font-family: 'NanumBarunGothic';
  font-style: normal;
@@ -9,8 +70,12 @@
 body {
   margin : 0px;
   padding : 0px;
-  background-color : #d3d3d3;
+  background-color : var(--lightgray);
   font-family : 'NanumBarunGothic';
+}
+
+body > * {
+   color : var(--fontcolor);
 }
 
 .app-body {
@@ -20,7 +85,7 @@ body {
   margin-bottom : 0px;
   padding-top : 0.1%;
   display: block;
-  background-color : white;
+  background-color : var(--white);
 }
 
 .content {
@@ -29,69 +94,156 @@ body {
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  border : 2px dotted #d3d3d3;
+  border : 2px dotted #d3d3d3;  
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.content, .content > * {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.bold {
+  font-weight : bold;
 }
 
 .content::-webkit-scrollbar {
   display: none;
 }
 
+.t6 {
+  font-size : 2.5vw;
+  margin : 0;
+}
+
+.t5 {
+  font-size : 3.5vw;
+  margin : 0;
+}
+
+.t4 {
+  font-size : 4.5vw;
+  margin : 0;
+}
+
 h1 {
   font-size : 10vw;
+  margin : 0;
 }
 
 h2 {
   font-size : 8vw;
+  margin : 0;
 }
 
 h3 {
   font-size : 6vw;
+  margin : 0;
 }
 
 h4 {
   font-size : 4.5vw;
+  margin : 0;
 }
 
 h5 {
   font-size : 3.5vw;
+  margin : 0;
 }
 
 h6 {
   font-size : 2.5vw;
+  margin : 0;
 }
 
-@media screen and (min-width: 500px) {
+.v-container {
+    width : 100%;
+    padding : 1.5%;
+}
+
+.v-item {
+    margin : 1%;
+    padding :2%;
+    width : 91%;
+}
+
+.v-table {
+    width:95%;
+    margin : 2%;
+}
+
+.v-table > tr {
+    padding : 1%;
+}
+
+.v-table-half {
+    width : 50%;
+}
+
+.v-table-third {
+    width : 33.3%;
+}
+
+.v-table-quater {
+    width : 25%;
+}
+
+.right {
+    text-align : right;
+}  
+
+.center {
+    text-align : center;
+}
+
+@media screen and (min-width: 600px) {
   .app-body {
-    max-width : 500px;
+    max-width : 600px;
     margin-left : auto;
     margin-right : auto;
   }
-
+  
+    
+    
   h1 {
-    font-size : 50px;
+    font-size : 60px;
   }
-
+  
   h2 {
-    font-size : 40px;
+    font-size : 48px;
   }
-
+  
   h3 {
-    font-size : 30px;
+    font-size : 36px;
   }
 
   h4 {
-    font-size : 22.5px;
+    font-size : 27px;
   }
 
   h5 {
-    font-size : 17.5px;
+    font-size : 21px;
   }
 
   h6 {
-    font-size : 12.5px;
+    font-size : 15px;
   }
+  
+  .t6 {
+    font-size : 15px;
+  }
+
+  .t5 {
+    font-size : 21px;
+  }
+
+  .t4 {
+    font-size : 27px;
+  }
+}
+
+/* 완성되면 밑에 지워야 함 */
+table, tr, th, td, div {
+  border : 0.5px dotted green
 }

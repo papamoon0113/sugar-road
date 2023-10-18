@@ -27,24 +27,10 @@ public class UsersController {
     @RequestMapping(value = "/users/signup", method = RequestMethod.POST)
     @ResponseBody
     public String createUsers(UsersDTO newbieDTO){
-        //ModelAndView mav = new ModelAndView();
-
-        //선택한 파일로 프로필 이미지 삽입
-//        String path = "/images/users";
 
         MultipartFile imageFile = newbieDTO.getImage();
         String userImagePath = imageUtil.writeImage(imageFile);
         newbieDTO.setUserImagePath(userImagePath);
-//        String uuid = UUID.randomUUID().toString(); //중복 파일이 존재하면 앞머리에 랜덤표식 설정
-//        String fileName = uuid + imageFile.getOriginalFilename();
-//
-//        try{
-//            File f = new File("C:\\kosastudy\\sugar-road\\server\\src\\main\\resources\\static\\images\\users/" + fileName);
-//            imageFile.transferTo(f);
-//            newbieDTO.setUserImagePath(path + "/" + fileName);
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
 
         if(usersDAO.createUser(newbieDTO)){ //회원 생성 성공 시
             return "회원가입에 성공했습니다";

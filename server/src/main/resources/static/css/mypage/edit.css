@@ -1,0 +1,80 @@
+#title{
+  position: relative;
+  left: 10%;
+}
+
+#mypageBack{
+    width: 90%;
+    height: 830px;
+    margin: auto;
+
+    border-radius: 50px;
+    background-repeat: no-repeat;
+    background-image: url(../mypage/img/backGround.jpg);
+    background-size: 110%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#userImage{
+  border-radius: 109px;
+  border: 3px solid #D7CBE3;
+  width: 23%;
+  height: 15%;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+  left: 38%;
+}
+
+.userInfo{
+  text-align: center;
+}
+
+.editText{
+  position: relative;
+  left: 25%;
+  top: 16px;
+}
+
+.editBox{
+  position: relative;
+  left: 25%;
+
+  width: 50%;
+  height: 30px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.50);
+}
+
+.imgChange{
+    position: relative;
+    left: 30%;
+}
+
+#editButtom{
+        position: relative;
+        left: 20%;
+        top: 50px;
+        width: 60%;
+        height: 39px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        background: rgba(175, 150, 199, 0.60);
+        border-radius: 15px;
+
+        font-size: 90%;
+}
+
+#delete{
+  position: relative;
+  left: 60%;
+  top: 8%;
+}
+
