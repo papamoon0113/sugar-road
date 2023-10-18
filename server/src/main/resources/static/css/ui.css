@@ -193,6 +193,10 @@ h6 {
     text-align : right;
 }  
 
+.center {
+    text-align : center;
+}
+
 @media screen and (min-width: 600px) {
   .app-body {
     max-width : 600px;
