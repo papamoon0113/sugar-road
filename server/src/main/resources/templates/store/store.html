@@ -1,35 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>Title</title>
-    <style>
-        #post{
-        border: 1px solid red;
-        }
-    </style>
-</head>
-<body>
-<h3>가게정보 리스트</h3>
-<button>정렬</button>
-<!--<button>최신 등록순</button>-->
-<!--<button>좋아요 많은 가게 순</button>-->
-<div>
-    <div id="post" th:if="${list}" th:each="dto:${list}">
-        가게명:
-        <div th:text="${dto.storeName}"></div>
-        가게설명:
-        <div th:text="${dto.storeDesc}"></div>
-        가게id:
-        <div th:text="${dto.storeId}"></div>
-        <a th:href="@{/store/detail(storeId=${dto.storeId})}">상세페이지로</a><br/>
-        <!--    대표이미지 출력    -->
-    </div>
-    <a th:href="@{/store/write}">가게 작성</a>
-    <h3 th:if="${msg}" th:text="${ msg }"></h3>
-</div>
-<footer th:insert="ui/nav :: nav"></footer>
+   <!-- <link rel="stylesheet" href="/src/main/resources/static/css/ui.css" /> -->
+    <link rel="stylesheet" href="/css/ui.css"  />
+    <link rel="stylesheet" href="/css/store.css" />
+  </head>
+  <body>
+    <div class="app-body">
+      <div class="content">
+        <div class="container">
+          <h3>가게정보 리스트</h3>
+          <div class="btnList">
+            <span>👍인기</span>
+            <span>😲최근</span>
+            <span>💖좋아요</span>
+          </div>
+          <a class="storeInsertBtn" th:href="@{/store/write}">가게 작성</a>
+          <div class="storeList">
+            <div class="storeBox" th:if="${list}" th:each="dto:${list}">
+              <div class="storeBoxTop">
+                <div th:text="${dto.storeName}">가게명</div>
+                <div>댓글/하트수 : <span>5</span></div>
+              </div>
+              <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
+              <div th:text="${dto.storeDesc}"></div>
+              <a th:href="@{/store/detail(storeId=${dto.storeId})}"
+                >상세페이지로</a
+              ><br />
+            </div>
+            <div class="storeBox" th:if="${list}" th:each="dto:${list}">
+              가게명:
+              <div th:text="${dto.storeName}"></div>
+              <div th:text="${dto.storeDesc}"></div>
+              <a th:href="@{/store/detail(storeId=${dto.storeId})}"
+                >상세페이지로</a
+              ><br />
 
-</body>
+            </div>
+          </div>
+          <div>
+            <input class="storeSearchBar" /><input type="button" value="검색" />
+          </div>
+          <footer th:insert="ui/nav :: nav"></footer>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface StoreDAO {
     //R 다 불러 오는 거 // user_id 추가??
-    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude  from store")
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store order by store_id desc")
     public List<StoreDTO> readStore();
 
     // 선택한 게시물 가게정보, 메뉴 불러오기
