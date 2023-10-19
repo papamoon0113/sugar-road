@@ -8,7 +8,8 @@
   --purple:#AF96C7;
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
-  --white:#F5F5F5;
+  --white:#F5F5F5;  
+
 }
 
 .pink1 {
@@ -76,6 +77,10 @@ body {
 * {
    color : var(--fontcolor);
    font-family : 'NanumBarunGothic';
+}
+
+body > * {
+   color : var(--fontcolor);
 }
 
 body > * {
@@ -207,7 +212,9 @@ h6 {
     margin-left : auto;
     margin-right : auto;
   }
-
+  
+    
+    
   h1 {
     font-size : 60px;
   }
@@ -245,12 +252,12 @@ h6 {
   }
 }
 
-input[type=file]::file-selector-button {
+/* input[type=file]::file-selector-button {
   width: 40%;
   padding : 3%;
   background: var(--pink1);
   border : none;
-}
+} */
 
 .no-border {
     border : none;
@@ -260,4 +267,3 @@ input[type=file]::file-selector-button {
 table, tr, th, td, div {
   border : 0.5px dotted green
 }
-
