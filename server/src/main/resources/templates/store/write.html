@@ -7,8 +7,8 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <title>Title</title>
-    <link rel="stylesheet" href="/css/ui.css" />
-    <link rel="stylesheet" href="/css/store.css" th:href="@{/css/ui.css}" />
+<!--    <link rel="stylesheet" href="/css/ui.css" />-->
+    <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/store.css" th:href="@{/css/store.css}" />
   </head>
@@ -16,7 +16,8 @@
     <div class="app-body">
       <div class="content">
         <div id="container">
-          <h3>가게정보등록</h3>
+          <a href="javascript:history.back();">◀</a><br>
+          <div class="store-write-title">가게정보등록</div>
           <div class="HeadLine"></div>
           <form
             method="post"
@@ -25,48 +26,52 @@
           >
             <!--  input에 required 추가  -->
             <div class="inputBox">
-              <span id="title">가게명</span
+              <span>가게명</span
               ><input type="text" name="storeName" />
             </div>
             <div class="inputBox">
-              <span id="title">가게번호</span
+              <span>가게번호</span
               ><input type="number" name="phoneNumber" />
             </div>
             <div class="inputBox">
-              <span id="title">가게주소</span
+              <span>가게주소</span
               ><input type="text" name="address" />
             </div>
             <div class="inputBox">
-              <span id="title">대표 이미지</span
+              <span>대표 이미지</span
               ><input type="file" name="file" /><br />
             </div>
             <div class="inputBox">
-              <span id="title">설명</span
+              <span>설명</span
               ><input type="text" name="storeDesc" /><br />
             </div>
-            <h4>메뉴</h4>
+            <h6>메뉴</h6>
             <div class="menuBox">
               <div class="menu">
                 <div class="inputBox">
-                  <span id="title">메뉴이름</span>
+                  <span >메뉴이름</span>
                   <input type="text" name="menuName" /><br />
                 </div>
                 <div class="inputBox">
-                  <span id="title">메뉴이미지</span>
+                  <span>메뉴이미지</span>
                   <input type="file" name="menuImages" />
                 </div>
               </div>
             </div>
             <br />
+            <div class="store-menu-btnBox">
             <button type="button" onclick="addMenu()" id="plusBtn">
               메뉴➕
             </button>
             <button type="button" onclick="deleteMenu()" id="minusBtn">
               메뉴➖
             </button>
+            </div>
             <br />
+            <div class="store-insert-btnBox">
+              <button ><a href="javascript:history.back();">취소</a></button>
             <button type="submit">등록</button>
-            <button>취소</button>
+            </div>
           </form>
         </div>
       </div>

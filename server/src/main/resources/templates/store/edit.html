@@ -3,26 +3,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>Title</title>
+    <!--<link rel="stylesheet" href="/css/ui.css" />-->
+    <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/store.css" th:href="@{/css/store.css}"/>
 </head>
 <body>
-<h3>가게정보수정</h3>
-<form method="post" action="/store/edit" enctype="multipart/form-data" >
-    <input type="hidden" name="storeId" th:value="${list.storeId}">
-    가게명<input type="text" name="storeName" th:value="${list.storeName}"><br/>
-    가게주소<input type="text" name="address" th:value="${list.address}"><br/>
-    가게번호<input type="text" name="phoneNumber" th:value="${list.phoneNumber}"><br/>
-    가게설명<input type="text" name="storeDesc" th:value="${list.storeDesc}"><br/>
-
-    <div th:each="menu : ${list.menuList}">
-        메뉴 이름: <input type="text" name="menuNames" th:value="${menu.menuName}"><br/>
-        기존 메뉴 이미지: <img th:src="@{|${menu.menuImagePath}|}" alt="메뉴 이미지" width="200px"><br/>
-        새로운 메뉴 이미지 선택<input type="file" name="menuImages"><br/>
+<div class="app-body">
+    <div class="content">
+        <div id="container">
+            <a href="javascript:history.back();">◀</a><br>
+            <div class="store-write-title">가게정보수정</div>
+            <div class="HeadLine"></div>
+            <form method="post" action="/store/edit" enctype="multipart/form-data">
+                <input type="hidden" name="storeId" th:value="${list.storeId}">
+                <div class="inputBox"><span>가게명</span><input type="text" name="storeName" th:value="${list.storeName}">
+                </div>
+                <div class="inputBox"><span>가게주소</span><input type="text" name="address" th:value="${list.address}">
+                </div>
+                <div class="inputBox"><span>가게번호</span><input type="text" name="phoneNumber"
+                                                              th:value="${list.phoneNumber}"></div>
+                <div class="inputBox"><span>가게설명</span><input type="text" name="storeDesc" th:value="${list.storeDesc}">
+                </div>
+                <h6>메뉴</h6>
+                <div class="edit-menuBox">
+                    <div class="edit-menu">
+                        <div th:each="menu : ${list.menuList}" class="edit-menu-item">
+                           <div > <span>메뉴 이름:</span> <input type="text" name="menuNames" th:value="${menu.menuName}"></div>
+                        <div><span>기존 이미지: </span><img th:src="@{|${menu.menuImagePath}|}" alt="메뉴 이미지"
+                                                     width="150px"></div>
+                        <div><span>새로운 이미지:</span><input type="file" name="menuImages"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="store-insert-btnBox">
+                <button ><a href="javascript:history.back();">취소</a></button>
+                <button type="submit">등록</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <button type="submit">등록</button>
-    <button>취소</button>
-</form>
-<footer th:insert="ui/nav :: nav"></footer>
-
+    <div class="nav">
+        <footer th:insert="ui/nav :: nav"></footer>
+    </div>
+</div>
 </body>
 </html>

@@ -1,7 +1,12 @@
   /*detail.css*/
-.store-like {
-  text-align: right;
-  margin: 1vh 2vh 1vh 0;
+.store-like-back {
+margin: 1vh 2vh 5vh 0;
+    display: flex;
+    justify-content: space-between;
+}
+.store-like-back > a{
+text-decoration: none;
+    color: gray;
 }
 .edit-remove-btnBox {
   text-align: right;
@@ -10,7 +15,8 @@
 .edit-remove-btnBox > a {
   margin-right: 2vh;
   text-decoration: none;
-   color:  var(--lightgray);
+   color:  #999999;
+   font-size: 13px;
 }
 .store-image {
   width: 100%;
@@ -19,6 +25,7 @@ height: 20vh;
 }
 .address-phone-box {
   padding: 2vh 0 2vh 2vh;
+      font-size: 15px;
 }
 .addressBox,
 .phoneBox,
@@ -26,27 +33,47 @@ height: 20vh;
   display: flex;
 }
 .addressBox,
-.phoneBox {
+.phoneBox, .descBox {
   margin-bottom: 1.5vh;
 }
-.menu-container {
+addressBox > div{
+font-size: 14px;
+}
+.addressBox > i, .phoneBox > i, .descBox > i{
+    margin-right: 10px;
+}
+#menu-container {
   border: 2px solid #cdcdcd;
   padding: 1vh;
   border-radius: 10px;
+  margin-bottom: 30px;
 }
-.menuBox {
+#menu-container > div{
+font-size: 18px;
+}
+.imageName-box{
+display: flex;
+    overflow-x: scroll;
+}
+.imageName-box::-webkit-scrollbar {
+  display: none;
+}
+#menuBox {
   width: 15vh;
-  display: inline-block;
+/*  display: inline-block;*/
    margin-right: 10px;
        border: 1px solid lightgrey;
        border-radius: 5px;
+       cursor: pointer;
 }
-.menuBox > img{
+#menuBox > img{
 width: 15vh;
     height: 15vh;
     object-fit: cover;
-        border-radius: 5px;
 }
-.menuBox > div{
+#menuBox > div{
 text-align: center;
+    line-height: 23px;
+    height: 23px;
+    font-size: 14px;
 }
