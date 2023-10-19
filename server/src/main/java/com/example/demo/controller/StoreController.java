@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.MenuDAO;
+import com.example.demo.dao.ReviewDAO;
 import com.example.demo.dao.StoreDAO;
 import com.example.demo.domain.MenuDTO;
+import com.example.demo.domain.ReviewDTO;
 import com.example.demo.domain.StoreDTO;
+import com.example.demo.util.ImageUtil;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class StoreController {
     MenuDAO mdao;
     @Autowired
     ServletContext context;
+    @Autowired
+    ImageUtil imageUtil;
     ModelAndView mav = new ModelAndView();
 
     @GetMapping("/store") // 글목록 출력
@@ -59,27 +64,19 @@ public class StoreController {
     public String writePage() {
         return "/store/write";}
     @PostMapping("/store/write") // 가게 등록
-    public ModelAndView createStore(StoreDTO dto, MultipartRequest mreq, String[] menuName ) {
-        MultipartFile storeFile = mreq.getFile("file");
-        List<MultipartFile> menuList = mreq.getFiles("menuImages");
-        String storePath = "C:/storeImgs/";
-        String menuPath = "C:/menuImgs/";
-        File isDir = new File(storePath);
-        if (!isDir.isDirectory()) {
-            isDir.mkdir();
-        }
-       isDir = new File(menuPath);
-        if (!isDir.isDirectory()) {
-            isDir.mkdir();
-        }
-        String storeFileName = saveFile(storeFile, storePath);
-        dto.setStoreImagePath("/storeImgs/" + storeFileName);
+    public ModelAndView createStore(StoreDTO dto, String[] menuName, MultipartRequest mreq ) {
+        String menuImagePath="";
+        MenuDTO menuDto;
+        MultipartFile storeFile = mreq.getFile("file"); // 가게 대표 이미지
+        List<MultipartFile> menuList = mreq.getFiles("menuImages"); // 메뉴 이미지들
+        String storeImagePath  = imageUtil.writeImage(storeFile);
+        dto.setStoreImagePath(storeImagePath);
         int result = dao.createStore(dto);
-        if (result>0) {
-            for (int i =0; i<menuList.size(); i++) {
-                String menuFileName = saveFile(menuList.get(i), menuPath);
-                MenuDTO menuDto = new MenuDTO();
-                menuDto.setMenuImagePath("/menuImgs/" + menuFileName);
+        if (result>0 && menuName.length>0) {
+            for (int i =0; i < menuList.size(); i++) {
+                menuImagePath  = imageUtil.writeImage(menuList.get(i));
+                menuDto = new MenuDTO();
+                menuDto.setMenuImagePath(menuImagePath);
                 menuDto.setStoreId(dto.getStoreId());// 앞서 저장한 가게 ID를 설정
                 menuDto.setMenuName(menuName[i]); // 메뉴 이름 저장
                 boolean menuResult = mdao.createMenu(menuDto); // 메뉴 정보를 저장
@@ -97,20 +94,6 @@ public class StoreController {
         mav.setViewName("store/store");
         return mav;
     }
-    // 파일 저장을 위한 메소드
-    private String saveFile(MultipartFile file, String savePath) {
-        String uuid = UUID.randomUUID().toString();
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        String fileInfo = savePath + fileName;
-        try {
-            File f = new File(fileInfo);
-            file.transferTo(f);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("파일 저장 중 오류가 발생했습니다");
-        }
-        return fileName;
-    }
     @GetMapping("/store/editView") // 수정할 가게 내용 내보내기
     public ModelAndView ViewEditStore(int storeId) {
         StoreDTO list = dao.readSelectStoreBy(storeId);
@@ -120,7 +103,6 @@ public class StoreController {
         mav.setViewName("store/edit");
         return mav;
     }
-
 // 이전
     @PostMapping("/store/edit") // 가게 수정
     public ModelAndView updateStore(StoreDTO dto) {
@@ -138,11 +120,19 @@ public class StoreController {
         boolean result = dao.deleteStore(storeId);
         if (result) {
             mav.addObject("list", dao.readStore());
-            System.out.println("가게가 삭제되었습니다.");
         } else {
             mav.addObject("msg", "추출된 결과가 없습니다.");
         }
         mav.setViewName("store/store");
+        return mav;
+    }
+
+    @GetMapping("/store/test")
+    public ModelAndView testStore(int storeId) {
+        StoreDTO list = dao.readSelectStoreBy(storeId);
+
+        mav.addObject("list", list);
+        mav.setViewName("store/detail2");
         return mav;
     }
 }

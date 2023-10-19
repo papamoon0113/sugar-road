@@ -8,7 +8,7 @@
   --purple:#AF96C7;
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
-  --white:#FFFFFF;
+  --white:#F5F5F5;  
 }
 
 .pink1 {
@@ -70,8 +70,20 @@
 body {
   margin : 0px;
   padding : 0px;
-  background-color : var(--skyblue);
-  font-family : 'NanumBarunGothic';
+  background-color : var(--lightgray);
+}
+
+* {
+   color : var(--fontcolor);
+   font-family : 'NanumBarunGothic';
+}
+
+body > * {
+   color : var(--fontcolor);
+}
+
+body > * {
+   color : var(--fontcolor);
 }
 body > * {
    color : var(--fontcolor);
@@ -93,7 +105,7 @@ body > * {
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  /*border : 2px dotted #d3d3d3;*/
+  border : 2px dotted #d3d3d3;  
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -190,7 +202,7 @@ h6 {
 
 .right {
     text-align : right;
-}
+}  
 
 .center {
     text-align : center;
@@ -202,17 +214,15 @@ h6 {
     margin-left : auto;
     margin-right : auto;
   }
-
-
-
+  
   h1 {
     font-size : 60px;
   }
-
+  
   h2 {
     font-size : 48px;
   }
-
+  
   h3 {
     font-size : 36px;
   }
@@ -242,73 +252,18 @@ h6 {
   }
 }
 
+/* input[type=file]::file-selector-button {
+  width: 40%;
+  padding : 3%;
+  background: var(--pink1);
+  border : none;
+} */
+
+.no-border {
+    border : none;
+}
+
 /* 완성되면 밑에 지워야 함 */
 table, tr, th, td, div {
-  /*border : 0.5px dotted green;*/
+  border : 0.5px dotted green
 }
-
-/* review.css */
-@font-face {
-    font-family: 'NPSfontBold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
-.review {
-  background-color : var(--pink1);
-  margin : 2%;
-  border-radius: 5%;
-  padding-top : 0.01%;
-  padding-bottom : 0.01%;
-}
-
-.review-table {
-  width:90%;
-  margin : 4%;
-}
-
-.review-nickname{
-  text-align : left;
-  width:70%;
-}
-
-.review-star {
-  text-align : left;
-}
-
-.review-date{
-  text-align : right;
-  width : 50%;
-}
-
-.review-content {
-  width : 100%;
-  padding-top:1.5%;
-}
-
-.review-image-box {
-  display : flex;
-  overflow-x : scroll;
-}
-
-.review-image-box::-webkit-scrollbar {
-  display: none;
-}
-
-.review-image {
-  margin-right : 2%;
-  width : 25%;
-  border-radius: 10%;
-}
-
-.review-button {
-  text-align : left;
-  font-family : 'NPSfontBold';
-  padding: 1%;
-  background-color : var(--pink1);
-  border:none;
-  color : var(--pink3);
-}
-
-/* 대략적인 위치 잡기 */

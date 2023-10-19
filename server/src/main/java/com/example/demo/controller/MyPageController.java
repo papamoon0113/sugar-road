@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dao.UsersDAO;
 import com.example.demo.domain.UsersDTO;
+import com.example.demo.util.ImageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class MyPageController {
 
     @Autowired
     UsersDAO usersDAO;
+    @Autowired
+    ImageUtil imageUtil;
 
     @RequestMapping({"/mypage", "/mypage/edit", "/mypage/delete"})
     public ModelAndView userInfo(HttpSession session,
@@ -58,20 +61,10 @@ public class MyPageController {
     @RequestMapping(value = "/users/edit", method = RequestMethod.POST)
     @ResponseBody
     public String usersEdit(UsersDTO editUser){ //id, pw, 이름, 별명, 이메일 정보 받고
-        String path = "/images/users";
 
         MultipartFile imageFile = editUser.getImage();
-
-        String uuid = UUID.randomUUID().toString(); //중복 파일이 존재하면 앞머리에 랜덤표식 설정
-        String fileName = uuid + imageFile.getOriginalFilename();
-
-        try{
-            File f = new File("C:\\kosastudy\\sugar-road\\server\\src\\main\\resources\\static\\images\\users/" + fileName);
-            imageFile.transferTo(f);
-            editUser.setUserImagePath(path + "/" + fileName);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        String userImagePath = imageUtil.writeImage(imageFile);
+        editUser.setUserImagePath(userImagePath);
 
         if(usersDAO.updateUserAll(editUser)){
             return editUser.getUserId() + "회원의 정보가 수정되었습니다";

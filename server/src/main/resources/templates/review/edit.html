@@ -2,28 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/review.css">
+  <link rel="stylesheet" href="/css/ui.css">
 </head>
 <body>
-<h1>Review Write</h1>
-<hr/>
-<form method = "post" action = "/review/edit">
-  <input th:value="${reviewDTO.userId}" type ="text" name ="userId"
-         placeholder="userId" required><br>
-  <input th:value="${reviewDTO.storeId}" type ="number" name ="storeId" required><br>
-
-  <textarea th:text="${reviewDTO.content}" cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
-  <input th:value="${reviewDTO.postedDate}" type = "date" name="postedDate">
-  <input th:value="${reviewDTO.star}" type ="number" name ="star" required><br>
-  <input th:value="${reviewDTO.reviewId}" type ="hidden" name ="reviewId"><br>
-  <input type="file" name="uploadImage" multiple><br>
-  <input type = "submit" value = "제출">
-  <input type = "button" value = "삭제" th:onclick="|location.href='@{/review/delete(id=${reviewDTO.reviewId})}'|">
-</form>
-<footer th:insert="ui/nav :: nav"></footer>
-
+<div class = "app-body">
+  <div class = "content">
+    <div class = "center t4 bold">리뷰 수정<span class = "t-lightgray t5">review</span></div>
+    <form method = "post" action = "/review/edit" enctype="multipart/form-data">
+      <input type ="hidden" th:value="${reviewDTO.userId}" name ="userId" required>
+      <input type ="hidden" name ="storeId" th:value="${reviewDTO.storeId}" required>
+      <input type ="hidden" name ="reviewId" th:value="${reviewDTO.reviewId}" required>
+      <input type ="hidden" name ="star" id = "starInput" required>
+      <table class="v-table">
+        <tr>
+          <td class="v-table-half">
+            <div class="rating-box t5 center">
+              <h5 class="t-lightgray" id="is-rating">당신의 만족도는?</h5>
+            </div>
+          </td>
+          <td>
+            <div class="stars t4 center">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan = "2" class = "center">
+            <textarea name ="content" class = "review-content-box t5" th:text="${reviewDTO.content}" required></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan = "2">
+            <input type="file" name="uploadImage">
+          </td>
+        </tr>
+        <tr>
+          <td colspan = "2" class = "center">
+            <input type = "submit" value = "수정" class = "pink2 v-item t6 bold no-border">
+          </td>
+        </tr>
+        <tr>
+          <td colspan = "2" class = "center">
+            <input type = "button" value = "삭제" class = "v-item t6 bold no-border lightgray" th:onclick="|location.href='@{/review/delete(id=${reviewDTO.reviewId})}'|">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class = "nav t4 center lightgray">
+    NAV
+  </div>
+</div>
 </body>
 <script>
-
+  const stars = document.querySelectorAll(".stars i");
+stars.forEach((star, index1) => {
+  star.addEventListener("click", () => {
+    stars.forEach((star, index2) => {
+      index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+    });
+    document.querySelector("#starInput").value = index1 + 1;
+    console.log(document.querySelector("#starInput").value);
+    document.querySelector("#is-rating").classList.add("active")
+  });
+});
 </script>
 </html>
