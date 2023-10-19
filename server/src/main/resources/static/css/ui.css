@@ -78,6 +78,10 @@ body {
    font-family : 'NanumBarunGothic';
 }
 
+body > * {
+   color : var(--fontcolor);
+}
+
 .app-body {
   width : 100%;
   height : 100vh;
@@ -94,7 +98,7 @@ body {
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  border : 2px dotted #d3d3d3;
+  border : 2px dotted #d3d3d3;  
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -191,7 +195,7 @@ h6 {
 
 .right {
     text-align : right;
-}
+}  
 
 .center {
     text-align : center;
@@ -204,16 +208,14 @@ h6 {
     margin-right : auto;
   }
 
-
-
   h1 {
     font-size : 60px;
   }
-
+  
   h2 {
     font-size : 48px;
   }
-
+  
   h3 {
     font-size : 36px;
   }
@@ -252,9 +254,10 @@ input[type=file]::file-selector-button {
 
 .no-border {
     border : none;
-}
+
 
 /* 완성되면 밑에 지워야 함 */
 table, tr, th, td, div {
   border : 0.5px dotted green
 }
+

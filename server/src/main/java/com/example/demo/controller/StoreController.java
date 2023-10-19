@@ -35,9 +35,6 @@ public class StoreController {
     ServletContext context;
     @Autowired
     ImageUtil imageUtil;
-//    @Autowired
-//    ReviewDAO reviewDAO;
-    
     ModelAndView mav = new ModelAndView();
 
     @GetMapping("/store") // 글목록 출력
