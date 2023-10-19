@@ -1,4 +1,10 @@
-/* 컬러 변수 선언 */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /* 컬러 변수 선언 */
 /* var(--pink1) -> 이런 식으로 색깔 대신 값 넣으면 됨 */
 :root {
   --pink1:#F7E9ED;
@@ -71,11 +77,11 @@ body {
   margin : 0px;
   padding : 0px;
   background-color : var(--lightgray);
+  font-family : 'NanumBarunGothic';
 }
 
-* {
+body > * {
    color : var(--fontcolor);
-   font-family : 'NanumBarunGothic';
 }
 
 .app-body {
@@ -254,7 +260,158 @@ input[type=file]::file-selector-button {
     border : none;
 }
 
+
 /* 완성되면 밑에 지워야 함 */
 table, tr, th, td, div {
   border : 0.5px dotted green
 }
+
+/* review.css */
+.rating-box {
+  position: relative;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+.rating-box .stars {
+  display: flex;
+  align-items: center;
+}
+.stars i {
+  color: var(--lightgray);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.stars i.active {
+  color: var(--pink2);
+}
+.rating-box h5.active {
+  color: var(--pink3);
+}
+
+.review-content-box {
+    background : var(--white);
+    border : none;
+    outline-color : var(--pink2);
+    height : 58vh;
+    width : 99%;
+}
+
+/* comment.css */
+#commentInput {
+    position: sticky;
+    bottom: 0;
+    border : 1.5px solid var(--fontcolor);
+    outline-color : var(--pink2);
+}
+
+#commentBtn {
+    width : 8%;
+}
+
+.comment {
+    width : 95%;
+}
+
+.child-comment {
+    width : 85%;
+    margin-left : 12%;
+}
+
+.child-comment-icon {
+    width : 10%;
+}
+
+  </style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<body>
+<div class = "app-body">
+  <div class = "content">
+    <div><h3>가게 이름</h3></div>
+    <table class="v-table pink1">
+      <tr>
+        <td class = "v-table-half t4 bold">
+          🍰 닉네임
+        </td>
+        <td class = "v-table-quater">
+        </td>
+        <td class = "v-table-quater t5 bold right">
+          날짜
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class = "t5 v-item">
+          리뷰 내용.....
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class = "t5 t-lightgray right">
+          <a>수정</a>
+        </td>
+        <td class = "t5 center t-lightgray">
+          <a>삭제</a>
+        </td>
+      </tr>
+    </table>
+    <table class="v-table comment">
+      <tr>
+        <td class = "v-table-half t5">
+          닉네임
+        </td>
+        <td class = "v-table-quater">
+        </td>
+        <td class = "v-table-quater t6 right">
+          날짜
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class = "t6 v-item">
+          댓글 내용.....
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class = "t6 t-lightgray right">
+          <a>수정</a>
+        </td>
+        <td class = "t6 center t-lightgray">
+          <a>삭제</a>
+        </td>
+      </tr>
+    </table>
+    <table class="v-table child-comment">
+      <tr>
+        <td class = "v-table-half t5">
+          닉네임
+        </td>
+        <td class = "v-table-quater">
+        </td>
+        <td class = "v-table-quater t6 right">
+          날짜
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" class = "t6 v-item">
+          댓글 내용.....
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class = "t6 t-lightgray right">
+          <a>수정</a>
+        </td>
+        <td class = "t6 center t-lightgray">
+          <a>삭제</a>
+        </td>
+      </tr>
+    </table>
+    <div style="height : 1000px"></div>
+    <input type="text" class = "v-item" id = "commentInput">
+  </div>
+  <div class = "nav t4 center lightgray">
+    NAV
+  </div>
+</div>
+</body>
+</html>

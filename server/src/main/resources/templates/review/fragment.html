@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+  <div th:fragment="review (storeId)" class = "v-container">
+    <link rel="stylesheet" href="/css/review.css">
+    <script src="/js/recommendation.js" async></script>
+    <script src="/js/review.js" async></script>
+    <custom-review th:data-storeId="${storeId}"></custom-review>
+  </div>
+</body>
+</html>
