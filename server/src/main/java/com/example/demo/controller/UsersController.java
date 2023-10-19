@@ -7,10 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,17 @@ public class UsersController {
     UsersDAO usersDAO;
     @Autowired
     ImageUtil imageUtil;
+
+    @GetMapping({"/users/login", "/users/login.html"})
+    public String loginPage(){
+        return "users/login";
+    }
+
+    @GetMapping("/users/signup")
+    public String signupPage(){
+        return "users/signup";
+    }
+
     //회원가입
     @RequestMapping(value = "/users/signup", method = RequestMethod.POST)
     @ResponseBody
@@ -45,8 +58,8 @@ public class UsersController {
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     @ResponseBody
     public String loginUsers(UsersDTO unknownDTO,
-                             HttpServletRequest servletRequest){
-
+                                   HttpServletRequest servletRequest){
+        ModelAndView mav = new ModelAndView();
         List<UsersDTO> selectIdResult = usersDAO.readUserBy("user_id", unknownDTO.getUserId()); //입력한 아이디 검색 결과
 
         if(selectIdResult.isEmpty()){
@@ -71,8 +84,11 @@ public class UsersController {
             //로그인 성공한 유저의 ID 정보를 값으로 갖는 "nowLogin" 세션 생성
             session.setAttribute("nowLogin", selectIdResult.get(0).getUserId());
 
-            return "redirect:/mypage"; //로그인에 성공하면 마이페이지로 이동
+            //로그인에 성공하면 마이페이지로 이동
             //추후 홈.html으로 수정예정
+            //servletRequest.setAttribute("msg", "로그인에 성공하였습니다");
+            //servletRequest.setAttribute("url", "/mypage");
+            return "redirect:/mypage";
         }
 
     }

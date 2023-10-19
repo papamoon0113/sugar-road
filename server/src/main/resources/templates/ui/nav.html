@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <footer th:fragment="nav">
-  <button onclick="location.href = '/users/login.html'">로그인</button>
+  <button onclick="location.href = '/users/login'">로그인</button>
   <button onclick="fetch('/users/login?userId=test_id&userPassword=1234', {method : 'POST'}); this.textContent= 'test_id';">바로 로그인</button>
   <button onclick="location.href = '/store'">가게</button>
   <button onclick="location.href = '/post'">게시판</button>

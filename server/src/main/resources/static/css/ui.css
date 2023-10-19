@@ -243,7 +243,3 @@ h6 {
   }
 }
 
-/* 완성되면 밑에 지워야 함 */
-table, tr, th, td, div {
-  border : 0.5px dotted green
-}

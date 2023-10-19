@@ -5,6 +5,7 @@
     <title>MyPage</title>
     <link rel="stylesheet" href="../css/ui.css">
     <link rel="stylesheet" href="../css/mypage/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
 <div class="app-body">
@@ -28,33 +29,34 @@
                 <a href="/mypage/edit" style="text-decoration: none">
                     <div class="menuButton" id="edit">
                     <img src="../css/mypage/img/menuImg1.png" id="menuImg1">
-                    <span class="menuText1">프로필 수정</span>
+                        <h5><span class="menuText1">프로필 수정</span></h5>
                     </div>
                 </a>
                 <a href="/mypage" style="text-decoration: none">
                     <div class="menuButton" id="button2">
                     <img src="../css/mypage/img/menuImg2.png" id="menuImg2">
-                    <span class="menuText2">내가 작성한 글</span>
+                        <h5><span class="menuText2">내가 작성한 글</span></h5>
                     </div>
                 </a>
                 <a href="/mypage" style="text-decoration: none">
                     <div class="menuButton" id="button3">
                     <img src="../css/mypage/img/menuImg3.png" id="menuImg3">
-                    <span class="menuText3">내가 작성한 댓글</span>
+                        <h5><span class="menuText3">내가 작성한 댓글</span></h5>
                     </div>
                 </a>
-                <a href="/mypage" style="text-decoration: none"><div class="menuButton" id="button4">
+                <a href="/mypage" style="text-decoration: none">
+                    <div class="menuButton" id="button4">
                     <img src="../css/mypage/img/menuImg4.png" id="menuImg4">
-                    <span class="menuText4">좋아요 한 글</span></div></a>
+                        <h5><span class="menuText4">좋아요 한 글</span></h5>
+                    </div>
+                </a>
             </div>
 
         <div id="logOut"><a href="/logout" style="text-decoration: none">로그아웃</a></div>
         </div>
     </div>
     <div class = "nav">
-        <footer th:insert="ui/nav :: nav">
-
-        </footer>
+        <footer th:insert="ui/footer :: footer"></footer>
     </div>
 </div>
 </body>
