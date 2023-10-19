@@ -9,24 +9,22 @@
 </head>
 <body>
 <div class="app-body">
+    <div id="pageBack">
     <div class = "content">
-        <div id="pageBack">
+
     <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
             <div id="loginBox">
-            <label id="loginImg" for="input-image">
-                <img src="../css/users/img/login.png">
-            </label>
-    <form action="/users/login" method="post" target="iframe">
-        <h4 id="please">Please Sign In</h4>
+    <form action="/users/login" method="post" name="loginForm" target="iframe">
+        <h3 id="please">Please Sign In</h3>
         <input id="loginText1" type="text" name="userId" placeholder="Id" required><br>
         <br>
         <input id="loginText2" type="password" name="userPassword" placeholder="Password" required><br>
         <br>
-        <input type="submit" value="로그인" style="display:none" id="input-image">
+        <input type="submit" id="signIn" value="Sign in">
     </form>
             <iframe id="iframe" name="iframe"></iframe>
             <br>
-        <button id="signUp" onclick="location.href = '/users/signup'">Sign Up</button>
+        <button id="signUp" onclick="location.href = '/users/signup'">Go to Sign Up</button>
             </div>
         </div>
     </div>
