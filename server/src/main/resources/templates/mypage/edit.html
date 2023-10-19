@@ -21,7 +21,7 @@
             <label class="imgChange" for="input-image">
                 <img src="../css/mypage/img/edit.png">
             </label>
-            <form id="editForm" action="/users/edit" method="post" enctype="multipart/form-data" target="MSG">
+            <form id="editForm" action="/users/edit" method="post" enctype="multipart/form-data" target="iframe">
                 <input type="hidden" name="userId" th:value="${userInfo.userId}">
                 <input type="file" name="image" style="display:none" id="input-image">
                 <h5 class="editText">PW</h5>
@@ -40,7 +40,7 @@
                 <input id="editButtom" type="submit" value="업데이트 프로필"/>
             </form>
         </th:block>
-        <h3 th:if="${msg}" name="MSG" th:text="${msg}"></h3>
+            <iframe id="iframe" name="iframe"></iframe>
         <div id="delete"><a href="/mypage/delete" style="text-decoration: none">회원정보 탈퇴</a></div>
         </div>
     </div>
