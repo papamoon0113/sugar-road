@@ -9,7 +9,6 @@
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
   --white:#F5F5F5;  
-
 }
 
 .pink1 {
@@ -83,6 +82,9 @@ body > * {
    color : var(--fontcolor);
 }
 
+body > * {
+   color : var(--fontcolor);
+}
 body > * {
    color : var(--fontcolor);
 }
@@ -213,8 +215,6 @@ h6 {
     margin-right : auto;
   }
   
-    
-    
   h1 {
     font-size : 60px;
   }
@@ -261,7 +261,7 @@ h6 {
 
 .no-border {
     border : none;
-
+}
 
 /* 완성되면 밑에 지워야 함 */
 table, tr, th, td, div {

@@ -2,33 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <a href="javascript:history.back(01)">뒤로가기</a>
-        <h3>자유 게시판</h3>
-    </div>
+<div class="app-body">
+    <div class="content">
+    <div class="post-header">
+        <a href="/post"><img src="/images/icons/back.png" alt="" width="10px"></a>
+        <h4>자유 게시판</h4>
 
-<th:block th:if="${dto}">
-    <div class="post-detail">
-    <h3 th:text="${dto.title}"></h3>
-    <th:block th:each=" image :${dto.postImage}">
-        <img th:src="${image}" width="100px" alt="img">
-    </th:block>
     </div>
+        <hr class="hr-blue">
+<th:block th:if="${dto}">
+    <div class="post-detail" style="min-height: 400px">
+    <h3 th:text="${dto.title}"></h3>
+        <hr>
+        <p th:text="${dto.content}"></p>
+    <div class="post-image" th:each=" image :${dto.postImage}">
+        <img th:src="${image}" alt="img">
+    </div>
+    </div>
+    <hr>
     <div class="post-comment">
         <p>댓글 영역</p>
     </div>
 
-    <div class="post-button">
-    <th:block th:if="${session.nowLogin}==${dto.userId}">
-        <a th:href=@{/post/delete(id=${dto.postId})}>삭제</a>
-        <a th:href=@{/post/edit(id=${dto.postId})}>수정</a>
-    </th:block>
-    </div>
-    <a th:href=@{/post}>홈</a>
+
+
 </th:block>
 <h4>댓글 작성</h4>
 <th:block th:if="${session.nowLogin != null}">
@@ -39,7 +43,15 @@
         <input type = "submit" value = "댓글 작성">
     </form>
 </th:block>
-<footer th:insert="ui/nav :: nav"></footer>
+        <hr>
+        <div class="post-button" th:if="${session.nowLogin}==${dto.userId}">
+            <button th:onclick="|location.href='@{/post/delete(id=${dto.postId})}'|">삭제</button>
+            <button th:onclick="|location.href='@{/post/edit(id=${dto.postId})}'|">수정</button>
 
+
+        </div>
+    </div>
+<footer th:insert="ui/footer :: footer"></footer>
+</div>
 </body>
 </html>
