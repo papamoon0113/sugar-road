@@ -12,15 +12,16 @@
 <div class="app-body">
     <div class="content">
     <div class="header" style="text-align: center">
-        <h4>글 작성</h4>
-        <hr>
+        <h5 th:text="${path} == '/post/write' ? '글 작성' : '글 수정'"></h5>
+
     </div>
+        <hr>
     <div class="post-content">
     <form th:action="${path}" enctype="multipart/form-data" method="POST" id="writeForm">
         <input type="hidden" name="postId" th:value="${dto}? ${dto.postId} : 0">
         <input type="text" name="title" style="width: 100%; border: none" placeholder="제목" th:value="${dto}? ${dto.title} : _"><br>
         <hr>
-        <textarea name="content" rows="25" style="width: 100%; border: none" placeholder="내용" th:text="${dto}? ${dto.content} : _"></textarea><br>
+        <textarea name="content" rows="20" style="width: 100%; border: none" placeholder="내용" th:text="${dto}? ${dto.content} : _"></textarea><br>
         <hr>
         <input type="hidden" name="userId" th:value="${dto}? ${dto.userId} : ${session.nowLogin}"><br>
 
@@ -33,7 +34,7 @@
             <th:block th:each=" image :${dto.postImage}">
             <label>
                 <input type="checkbox" name="postImage" th:value="${image}">
-                <img th:src="${image}" alt="img" width="100px">
+                <img th:src="${image}" alt="img" width="50px">
             </label>
             </th:block>
         </th:block>
@@ -44,7 +45,7 @@
         </div>
     </div>
     </div>
-<footer th:insert="ui/nav :: nav"></footer>
+<footer th:insert="ui/footer :: footer"></footer>
 </div>
 
 </body>

@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
     <link rel="stylesheet" href="/css/ui.css">
     <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div class="app-body">
@@ -16,12 +18,12 @@
     </div>
         <hr class="hr-blue">
 <th:block th:if="${dto}">
-    <div class="post-detail">
+    <div class="post-detail" style="min-height: 400px">
     <h3 th:text="${dto.title}"></h3>
         <hr>
         <p th:text="${dto.content}"></p>
     <div class="post-image" th:each=" image :${dto.postImage}">
-        <img th:src="${image}" width="100px" alt="img">
+        <img th:src="${image}" alt="img">
     </div>
     </div>
     <hr>
@@ -49,7 +51,7 @@
 
         </div>
     </div>
-<footer th:insert="ui/nav :: nav"></footer>
+<footer th:insert="ui/footer :: footer"></footer>
 </div>
 </body>
 </html>

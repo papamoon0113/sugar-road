@@ -18,20 +18,20 @@
 <div class="category">
     <button onclick="location.href='/post?category=01'">
         <div class="image-button">
-            <img src="/images/icons/bread.png" height="20px" alt="">
-            <span>빵리뷰</span>
+            <img src="/images/icons/bread.png" height="15px" alt="">
+            <span class="t6">빵리뷰</span>
         </div>
     </button>
     <button onclick="location.href='/post?category=02'">
         <div class="image-button">
-        <img src="/images/icons/daily.png" height="20px"  alt="">
-        <span>일상</span>
+        <img src="/images/icons/daily.png" height="15px"  alt="">
+        <span class="t6">일상</span>
         </div>
     </button>
     <button onclick="location.href='/post?category=03'">
         <div class="image-button">
-        <img src="/images/icons/talk.png" height="20px" alt="">
-        <span>잡담</span>
+        <img src="/images/icons/talk.png" height="15px" alt="">
+        <span class="t6">잡담</span>
         </div>
     </button>
 </div>
@@ -39,7 +39,6 @@
         <form action="/post" method="GET">
             <img src="/images/icons/search.png" alt="">
             <input type="text" class="input" name="search" placeholder="검색">
-
         </form>
         </div>
 
@@ -49,21 +48,22 @@
         <table class="v-table">
             <tr>
                 <td>
-                    <p class="t5 bold" th:text="${l.title}"></p><br>
+                    <p class="t5 bold" th:text="${l.title}"></p>
                 </td>
                 <td class="v-table-half right">
                     <p class="t6">댓글 수: 3</p>
                 </td>
 
             </tr>
-            <tr>
+            <tr class="center">
                 <td colspan="2">
-                    <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" alt="img">
+                    <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: 'https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg'" alt="img">
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <p th:text="${l.content}"></p>
+                <td colspan="2" class="left">
+                    <span class="t5 bold" th:text="${l.userId}"></span>
+                    <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
                 </td>
             </tr>
         </table>
@@ -71,10 +71,10 @@
     </div>
 </div>
 <div class="post-button-index">
-    <button onclick="location.href='/post/write'">작성</button>
+    <button onclick="location.href='/post/write'"><span class="t6">작성</span></button>
 </div>
     </div>
-<footer th:insert="ui/nav :: nav"></footer>
+<footer th:insert="ui/footer :: footer"></footer>
 
 </div>
 </div>

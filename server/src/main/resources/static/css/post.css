@@ -31,7 +31,9 @@
     border-radius: 10px;
     border: 0.5px;
     padding: 4px;
-
+}
+.search input:focus{
+    outline: none;
 }
 .index-header{
     margin: 10px;
@@ -51,10 +53,12 @@
         text-align: center;
         background-color: skyblue;
 }
+
 .post-thumbnail{
     margin: 10px;
     border: 0.5px solid #C3DCF1;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .post-thumbnail > a{
     text-decoration: none;
@@ -74,7 +78,7 @@
 }
 .post-button > button{
     padding: 5px;
-    width: 10%;
+    width: 15%;
     border: none;
     border-radius: 10px;
     text-align: center;
@@ -86,6 +90,7 @@
     display: flex;
     justify-content: space-between; /* a 요소를 왼쪽 끝에 붙이기 위해 사용 */
     align-items: center; /* h4 요소를 가운데 정렬하기 위해 사용 */
+    margin-top: 10px;
 }
 .post-header > a {
   align-self: center;
@@ -105,12 +110,16 @@
     text-align: center;
 }
 .post-image > img{
-    width: 80%;
+    width: 70%;
 }
 
 td > img{
     width: 100%;
-    height: 300px;
+    height: 200px;
     object-fit: cover;
 }
 /* post/write */
+.header{
+    margin-top: 5%;
+
+}
