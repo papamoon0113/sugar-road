@@ -15,6 +15,7 @@ import lombok.Setter;
 public class PostCommentDTO {
 	private int postCommentId;
 	private String userId;
+	private String nickname;
 	private int postId;
 	private String content;
 	private LocalDateTime postedDate;

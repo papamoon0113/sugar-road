@@ -5,6 +5,7 @@ import com.example.demo.dao.ReviewCommentDAO;
 import com.example.demo.domain.PostCommentDTO;
 import com.example.demo.domain.ReviewCommentDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,19 +25,21 @@ public class CommentController {
 
 	@PostMapping("/comment/post/write")
 	@ResponseBody
-	public boolean writePostComment(@RequestBody PostCommentDTO dto){
+	public boolean writePostComment(@RequestBody PostCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return postCommentDAO.createPostComment(dto);
 	}
 
 	@PostMapping("/comment/post/child/write")
 	@ResponseBody
-	public boolean writePostCommentChild(@RequestBody PostCommentDTO dto){
+	public boolean writePostCommentChild(@RequestBody PostCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return postCommentDAO.createPostCommentChild(dto);
 	}
 
 	@GetMapping("/comment/post")
 	@ResponseBody
-	public List<PostCommentDTO> readPostComment(@RequestParam("postId") int postId){
+	public List<PostCommentDTO> readPostComment(@RequestParam("id") int postId){
 		return postCommentDAO.readPostCommentBy("post_id", String.valueOf(postId));
 	}
 
@@ -48,25 +51,28 @@ public class CommentController {
 
 	@PostMapping("/comment/post/edit")
 	@ResponseBody
-	public boolean editPostComment(@RequestBody PostCommentDTO dto){
+	public boolean editPostComment(@RequestBody PostCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return postCommentDAO.updatePostComment(dto);
 	}
 
 	@PostMapping("/comment/review/write")
 	@ResponseBody
-	public boolean writeReviewComment(@RequestBody ReviewCommentDTO dto){
+	public boolean writeReviewComment(@RequestBody ReviewCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return reviewCommentDAO.createReviewComment(dto);
 	}
 
 	@PostMapping("/comment/review/child/write")
 	@ResponseBody
-	public boolean writeReviewCommentChild(@RequestBody ReviewCommentDTO dto){
+	public boolean writeReviewCommentChild(@RequestBody ReviewCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return reviewCommentDAO.createReviewCommentChild(dto);
 	}
 
 	@GetMapping("/comment/review")
 	@ResponseBody
-	public List<ReviewCommentDTO> readReviewComment(@RequestParam("reviewId") int reviewId){
+	public List<ReviewCommentDTO> readReviewComment(@RequestParam("id") int reviewId){
 		return reviewCommentDAO.readReviewCommentBy("review_id", String.valueOf(reviewId));
 	}
 
@@ -78,7 +84,8 @@ public class CommentController {
 
 	@PostMapping("/comment/review/edit")
 	@ResponseBody
-	public boolean editReviewComment(@RequestBody ReviewCommentDTO dto){
+	public boolean editReviewComment(@RequestBody ReviewCommentDTO dto, HttpSession session){
+		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
 		return reviewCommentDAO.updateReviewComment(dto);
 	}
 }

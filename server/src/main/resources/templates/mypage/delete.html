@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>delete</title>
+    <link rel="stylesheet" href="../css/ui.css">
+    <link rel="stylesheet" href="../css/mypage/edit.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
 <th:block th:if="${userInfo}">
@@ -18,6 +21,8 @@
 </th:block>
 <iframe id="iframe1" name="iframe1"></iframe>
 
-<footer th:insert="ui/nav :: nav"></footer>
+<div class = "nav">
+    <footer th:insert="ui/footer :: footer"></footer>
+</div>
 </body>
 </html>

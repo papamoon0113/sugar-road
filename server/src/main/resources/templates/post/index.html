@@ -2,37 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
+    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>자유게시판</h1>
+<div class="post-index-container">
+<div class="app-body">
+    <div class="content">
+    <div class="index-header">
+        <h1 class="bold">Free Board</h1>
     </div>
-<div class="category"></div>
-    <div class="search">
+<div class="category">
+    <button onclick="location.href='/post?category=01'">
+        <div class="image-button">
+            <img src="/images/icons/bread.png" height="15px" alt="">
+            <span class="t6">빵리뷰</span>
+        </div>
+    </button>
+    <button onclick="location.href='/post?category=02'">
+        <div class="image-button">
+        <img src="/images/icons/daily.png" height="15px"  alt="">
+        <span class="t6">일상</span>
+        </div>
+    </button>
+    <button onclick="location.href='/post?category=03'">
+        <div class="image-button">
+        <img src="/images/icons/talk.png" height="15px" alt="">
+        <span class="t6">잡담</span>
+        </div>
+    </button>
+</div>
+        <div class="search">
         <form action="/post" method="GET">
-            <input type="text" name="search">
-            <input type="submit">
+            <img src="/images/icons/search.png" alt="">
+            <input type="text" class="input" name="search" placeholder="검색">
         </form>
-    </div>
-<div class="post-list">
-<th:block th:if="${list}" th:each="l:${list}">
-    <div class="post-thumbnail" style="border: 1px solid black;">
+        </div>
+
+<div class="post-list" th:if="${list}" >
+    <div th:each="l:${list}" class="post-thumbnail">
     <a th:href=@{/post/detail(id=${l.postId})}>
-        <p th:text="${l.title}"></p>
-        <img th:if="${l.postImage.length} gt 0" th:src="${l.postImage[0]}" width="100px" alt="img">
-        <p th:text="${l.content}"></p>
+        <table class="v-table">
+            <tr>
+                <td>
+                    <p class="t5 bold" th:text="${l.title}"></p>
+                </td>
+                <td class="v-table-half right">
+                    <p class="t6">댓글 수: 3</p>
+                </td>
+
+            </tr>
+            <tr class="center">
+                <td colspan="2">
+                    <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: 'https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg'" alt="img">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="left">
+                    <span class="t5 bold" th:text="${l.userId}"></span>
+                    <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
+                </td>
+            </tr>
+        </table>
     </a>
     </div>
-</th:block>
 </div>
-
-<input type="button" onclick="location.href='/post/write'" value="작성하기">
-<h3 th:if="${msg}" th:text="${msg}"></h3>
+<div class="post-button-index">
+    <button onclick="location.href='/post/write'"><span class="t6">작성</span></button>
 </div>
-<footer th:insert="ui/navbar :: navbar"></footer>
+    </div>
+<footer th:insert="ui/footer :: footer"></footer>
 
-
+</div>
+</div>
 </body>
 </html>

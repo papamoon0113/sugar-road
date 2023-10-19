@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="../css/ui.css">
+    <link rel="stylesheet" href="../css/users/signup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+</head>
+<body>
+<div class="app-body">
+    <div class = "content">
+        <div id="pageBack">
+            <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
+            <div id="signBox">
+                <label id="signImg" for="submitForm">
+                    <img src="../css/users/img/login.png">
+                </label>
+                <form action="/users/signup" method="post" enctype="multipart/form-data" target="iframe">
+                    <input id="inputText1" type="text" name="userId" placeholder="User Id" required><br>
+                    <input id="inputText2" type="password" name="userPassword" placeholder="Password" required><br>
+                    <input id="inputText3" type="text" name="userName" placeholder="User Name" required><br>
+                    <input id="inputText4" type="text" name="nickname" placeholder="User NickName" required><br>
+                    <input id="inputText5" type="text" name="userEmail" placeholder="User Email" required><br>
+                    <input id="photoInput" type="file" name="image" style="display:none"><br>
+                    <input id="submitForm" type="submit" value="회원가입" style="display:none">
+                </form>
+                <iframe id="iframe" name="iframe"></iframe>
+                <br>
+
+                <button id="photo" onclick="document.getElementById('photoInput')">
+                Profile Photo
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class = "nav">
+        <footer th:insert="ui/footer :: footer"></footer>
+    </div>
+</div>
+</body>
+</html>
