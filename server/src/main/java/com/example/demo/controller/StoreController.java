@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.MenuDAO;
+import com.example.demo.dao.ReviewDAO;
 import com.example.demo.dao.StoreDAO;
 import com.example.demo.domain.MenuDTO;
+import com.example.demo.domain.ReviewDTO;
 import com.example.demo.domain.StoreDTO;
 import com.example.demo.util.ImageUtil;
 import jakarta.servlet.ServletContext;
@@ -122,6 +124,15 @@ public class StoreController {
             mav.addObject("msg", "추출된 결과가 없습니다.");
         }
         mav.setViewName("store/store");
+        return mav;
+    }
+
+    @GetMapping("/store/test")
+    public ModelAndView testStore(int storeId) {
+        StoreDTO list = dao.readSelectStoreBy(storeId);
+
+        mav.addObject("list", list);
+        mav.setViewName("store/detail2");
         return mav;
     }
 }

@@ -1,37 +1,38 @@
 class Recommendation extends HTMLButtonElement {
     constructor(){
         super();
-        this.userId = this.getAttribute("data-userId");
         this.referenceType = this.getAttribute("data-referenceType");
         this.referenceId = this.getAttribute("data-referenceId");
-        console.log(`userId : ${this.userId} referenceType : ${this.referenceType} referenceId : ${this.referenceId} action : ${this.action}`);
+        console.log(`referenceType : ${this.referenceType} referenceId : ${this.referenceId} action : ${this.action}`);
+        this.btnText = document.createElement("h4");
+        this.appendChild(this.btnText);
 
         this.render();
         this.addEventListener("click", this.recommend);
     }
     render(){
-        fetch(`/recommendation/check?referenceType=${this.referenceType}&referenceId=${this.referenceId}&userId=${this.userId}`)
+        fetch(`/recommendation/check?referenceType=${this.referenceType}&referenceId=${this.referenceId}`)
           .then(response => {return response.json();})
           .then(json => this.readJson(json));
     }
     recommend(){
         let api = this.check?"delete":"write";
-        fetch(`/recommendation/${api}?referenceType=${this.referenceType}&referenceId=${this.referenceId}&userId=${this.userId}`)
+        fetch(`/recommendation/${api}?referenceType=${this.referenceType}&referenceId=${this.referenceId}`)
           .then(response => {return response.json();})
           .then(json => this.readJson(json));
     }
     readJson(json){
       console.log(json);
-      this.textContent = json['count'];
+      this.btnText.textContent = "♥ " + json['count'];
       this.check = json['check'];
       this.mark();
     }
     mark(){
       if (this.check === true){
-          this.style.backgroundColor = 'red';
+          this.btnText.style.color = 'var(--pink3)';
       }
       else {
-          this.style.backgroundColor = 'blue';
+          this.btnText.style.color = 'var(--lightgray)';
       }
     }
   }

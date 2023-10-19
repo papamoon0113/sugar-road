@@ -11,7 +11,14 @@ public interface ReviewCommentDAO {
     @Select("select review_comment_id, content, posted_date, review_id, user_id, parent_comment from review_comment")
     public List<ReviewCommentDTO> readReviewComment();
 
-    @Select("select review_comment_id, content, posted_date, review_id, user_id, parent_comment from review_comment where ${cn} = #{v}")
+    @Select("select review_comment_id, nickname, content, posted_date, review_id, c.user_id, parent_comment "
+        + "from (select review_comment_id, content, posted_date, review_id, user_id, parent_comment "
+        + "from review_comment "
+        + "where ${cn} = #{v}) as c "
+        + "join "
+        + "(select user_id, nickname from users) as u "
+        + "on u.user_id = c.user_id "
+        + "order by ifnull(parent_comment, review_comment_id), posted_date;")
     public List<ReviewCommentDTO> readReviewCommentBy(@Param("cn") String columnName, @Param("v") String value);
 
     @Insert("insert into review_comment (content, review_id, user_id, posted_date) values(#{content}, #{reviewId}, #{userId}, now())")

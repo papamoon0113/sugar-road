@@ -60,3 +60,34 @@
   border:none;
   color : var(--pink3);
 }
+
+.rating-box {
+  position: relative;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+.rating-box .stars {
+  display: flex;
+  align-items: center;
+}
+.stars i {
+  color: var(--lightgray);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.stars i.active {
+  color: var(--pink2);
+}
+.rating-box h5.active {
+  color: var(--pink3);
+}
+
+.review-content-box {
+    background : var(--white);
+    border : none;
+    outline-color : var(--pink2);
+    height : 65vh;
+    width : 99%;
+}
+
+.review-content {
+  height : 85vh;
