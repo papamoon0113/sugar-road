@@ -49,7 +49,7 @@ public class StoreController {
     }
 
     @GetMapping("/store/detail") // 가게 상세정보 출력
-    public ModelAndView readSelectStore(int storeId) {
+    public ModelAndView readSelectStore(int storeId, HttpSession session) {
         // store , menu 따로 불러와서 내보내기
        StoreDTO list = dao.readSelectStoreBy(storeId);
        List<MenuDTO> mlist = mdao.readMenuBy(storeId);
@@ -62,13 +62,14 @@ public class StoreController {
     public String writePage() {
         return "/store/write";}
     @PostMapping("/store/write") // 가게 등록
-    public ModelAndView createStore(StoreDTO dto, String[] menuName, MultipartRequest mreq ) {
+    public ModelAndView createStore(StoreDTO dto, String[] menuName, MultipartRequest mreq, HttpSession session ) {
         String menuImagePath="";
         MenuDTO menuDto;
         MultipartFile storeFile = mreq.getFile("file"); // 가게 대표 이미지
         List<MultipartFile> menuList = mreq.getFiles("menuImages"); // 메뉴 이미지들
         String storeImagePath  = imageUtil.writeImage(storeFile);
         dto.setStoreImagePath(storeImagePath);
+        dto.setUserId((String)session.getAttribute("nowLogin"));
         int result = dao.createStore(dto);
         if (result>0 && menuName.length>0) {
             for (int i =0; i < menuList.size(); i++) {

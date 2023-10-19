@@ -152,23 +152,24 @@
                 margin: 25px ;
                 font-weight: 700;
                 }
-            .store-insert-btnBox{
+ .store-insert-btnBox{
 display: flex;
     justify-content: space-between;
     margin: 2vh;
     position: relative;
 bottom: -2vh;
-            }
+}
  .store-insert-btnBox > button{
  border: none;
 background-color: #f0f8ff00;
    }
-           .store-insert-btnBox > button[type="submit"]{
+    .store-insert-btnBox > button[type="submit"]{
     background-color: #af96c7ba;
     border-radius: 5px;
-    padding: 7px 10px;
+    width: 65px;
+    height: 40px;
     color: black;
-           }
+   }
 .store-insert-btnBox > button[type="submit"]:hover{
   background-color: #cab9dc;
 }
@@ -215,6 +216,3 @@ display: inline-block;
         border: none;
         color: gray;
 }
-
-
-

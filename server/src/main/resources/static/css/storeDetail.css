@@ -1,4 +1,7 @@
   /*detail.css*/
+  .store-detail-name{
+      margin-bottom: 4vh;
+  }
 .store-like-back {
 margin: 1vh 2vh 5vh 0;
     display: flex;
@@ -59,15 +62,12 @@ display: flex;
   display: none;
 }
 #menuBox {
-  width: 15vh;
-/*  display: inline-block;*/
    margin-right: 10px;
        border: 1px solid lightgrey;
        border-radius: 5px;
-       cursor: pointer;
 }
 #menuBox > img{
-width: 15vh;
+width: 35vw;
     height: 15vh;
     object-fit: cover;
 }

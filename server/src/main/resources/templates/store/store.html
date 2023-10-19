@@ -21,7 +21,7 @@
                 <span>😲Recent</span>
                 <span>💖Like</span>
             </div>
-            <a class="store-insertBtn" th:href="@{/store/write}">가게 등록</a>
+            <a class="store-insertBtn"  th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게 등록</a>
             <div class="storeList">
                 <div class="storeBox" th:if="${list}" th:each="dto:${list}">
                     <div class="storeBoxTop">
