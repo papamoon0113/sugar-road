@@ -1,4 +1,9 @@
 /*store.html*/
+ .app-body{
+        background-image: url('images/bac3.jpg');
+        background-repeat : no-repeat;
+        background-size : cover;
+ }
    .container {
    /*     margin: 40px 20px;*/
       }
@@ -31,9 +36,9 @@
        /* left: 4%; */
        top: 90%;
        z-index: 99999;
-       font-size: 20px;
+    /*   font-size: 20px;*/
        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-       border: 2px solid gray;
+       border: 1px solid gray;
       }
       .store-insertBtn:hover{
          background-color: #cab9dc;
@@ -48,6 +53,9 @@
     border-radius: 10px;
     transition: .5s ease;
     cursor: pointer;
+      }
+      .storeBox > a{
+      text-decoration: none;
       }
        .storeBox:hover{
             box-shadow:

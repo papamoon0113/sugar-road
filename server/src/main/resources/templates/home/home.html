@@ -15,22 +15,34 @@
     <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}"/>
     <style>
         .title{
-        text-align: center;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
         }
         .main-title{
-            height: 150px;
+            height: 60px;
         }
         span > b {
         margin: 10px;
         }
-        .swiper {
-      width: 600px;
-    height: 200px;
-    padding: 10px;
+        .text-box{
+   height: 11vh;
+    background-color: #fbe0e5;
+    color: #ffffff;
+        text-align: center;
 }
-    }
+  .text-box > h3{
+padding:20px 10px 5px;
+      color: #ffffff;
+  }
+        .swiper {
+    width: 96%;
+    height: 25vh;
+    padding: 10px;
+    background-color: #fefefe;
+}
     .swiper-slide{
-    border: 1px solid red;
     width: 28vw;
     height: 20vh;
     }
@@ -49,21 +61,26 @@
 </head>
 <body>
 <div class="app-body">
-   <div class="title"> <img src="images/logo.png" class="main-title"></div>
-
+    <div class="title">
+        <img src="images/logonoback.png" class="main-title">
+    </div>
     <span><b>최근 등록한 가게🥐</b></span><br/>
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide" th:if="${list}" th:each="dto:${list}">
                 <a th:href="@{/store/detail(storeId=${dto.storeId})}">
-                        <div class="store-like">좋아요 수 : <span>5</span></div>
+                    <div class="store-like">좋아요 수 : <span>5</span></div>
                     <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
                     <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
                 </a>
             </div>
         </div>
     </div>
-    <br/><br/><br/>
+    <br/>
+    <div class="text-box">
+        <h3>Dessert Share PlatForm</h3>Welcome to Sugar Road
+    </div>
+    <br/>
     <span><b>최근 등록한 리뷰🧁</b></span><br/>
     <div class="swiper">
         <div class="swiper-wrapper">
@@ -81,17 +98,17 @@
     <footer th:insert="ui/footer :: footer"></footer>
 </div>
 <script>
-const swiper = new Swiper('.swiper', {
-spaceBetween: 10,    // 슬라이드 사이 여백
- slidesPerView : '3', // 한 슬라이드에 보여줄 갯수
-centeredSlides: true,    //센터모드
-autoplay: {     //자동슬라이드 (false-비활성화)
-    delay: 2500, // 시간 설정
-    disableOnInteraction: false, // false-스와이프 후 자동 재생
-        },
-loop: true,
-loopAdditionalSlides : 1
-});
+    const swiper = new Swiper('.swiper', {
+    spaceBetween: 10,    // 슬라이드 사이 여백
+     slidesPerView : 3, // 한 슬라이드에 보여줄 갯수
+    centeredSlides: true,    //센터모드
+    autoplay: {     //자동슬라이드 (false-비활성화)
+        delay: 1500, // 시간 설정
+        disableOnInteraction: false, // false-스와이프 후 자동 재생
+},
+    loop: true,
+    loopAdditionalSlides : 1
+    });
 </script>
 </body>
 </html>
