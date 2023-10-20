@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/ui.css">
     <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="search-container" style="padding-bottom: 80px">
@@ -15,7 +16,7 @@
     <div class="content">
         <div class="search-bar">
         <form action="/search" method="GET">
-            <img src="/images/icons/search.png" alt="">
+            <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
             <input type="text" class="input" name="search"
                    th:value="${search}? ${search}" placeholder="찾고 싶은 가게 또는 디저트를 입력하세요" required>
         </form>
@@ -76,7 +77,7 @@
 <div class="store-result" th:if="${storeList}">
     <h6 class="bold">가게</h6>
     <div class="thumbnail lightgray" th:each="store : ${storeList}">
-        <a th:href="@{/detail(storeId=${store.storeId})}">
+        <a th:href="@{/store/detail(storeId=${store.storeId})}">
             <table class="v-table">
                 <tr>
                     <td class="left">

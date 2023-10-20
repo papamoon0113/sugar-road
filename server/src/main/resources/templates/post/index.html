@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="/css/post.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="post-index-container">
 <div class="app-body">
     <div class="content">
     <div class="index-header">
-        <h1 class="bold">Free Board</h1>
+        <h1 class="bold">Open Forum</h1>
     </div>
 <div class="category">
     <button onclick="location.href='/post?category=01'">
@@ -37,7 +38,7 @@
 </div>
         <div class="search">
         <form action="/post" method="GET">
-            <img src="/images/icons/search.png" alt="">
+            <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
             <input type="text" class="input" name="search" placeholder="검색">
         </form>
         </div>
@@ -51,7 +52,7 @@
                     <p class="t5 bold" th:text="${l.title}"></p>
                 </td>
                 <td class="v-table-half right">
-                    <p class="t6">댓글 수: 3</p>
+                    <p class="t6" th:text="|댓글수: ${l.commentCount} 추천수:${l.recommendCount}|"></p>
                 </td>
 
             </tr>

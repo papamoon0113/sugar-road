@@ -37,6 +37,8 @@ public class PostController {
     @Autowired
     PostCommentDAO postCommentDAO;
     @Autowired
+    RecommendationDAO recommendationDAO;
+    @Autowired
     ImageUtil imageUtil;
 
     boolean checkLongin(HttpSession session) {
@@ -96,8 +98,12 @@ public class PostController {
 //            list = postDAO.readPost();
 //        }
 
-        for (PostDTO p : list) {
+        for (PostDTO p : list) {//이미지 및 댓글 수 처리
             int id = p.getPostId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("P").referenceId(id).build();
+            p.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+            System.out.println("카운트:" + p.getRecommendCount());
+            p.setCommentCount(postCommentDAO.readPostCommentCount(id));
             List<String> iList = postImageDAO.readPostImage(id);
             if (iList != null) {
                 p.setPostImage(iList.toArray(new String[0]));
