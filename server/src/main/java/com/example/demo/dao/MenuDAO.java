@@ -19,9 +19,10 @@ public interface MenuDAO {
 	@Select("select menu_id, store_id, menu_name, price, menu_desc,  image from menu")
 	public List<MenuDTO> readMenu();
 
+	// store_id 추가??!!
 	@Update("update menu "
 		+ "set menu_name = #{menuName}, price = #{price}, menu_desc = #{menuDesc}, menu_image_path = #{menuImagePath}"
-		+ "where store_id = #{storeId}")
+		+ "where menu_id = #{menuId}")
 	public boolean updateMenu(MenuDTO dto);
 
 	@Delete("delete from menu where menu_id = #{menuId}")
