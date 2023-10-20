@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <title>Title</title>
-    <link rel="stylesheet" href="./css/ui.css" />
+  <!--  <link rel="stylesheet" href="../static/css/ui.css" />-->
     <style>
       @font-face {
         font-family: "Pretendard";
@@ -16,7 +16,7 @@
         font-display: swap;
       }
       .app-body {
-        background: url(./images/m4.jpg);
+             background: url(/images/m4.jpg);
         /* m, m2,  */
         background-size: cover;
         z-index: 1;
@@ -24,7 +24,7 @@
       .sugarroad-title {
         width: 90vw;
         height: 30vh;
-        background: url(./images/logo.png);
+        background: url(/images/logo.png);
         background-size: cover;
         margin: 0 auto;
       }
@@ -67,9 +67,7 @@
     <div class="app-body">
       <div class="sugarroad-title"></div>
       <div class="main-desc">Dessert Share PlatForm</div>
-      <div class="nav">
-        <footer th:insert="ui/nav :: nav"></footer>
-      </div>
+      <footer th:insert="ui/footer :: footer"></footer>
     </div>
   </body>
 </html>

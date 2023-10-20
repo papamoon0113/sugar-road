@@ -21,17 +21,19 @@
                 <span>😲Recent</span>
                 <span>💖Like</span>
             </div>
-            <a class="store-insertBtn"  th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게 등록</a>
             <div class="storeList">
+                <a class="store-insertBtn bold h5" th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게
+                    등록</a>
                 <div class="storeBox" th:if="${list}" th:each="dto:${list}">
+                    <!--위치 확인!!!!--><a th:href="@{/store/detail(storeId=${dto.storeId})}" >
                     <div class="storeBoxTop">
-                        <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
-                        <div class="store-like">좋아요 수 : <span>5</span></div>
+                            <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
+                            <div class="store-like">좋아요 수 : <span>5</span></div>
                     </div>
                     <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
                     <div th:text="${dto.storeDesc}" class="store-desc"></div>
-                    <div class="store-click"><a th:href="@{/store/detail(storeId=${dto.storeId})}"
-                    >Click</a></div>
+
+                    </a>
                     <br/>
                 </div>
             </div>
