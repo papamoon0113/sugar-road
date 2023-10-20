@@ -23,4 +23,6 @@ public class PostDTO {
 	private String postCategoryId;
 	private String[] postImage;
 	private MultipartFile[] uploadImages;
+	private int commentCount;
+	private int recommendCount;
 }
