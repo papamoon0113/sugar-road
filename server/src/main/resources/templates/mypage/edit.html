@@ -10,18 +10,19 @@
 <body>
 <div class="app-body">
     <div class = "content">
-        <div id="mypageBack">
+<!--        <div id="mypageBack">-->
         <br>
         <h4 id="title">프로필 변경</h4>
         <br>
             <br>
         <br>
-        <th:block th:if="${userInfo}">
-            <img th:src="${userInfo.userImagePath}" id="userImage">
+           <img th:src="${userInfo.userImagePath}? ${userInfo.userImagePath} : '../css/users/img/default_user.png'" id="userImage">
+
+
             <label class="imgChange" for="input-image">
                 <img src="../css/mypage/img/edit.png">
             </label>
-            <form id="editForm" action="/users/edit" method="post" enctype="multipart/form-data" target="iframe">
+            <form id="editForm" action="/users/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="userId" th:value="${userInfo.userId}">
                 <input type="file" name="image" style="display:none" id="input-image">
                 <h5 class="editText">PW</h5>
@@ -40,9 +41,9 @@
                 <input id="editButtom" type="submit" value="업데이트 프로필"/>
             </form>
         </th:block>
-            <iframe id="iframe" name="iframe"></iframe>
+            <h5 id="iframed" th:text="${msg}"></h5>
         <div id="delete"><a href="/mypage/delete" style="text-decoration: none">회원정보 탈퇴</a></div>
-        </div>
+<!--        </div>-->
     </div>
 
     <div class = "nav">

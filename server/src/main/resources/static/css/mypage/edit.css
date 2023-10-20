@@ -78,7 +78,7 @@
         color: rgba(0, 0, 0, 0.70);
 }
 
-iframe{
+#iframed{
     position: relative;
         bottom: 1%;
         left: 20%;

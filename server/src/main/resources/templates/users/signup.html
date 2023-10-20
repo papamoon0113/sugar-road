@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
@@ -13,24 +13,21 @@
     <div class = "content">
             <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
             <div id="signBox">
-                <label id="signImg" for="submitForm">
-                    <img src="../css/users/img/login.png">
-                </label>
-                <form action="/users/signup" method="post" enctype="multipart/form-data" target="iframe">
+                <form id="signForm" action="/users/signup" method="post" enctype="multipart/form-data">
+                    <label class="photo" for="input-image">
+                        <img src="../css/users/img/photo.png">
+                    </label>
+                    <h3 id="please">Please Sign Up</h3>
                     <input id="inputText1" type="text" name="userId" placeholder="User Id" required><br>
                     <input id="inputText2" type="password" name="userPassword" placeholder="Password" required><br>
                     <input id="inputText3" type="text" name="userName" placeholder="User Name" required><br>
                     <input id="inputText4" type="text" name="nickname" placeholder="User NickName" required><br>
                     <input id="inputText5" type="text" name="userEmail" placeholder="User Email" required><br>
-                    <input id="photoInput" type="file" name="image" style="display:none"><br>
-                    <input id="submitForm" type="submit" value="회원가입" style="display:none">
+                    <input type="file" name="image" style="display:none" id="input-image"><br>
+                    <input id="submitForm" type="submit" value="Sign Up"/>
                 </form>
-                <iframe id="iframe" name="iframe"></iframe>
+                <h5 id="iframed" th:text="${msg}"></h5>
                 <br>
-
-                <button id="photo" onclick="document.getElementById('photoInput')">
-                Profile Photo
-                </button>
             </div>
         </div>
     </div>

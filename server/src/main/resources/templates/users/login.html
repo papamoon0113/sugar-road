@@ -14,7 +14,7 @@
 
     <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
             <div id="loginBox">
-    <form action="/users/login" method="post" name="loginForm" target="iframe">
+    <form action="/users/login" method="post" name="loginForm">
         <h3 id="please">Please Sign In</h3>
         <input id="loginText1" type="text" name="userId" placeholder="Id" required><br>
         <br>
@@ -22,7 +22,8 @@
         <br>
         <input type="submit" id="signIn" value="Sign in">
     </form>
-            <iframe id="iframe" name="iframe"></iframe>
+<!--            <iframe id="iframe" name="iframe"></iframe>-->
+                <h6 id="iframed" th:text="${msg}"></h6>
             <br>
         <button id="signUp" onclick="location.href = '/users/signup'">Go to Sign Up</button>
             </div>
