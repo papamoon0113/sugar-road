@@ -117,10 +117,12 @@ public class PostController {
     }
 
     @GetMapping("/write")
-    public String writePage(HttpSession session) {
+    public String writePage(HttpSession session, Model model) {
         if (!checkLongin(session)) {
-            System.out.println("로그인 필요");
-            return "redirect:/users/login.html";
+            model.addAttribute("msg", "로그인이 필요합니다");
+            model.addAttribute("url", "/users/login");
+            return "alert";
+//            return "redirect:/users/login.html";
         }
 
         return "post/write";
