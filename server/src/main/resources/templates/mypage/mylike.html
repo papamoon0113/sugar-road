@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="/css/post.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="app-body">
+    <div class="content">
+        <h3>좋아요 게시글 목록</h3>
+        <hr>
+        <div class="post-list" th:if="${postList}">
+            <div th:each="post : ${postList}" class="thumbnail">
+            <a th:href=@{/post/detail(id=${post.postId})}>
+                <table class="v-table">
+                    <tr>
+                        <td class="v-table-third" rowspan="2">
+                            <img th:src="${post.postImage.length} gt 0 ?${post.postImage[0]} :'/images/icons/sugarroad.png'" alt=""></td>
+                        <td th:text="${post.title}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${post.content}"></td>
+                    </tr>
+                </table>
+            </a>
+                <hr style="hr-blue">
+            </div>
+        </div>
+
+    </div>
+    <footer th:insert="ui/footer :: footer"></footer>
+</div>
+</body>
+</html>

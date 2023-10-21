@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.PostDAO;
+import com.example.demo.dao.PostImageDAO;
 import com.example.demo.dao.UsersDAO;
+import com.example.demo.domain.PostDTO;
 import com.example.demo.domain.UsersDTO;
 import com.example.demo.util.ImageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +30,10 @@ public class MyPageController {
 
     @Autowired
     UsersDAO usersDAO;
+    @Autowired
+    PostDAO postDAO;
+    @Autowired
+    PostImageDAO postImageDAO;
     @Autowired
     ImageUtil imageUtil;
 
@@ -126,6 +134,52 @@ public class MyPageController {
         }
         System.out.println("오류가 발생했습니다");
         return "redirect:/users/login.html";
+    }
+    @GetMapping("/mypage/mypost")
+    public ModelAndView readMyPost(HttpSession session){
+        ModelAndView mav = new ModelAndView();
+        String userId = (String) session.getAttribute("nowLogin");
+        List<PostDTO> postList = postDAO.readPostBy("user_id", userId);
+        if(!postList.isEmpty()) {
+                for (PostDTO p : postList) {
+                    int id = p.getPostId();
+                    List<String> iList = postImageDAO.readPostImage(id);
+                    if (iList != null) {
+                        p.setPostImage(iList.toArray(new String[0]));
+                    }
+                }
+
+            mav.addObject("postList", postList);
+        }
+        else
+            mav.addObject("msg", "작성한 글이 없습니다.");
+
+        mav.setViewName("mypage/mypost");
+
+        return mav;
+    }
+    @GetMapping("/mypage/mylike")
+    public ModelAndView readMyRecommendation(HttpSession session){
+        ModelAndView mav = new ModelAndView();
+        String userId = (String) session.getAttribute("nowLogin");
+        List<PostDTO> postList = postDAO.readRecommedingPostbyUser(userId);
+        if(!postList.isEmpty()) {
+            for (PostDTO p : postList) {
+                int id = p.getPostId();
+                List<String> iList = postImageDAO.readPostImage(id);
+                if (iList != null) {
+                    p.setPostImage(iList.toArray(new String[0]));
+                }
+            }
+            mav.addObject("postList", postList);
+        }
+        else{
+            mav.addObject("msg", "작성한 글이 없습니다.");
+        }
+
+        mav.setViewName("mypage/mylike");
+
+        return mav;
     }
 
 }

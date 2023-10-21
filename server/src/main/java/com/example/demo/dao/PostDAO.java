@@ -33,8 +33,13 @@ public interface PostDAO {
             "on post.post_id = recommendation.reference_id " +
             "where reference_type = 'p' " +
             "group by post_id " +
-            "order by recommendCount limit 5")
+            "order by recommendCount desc")
     public List<PostDTO> readPostByRecommendation();
+    @Select("select post_id, content, title, post.posted_date, post.user_id, post_category_id from post " +
+            "join recommendation " +
+            "on post.post_id = recommendation.reference_id " +
+            "where reference_type = 'p' and recommendation.user_id = #{userId}")
+    public List<PostDTO> readRecommedingPostbyUser(String userId);
     @Select("select post_id, content, title, posted_date, user_id, post_category_id postCategoryId from post where content like '%${search}%' or title like '%${search}%'")
     public List<PostDTO> readPostBySearch(String search);
 
