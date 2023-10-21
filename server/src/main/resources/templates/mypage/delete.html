@@ -8,21 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
-<th:block th:if="${userInfo}">
-<div>
-    <h1>회원탈퇴</h1>
-    <form action="/users/delete" method="post" target="iframe1">
-        <input type="hidden" name="userId" th:value="${userInfo.userId}">
-        비밀번호를 입력하세요<br>
-        <input type="password" name="userPassword" required>
-        <input type="submit" value="탈퇴">
-    </form>
-</div>
-</th:block>
-<iframe id="iframe1" name="iframe1"></iframe>
+<div class="app-body">
+    <div class = "content">
+        <!--        <div id="mypageBack">-->
+        <br>
+        <h4 id="title">회원 탈퇴</h4>
+        <br>
+        <br>
+        <br>
+        <img th:src="${userInfo.userImagePath}? ${userInfo.userImagePath} : '../css/users/img/default_user.png'" id="userImage">
+        <form id="editForm" action="/users/delete" method="post">
+            <input type="hidden" name="userId" th:value="${userInfo.userId}">
+            <h5 class="editText">비밀번호를 입력하세요</h5>
+            <br>
+            <input class="editBox" type="password" name="userPassword" required><br>
+            <br>
+            <input id="editButtom" type="submit" value="탈퇴"/>
+        </form>
+        </th:block>
+        <h5 id="iframed" th:text="${msg}"></h5>
+        <!--        </div>-->
+    </div>
 
-<div class = "nav">
-    <footer th:insert="ui/footer :: footer"></footer>
+    <div class = "nav">
+        <footer th:insert="ui/footer :: footer"></footer>
+    </div>
 </div>
 </body>
 </html>

@@ -10,14 +10,14 @@
 <body>
 <div class="app-body">
     <div class = "content">
-        <div id="mypageBack">
+<!--        <div id="mypageBack">-->
             <br>
             <br>
         <h4 id="title">MyPage</h4>
             <br>
             <br>
             <th:block th:if="${userInfo}">
-                <img th:src="${userInfo.userImagePath}" id="userImage">
+                <img th:src="${userInfo.userImagePath}? ${userInfo.userImagePath} : '../css/users/img/default_user.png'" id="userImage">
             <div class = "userInfo" th:each="vo : ${userInfo}">
                 <h5>[[${vo.nickname }]]</h5>
                 <h6>[[${vo.userEmail }]]</h6>
@@ -53,7 +53,7 @@
             </div>
 
         <div id="logOut"><a href="/logout" style="text-decoration: none">로그아웃</a></div>
-        </div>
+<!--        </div>-->
     </div>
     <div class = "nav">
         <footer th:insert="ui/footer :: footer"></footer>
