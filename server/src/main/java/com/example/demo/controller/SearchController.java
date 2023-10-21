@@ -28,14 +28,16 @@ public class SearchController {
     ReviewDAO reviewDAO;
 
     @GetMapping("")
-    public String index() {
-        return "search/index";
+    public ModelAndView index() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("nameList", storeDAO.readStoreName());
+        mav.setViewName("search/index");
+        return mav;
     }
 
     @GetMapping(value = "", params = {"search"})
     public ModelAndView search(String search) {
         ModelAndView mav = new ModelAndView();
-        //자동완성
         List<String> nameList = storeDAO.readStoreName();
         mav.addObject("nameList", nameList);
         List<PostDTO> postList = postDAO.readPostBySearch(search);

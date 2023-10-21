@@ -2,6 +2,8 @@ let commentInput = document.querySelector("#commentInput");
 let referenceTypeSave;
 let referenceIdSave;
 let focusComment;
+let commentSave;
+let loader = document.querySelector("#loader");
 
 commentInput.requestOptions = {};
 commentInput.requestOptions.body = {};
@@ -20,20 +22,34 @@ class Comment extends HTMLDivElement{
 
         console.log(`this.referenceType : ${this.referenceType} this.referenceId : ${this.referenceId} this.loginId : ${this.loginId}`)
 
+        // 무한 스크롤 관련 부분
+        this.iterator = 0;
+        this.distance = 8;
+        commentSave = this;
+        document.querySelector(".content").addEventListener("scrollend", function(){
+            console.log("scroll-end!");
+            loader.style.display = "block";
+            loader.focus();
+            commentSave.render()
+            .then(() => {
+                // loader.style.display = "none";
+                console.log("loader remove!")}
+            );
+        });
+
         this.render();
     }
 
     render(){
-        this.innerHTML = "";
-        fetch(`/comment/${this.referenceType}?id=${this.referenceId}`)
+        return fetch(`/comment/${this.referenceType}?id=${this.referenceId}&startPoint=${(this.iterator++)*this.distance}&count=${this.distance}`)
         .then(response => {return response.json();})
         .then(json => this.readJson(json));
     }
 
     readJson(json){
+        console.log(json);
         Object.values(json).forEach(
             (comment) => {
-                console.log(comment);
                 this.innerHTML += `
 
                     <table class="v-table ${comment["parentComment"]?"child-comment":"comment"} ${comment["userId"] === this.loginId?"pink1":""}" id = "c${comment[this.referenceType + "CommentId"]}">
@@ -46,7 +62,7 @@ class Comment extends HTMLDivElement{
                           <td class = ".v-table-eight">
                           </td>
                           <td class = "v-table-quater t6 right">
-                                ${comment["postedDate"].substring(0, 10)}
+                                ${comment["postedDate"].substring(0,10)}
                           </td>
                       </tr>
                       <tr>

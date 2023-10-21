@@ -3,7 +3,6 @@ class Recommendation extends HTMLButtonElement {
         super();
         this.referenceType = this.getAttribute("data-referenceType");
         this.referenceId = this.getAttribute("data-referenceId");
-        console.log(`referenceType : ${this.referenceType} referenceId : ${this.referenceId} action : ${this.action}`);
         this.btnText = document.createElement("h4");
         this.appendChild(this.btnText);
 
@@ -22,7 +21,6 @@ class Recommendation extends HTMLButtonElement {
           .then(json => this.readJson(json));
     }
     readJson(json){
-      console.log(json);
       this.btnText.textContent = "♥ " + json['count'];
       this.check = json['check'];
       this.mark();

@@ -11,47 +11,38 @@
 <body>
 <div class="app-body">
     <div class="content">
-    <div class="post-header">
-        <a href="/post"><img src="/images/icons/back.png" alt="" width="10px"></a>
-        <h4>자유 게시판</h4>
+        <div class="post-header">
+            <a href="/post"><img src="/images/icons/back.png" alt="" width="10px"></a>
+            <h4>자유 게시판</h4>
 
-    </div>
+        </div>
         <hr class="hr-blue">
-<th:block th:if="${dto}">
-    <div class="post-detail" style="min-height: 400px">
-    <h3 th:text="${dto.title}"></h3>
-        <hr>
-        <p th:text="${dto.content}"></p>
-    <div class="post-image" th:each=" image :${dto.postImage}">
-        <img th:src="${image}" alt="img">
-    </div>
-    </div>
-    <hr>
-    <div class="post-comment">
-        <p>댓글 영역</p>
-    </div>
-
-
-
-</th:block>
-<h4>댓글 작성</h4>
-<th:block th:if="${session.nowLogin != null}">
-    <form method = "post" action = "/comment/post/write">
-        <input type ="hidden" name ="userId" th:value="${session.nowLogin}" required><br>
-        <input type ="hidden" name ="postId" th:value="${dto.postId}" required><br>
-        <textarea cols="35" rows="10" name ="content" placeholder="content" required></textarea><br>
-        <input type = "submit" value = "댓글 작성">
-    </form>
-</th:block>
-        <hr>
+        <th:block th:if="${dto}">
+            <div class="post-detail" style="min-height: 400px">
+            <h3 th:text="${dto.title}"></h3>
+                <hr>
+                <p th:text="${dto.content}"></p>
+            <div class="post-image" th:each=" image :${dto.postImage}">
+                <img th:src="${image}" alt="img">
+            </div>
+            </div>
+<!--            <div class="post-comment">-->
+<!--                <p>댓글 영역</p>-->
+<!--            </div>-->
+            <button is = "custom-recommendation" class = "no-border" data-referenceType="P" th:data-referenceId=${dto.postId}></button>
+        </th:block>
         <div class="post-button" th:if="${session.nowLogin}==${dto.userId}">
             <button th:onclick="|location.href='@{/post/delete(id=${dto.postId})}'|">삭제</button>
             <button th:onclick="|location.href='@{/post/edit(id=${dto.postId})}'|">수정</button>
-
-
         </div>
+        <link rel="stylesheet" href="/css/comment.css">
+        <div is = "custom-comment" data-referenceType="post" th:data-referenceId="${dto.postId}" th:data-loginId="${session.nowLogin}" id = "comment-area"></div>
     </div>
+    <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100">
+    <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
 <footer th:insert="ui/footer :: footer"></footer>
 </div>
 </body>
+<script src="/js/recommendation.js"></script>
+<script src="/js/comment.js"></script>
 </html>
