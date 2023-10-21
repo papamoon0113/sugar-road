@@ -9,46 +9,44 @@
   <title>Title</title>
   <link rel="stylesheet" href="/css/ui.css">
   <link rel="stylesheet" href="/css/review.css">
+  <link rel="stylesheet" href="/css/loader.css">
 </head>
 <body>
   <div class = "app-body">
-      <div class = "content comment-content">
-          <div class ="center"><h3>자세히 보기</h3></div>
-              <table class="v-table pink1">
-                  <tr>
-                      <td class = "v-table-half t4 bold">
-                          🍰 [[${reviewDTO.nickname}]]
-                      </td>
-                      <td class = "v-table-quater">
-                      </td>
-                      <td class = "v-table-quater t6 bold right">
-                        [[${reviewDTO.postedDate}]]
-                      </td>
-                  </tr>
-                  <tr>
-                      <td colspan="3" class = "t5 v-item">
-                        [[${reviewDTO.content}]]
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <button is = "custom-recommendation" class = "review-button" data-referenceType="R" th:data-referenceId=${reviewDTO.reviewId}></button>
-                      </td>
-                      <td class = "t5 t-lightgray right">
-                          <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/edit(id=${reviewDTO.reviewId})}">수정</a>
-                      </td>
-                      <td class = "t5 center t-lightgray">
-                          <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/delete(id=${reviewDTO.reviewId})}">삭제</a>
-                      </td>
-                  </tr>
-                </table>
-
-                
-          <link rel="stylesheet" href="/css/comment.css">
-          <div is = "custom-comment" data-referenceType="review", th:data-referenceId="${reviewDTO.reviewId}" th:data-loginId="${session.nowLogin}" id = "comment-area"></div>
+      <div class = "content">
+            <div class ="center"><h3>자세히 보기</h3></div>
+            <table class="v-table pink1">
+                <tr>
+                    <td class = "v-table-half t4 bold">
+                        🍰 [[${reviewDTO.nickname}]]
+                    </td>
+                    <td class = "v-table-quater">
+                    </td>
+                    <td class = "v-table-quater t6 bold right">
+                      [[${#temporals.format(reviewDTO.postedDate, 'yyyy-MM-dd')}]]
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class = "t5 v-item">
+                      [[${reviewDTO.content}]]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button is = "custom-recommendation" class = "no-border" data-referenceType="R" th:data-referenceId=${reviewDTO.reviewId}></button>
+                    </td>
+                    <td class = "t5 t-lightgray right">
+                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/edit(id=${reviewDTO.reviewId})}">수정</a>
+                    </td>
+                    <td class = "t5 center t-lightgray">
+                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/delete(id=${reviewDTO.reviewId})}">삭제</a>
+                    </td>
+                </tr>
+            </table>
+            <link rel="stylesheet" href="/css/comment.css">
+            <div is = "custom-comment" data-referenceType="review", th:data-referenceId="${reviewDTO.reviewId}" th:data-loginId="${session.nowLogin}" id = "comment-area"></div>
+            <div class = "dot-elastic" id = "loader" style="display:none;"></div>
       </div>
-
-
       <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100">
       <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
       <footer th:insert="ui/footer :: footer"></footer>
