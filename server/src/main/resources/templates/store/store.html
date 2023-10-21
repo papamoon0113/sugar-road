@@ -22,8 +22,6 @@
                 <span>💖Like</span>
             </div>
             <div class="storeList">
-                <a class="store-insertBtn bold h5" th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게
-                    등록</a>
                 <div class="storeBox" th:if="${list}" th:each="dto:${list}">
                     <!--위치 확인!!!!--><a th:href="@{/store/detail(storeId=${dto.storeId})}" >
                     <div class="storeBoxTop">
@@ -37,11 +35,11 @@
                     <br/>
                 </div>
             </div>
-            <footer th:insert="ui/footer :: footer"></footer>
         </div>
+        <a class="store-insertBtn bold h5" th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게
+            등록</a>
     </div>
-    <footer th:insert="ui/footer"></footer>
-
+    <footer th:insert="ui/footer :: footer"></footer>
 </div>
 </body>
 </html>

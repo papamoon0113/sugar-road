@@ -15,6 +15,7 @@ class Review extends HTMLElement {
       Object.values(json).forEach((r) => {
           console.log(r);
           this.innerHTML += `
+
             <div class = "v-item pink1" onclick="location.href = '/review/detail?id=${r["reviewId"]}'">
                 <table class = "v-table">
                     <tr>

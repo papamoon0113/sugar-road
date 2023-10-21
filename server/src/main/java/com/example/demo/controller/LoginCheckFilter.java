@@ -16,7 +16,8 @@ import java.io.IOException;
 public class LoginCheckFilter implements Filter {
 
     //로그인이 필요하지 않은 페이지 url 요청들
-    private static final String[] whitelist = { "/home", "/users/signup", "/users/login", "/logout", "/css/*" };
+    private static final String[] whitelist = { "/home", "/users/signup", "/users/login", "/logout",
+            "/search", "/store", "/post", "/review/**", "/review", "/search/**", "/store/**", "/post/**", "/css/*" };
 
     //화이트 리스트의 경우 인증 체크 스킵
     //simpleMatch : 파라미터 문자열이 특정 패턴에 매칭되는지를 검사
