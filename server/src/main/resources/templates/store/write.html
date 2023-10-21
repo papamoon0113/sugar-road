@@ -1,48 +1,98 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>Title</title>
-    <style>
-        #plusBtn, #minusBtn{cursor:pointer};
-    </style>
-</head>
-<body>
-<h3>가게정보등록</h3>
-<form method="post" action="/store/write" enctype="multipart/form-data" >
-    <!--  input에 required 추가  -->
-    가게명<input type="text" name="storeName"><br/>
-    가게번호<input type="number" name="phoneNumber"><br/>
-    가게주소<input type="text" name="address"><br/>
-    <div id="menuInputs">
-    메뉴이름<input type="text" name="menuName">
-    메뉴이미지<input type="file" name="menuImages">
+<!--    <link rel="stylesheet" href="/css/ui.css" />-->
+    <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/store.css" th:href="@{/css/store.css}" />
+  </head>
+  <body>
+    <div class="app-body">
+      <div class="content">
+        <div id="container">
+          <a href="javascript:history.back();">◀</a><br>
+          <div class="store-write-title">가게정보등록</div>
+          <div class="HeadLine"></div>
+          <form
+            method="post"
+            action="/store/write"
+            enctype="multipart/form-data"
+          >
+            <!--  input에 required 추가  -->
+            <div class="inputBox">
+              <span>가게명</span
+              ><input type="text" name="storeName" />
+            </div>
+            <div class="inputBox">
+              <span>가게번호</span
+              ><input type="number" name="phoneNumber" />
+            </div>
+            <div class="inputBox">
+              <span>가게주소</span
+              ><input type="text" name="address" />
+            </div>
+            <div class="inputBox">
+              <span>대표 이미지</span
+              ><input type="file" name="file" /><br />
+            </div>
+            <div class="inputBox">
+              <span>설명</span
+              ><input type="text" name="storeDesc" /><br />
+            </div>
+            <h6>메뉴</h6>
+            <div class="menuBox">
+              <div class="menu">
+                <div class="inputBox">
+                  <span >메뉴이름</span>
+                  <input type="text" name="menuName" /><br />
+                </div>
+                <div class="inputBox">
+                  <span>메뉴이미지</span>
+                  <input type="file" name="menuImages" />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="store-menu-btnBox">
+            <button type="button" onclick="addMenu()" id="plusBtn">
+              메뉴➕
+            </button>
+            <button type="button" onclick="deleteMenu()" id="minusBtn">
+              메뉴➖
+            </button>
+            </div>
+            <br />
+            <div class="store-insert-btnBox">
+              <button ><a href="javascript:history.back();">취소</a></button>
+            <button type="submit">등록</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <footer th:insert="ui/footer :: footer"></footer>
     </div>
-    <div id = "AddMenuResult"></div>
-    <div onclick="addMenu()" id="plusBtn">➕</div>
-    <div onclick="deleteMenu()" id="minusBtn">➖</div>
-    <br/>
-    대표 이미지<input type="file" name="file"><br/>
-    설명<input type="text" name="storeDesc"><br/>
-    <button type="submit">등록</button>
-    <button>취소</button>
-</form>
-<script>
-    let AddMenuResult = document.querySelector("#AddMenuResult").innerHTML;
-        let menuInputs = document.querySelector("#menuInputs");
-   function addMenu() {
-        let newMenuInputs = document.createElement('div');
-        newMenuInputs.innerHTML = "메뉴이름<input type='text' name='menuName'> 메뉴이미지<input type='file' name='menuImages'>";
-        menuInputs.appendChild(newMenuInputs);
-    }
-      function deleteMenu() {
-        let menuCount = menuInputs.childElementCount;
-        if (menuCount > 1) {
-            menuInputs.removeChild(menuInputs.lastChild);
-        }
-    }
-</script>
-<footer th:insert="ui/nav :: nav"></footer>
-</body>
+   <script>
+ let menuBox = document.querySelector(".menuBox");
+ function addMenu() {
+   let newMenuInputs = document.createElement("div");
+   newMenuInputs.classList.add("menu");
+   newMenuInputs.innerHTML =
+     " <div class='inputBox'><span id='title'>메뉴이름</span><input type='text' name='menuName'></div> <div class='inputBox'><span id='title'>메뉴이미지</span><input type='file' name='menuImages'></div>";
+   menuBox.appendChild(newMenuInputs);
+ }
+
+ function deleteMenu() {
+   let menuCount = menuBox.childElementCount;
+   if (menuCount > 1) {
+     menuBox.removeChild(menuBox.lastChild);
+   }
+ }
+    </script>
+  </body>
 </html>

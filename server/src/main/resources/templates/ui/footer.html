@@ -1,75 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
-<head lang="en">
+<html xmlns:th="http://www.w3.org/1999/XSL/Transform">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
 <footer th:fragment="footer">
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-    <style>
-        .bottom_menu {
-          position: fixed;
-          bottom: 0px;
-          left: 0px;
-          width: 100%;
-          height: 70px;
-          z-index: 99999;
-          border-top: 1px solid black;
-          background-color: white;
-          border-radius: 20px 20px;
-        }
-        .bottom_menu > div {
-          float: left;
-          width: 20%;
-          height: 100%;
-          text-align: center;
-          padding-top: 13px;
-        }
-        .bottom_menu > div:hover {
-          background-color: rgb(240, 240, 240);
-        }
-    </style>
-
-<div class="bottom_menu">
+<div class="bottom_menu t4">
     <div>
+        <a href="/home">
         <i
                 class="fa-solid fa-house"
-                style="color: #999999; line-height: 40px"
         ></i>
+        </a>
     </div>
-
     <div>
+        <a href="/search">
         <i
                 class="fa-solid fa-magnifying-glass"
-                style="color: #999999; line-height: 40px"
         ></i>
+        </a>
     </div>
-
     <div>
+        <a href="/store">
         <i
                 class="fa-solid fa-store"
-                style="color: #999999; line-height: 40px"
         ></i>
+        </a>
     </div>
-
     <div>
+        <a href="/post">
         <i
                 class="fa-solid fa-comments"
-                style="color: #999999; line-height: 40px"
         ></i>
+        </a>
     </div>
-
     <div>
+        <a href="/mypage">
         <i
                 class="fa-solid fa-user"
-                style="color: #999999; line-height: 40px"
         ></i>
+        </a>
     </div>
 </div>
 </footer>
+
 </body>
 </html>

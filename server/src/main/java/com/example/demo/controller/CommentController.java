@@ -72,8 +72,9 @@ public class CommentController {
 
 	@GetMapping("/comment/review")
 	@ResponseBody
-	public List<ReviewCommentDTO> readReviewComment(@RequestParam("id") int reviewId){
-		return reviewCommentDAO.readReviewCommentBy("review_id", String.valueOf(reviewId));
+	public List<ReviewCommentDTO> readReviewComment(@RequestParam("id") int reviewId, @RequestParam("startPoint") int startPoint, @RequestParam("count") int count){
+		System.out.println(String.format("%d, %d", startPoint,count));
+		return reviewCommentDAO.readReviewCommentByLimit("review_id", String.valueOf(reviewId), startPoint, count);
 	}
 
 	@GetMapping("/comment/review/delete")

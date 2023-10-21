@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>Title</title>
-    <style>
-        #post{
-        border: 1px solid black;
-        }
-    </style>
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/css/ui.css" /> -->
+    <link rel="stylesheet" href="/css/ui.css"/>
+    <link rel="stylesheet" href="/css/store.css"/>
 </head>
 <body>
-<h3>가게정보 리스트</h3>
-<button>정렬</button>
-<!--<button>최신 등록순</button>-->
-<!--<button>좋아요 많은 가게 순</button>-->
-<div>
-    <div id="post" th:if="${list}" th:each="dto:${list}">
-        가게명:
-        <div th:text="${dto.storeName}"></div>
-        가게설명:
-        <div th:text="${dto.storeDesc}"></div>
-        가게id:
-        <div th:text="${dto.storeId}"></div>
-        <a th:href="@{/store/detail(storeId=${dto.storeId})}">상세페이지로</a><br/>
-        <!--    대표이미지 출력    -->
-    </div>
-    <a th:href="@{/store/write}">가게 작성</a>
-    <h3 th:if="${msg}" th:text="${ msg }"></h3>
-</div>
-<footer th:insert="ui/nav :: nav"></footer>
+<div class="app-body">
+    <div class="content">
+        <div class="container">
+            <h3>Store Board</h3>
+            <div class="btnList">
+                <span>👍Best</span>
+                <span>😲Recent</span>
+                <span>💖Like</span>
+            </div>
+            <div class="storeList">
+                <a class="store-insertBtn bold h5" th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게
+                    등록</a>
+                <div class="storeBox" th:if="${list}" th:each="dto:${list}">
+                    <!--위치 확인!!!!--><a th:href="@{/store/detail(storeId=${dto.storeId})}" >
+                    <div class="storeBoxTop">
+                            <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
+                            <div class="store-like">좋아요 수 : <span>5</span></div>
+                    </div>
+                    <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
+                    <div th:text="${dto.storeDesc}" class="store-desc"></div>
 
+                    </a>
+                    <br/>
+                </div>
+            </div>
+            <footer th:insert="ui/footer :: footer"></footer>
+        </div>
+    </div>
+    <footer th:insert="ui/footer"></footer>
+
+</div>
 </body>
 </html>

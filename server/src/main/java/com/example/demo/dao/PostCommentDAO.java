@@ -18,14 +18,18 @@ public interface PostCommentDAO {
     @Select("select post_comment_id, content, posted_date, post_id, user_id, parent_comment from post_comment")
     public List<PostCommentDTO>  readPostComment();
 
+    @Select("select count(*) from post_comment where post_id = #{postId}")
+    public int readPostCommentCount(int postId);
+
     @Update("update post_comment set content = #{content},posted_date=#{postedDate}, " +
             "user_id=#{memberId}, parent_comment=#{parentComment} where post_comment_id = #{postCommentId}")
+  
     public boolean updatePostComment(PostCommentDTO dto);
 
     @Delete("delete from post_comment where post_comment_id = #{postCommentId}")
     public boolean deletePostComment(int postCommentId);
 
-    @Select("select post_comment_id, nickname, content, posted_date, post_id, c.user_id, parent_comment"
+    @Select("select post_comment_id, nickname, content, posted_date, post_id, c.user_id, parent_comment "
         + "from (select post_comment_id, content, posted_date, post_id, user_id, parent_comment "
         + "from post_comment "
         + "where ${cn} = #{v}) as c "

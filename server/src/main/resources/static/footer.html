@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <style>
+      .bottom_menu {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 70px;
+        z-index: 99999;
+        border-top: 1px solid black;
+        background-color: white;
+        border-radius: 20px 20px 0 0; // 머지할 때 20 20 0 0 이 맞음
+      }
+      .bottom_menu > div {
+        float: left;
+        width: 20%;
+        height: 100%;
+        text-align: center;
+        padding-top: 13px;
+      }
+      .bottom_menu > div:hover {
+        background-color: rgb(240, 240, 240);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 100%; height: 500px; background-color: #97d5ff"></div>
+    <div
+      style="width: 100%; height: 500px; background-color: rgb(223, 250, 253)"
+    ></div>
+
+    <div class="bottom_menu">
+      <div>
+        <i
+          class="fa-solid fa-house"
+          style="color: #999999; line-height: 40px"
+        ></i>
+      </div>
+      <div>
+        <i
+          class="fa-solid fa-magnifying-glass"
+          style="color: #999999; line-height: 40px"
+        ></i>
+      </div>
+      <div>
+        <i
+          class="fa-solid fa-store"
+          style="color: #999999; line-height: 40px"
+        ></i>
+      </div>
+      <div>
+        <i
+          class="fa-solid fa-comments"
+          style="color: #999999; line-height: 40px"
+        ></i>
+      </div>
+      <div>
+        <i
+          class="fa-solid fa-user"
+          style="color: #999999; line-height: 40px"
+        ></i>
+      </div>
+    </div>
+  </body>
+</html>

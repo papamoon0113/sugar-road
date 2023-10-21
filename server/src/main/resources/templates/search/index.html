@@ -1,59 +1,112 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>검색</title>
-</head>
-<body>
-<h1>검색</h1>
-<div>
-<form action="/search" method="post">
-    검색어 입력 :
-    <input type="text" name="searchWord">
-    <input type="submit" value="검색">
-</form>
-</div>
-<div>
-
-</div>
-=======
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>검색</title>
+    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="/search" method="GET">
-        <input type="text" name="search">
-    </form>
-    <hr>
-<div th:if="${postList}">
-    <h2>post</h2>
-    <th:block th:each="post : ${postList}">
-        <a th:href="@{/review/detail(id=${post.postId})}">
-            <h3 th:text="|${post.title}:${post.content}|"></h3>
-        </a>
-    </th:block>
-</div>
-<div th:if="${reviewList}">
-    <h2>review</h2>
-    <th:block th:each="review : ${reviewList}">
-        <a th:href="@{/review/detail(id=${review.reviewId})}">
-            <h3 th:text="${review.content}"></h3>
-        </a>
-    </th:block>
-</div>
-<div th:if="${storeList}">
-    <h2>store</h2>
-    <th:block th:each="store : ${storeList}">
-        <a th:href="@{/detail(storeId=${store.storeId})}">
-            <h3 th:text="|${store.storeName}|"></h3>
-        </a>
-    </th:block>
-</div>
-<h3 th:if="${search}" th:text="${search}"></h3>
-    <footer th:insert="ui/nav :: nav"></footer>
->>>>>>> 3254908c4460ac75288f1e2ee252cd9fefa419ef
+<div class="app-body">
+        <div class="content">
+            <div class="header center"><img src="/images/icons/sugarroad.png"></div>
+            <div class="search-bar autocomplete">
+            <form action="/search" method="GET">
+                <img src="/images/icons/search.png" alt="">
+                <input type="text" class="input" name="search"
+                    th:value="${search}? ${search}" placeholder="찾고 싶은 가게 또는 디저트를 입력하세요" id = "searchInput" required>
+            </form>
+            </div>
+
+            <hr>
+            <div class="post-result" th:if="${postList}">
+                <h6>게시글</h6>
+                <div class="thumbnail pink1" th:each="post : ${postList}">
+                    <a th:href="@{/post/detail(id=${post.postId})}">
+                    <table class="v-table">
+                        <tr>
+                            <td>
+                                <p class="t5 bold" th:text="${post.title}"></p>
+                            </td>
+                            <td class="v-table-half right">
+                                <p class="t6">댓글 수: 3</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <p th:text="${post.content}"></p>
+                            </td>
+                        </tr>
+                    </table>
+                    </a>
+                </div>
+            </div>
+            <div class="review-result" th:if="${reviewList}">
+                <h6>리뷰</h6>
+                <div class="thumbnail skyblue" th:each="review : ${reviewList}">
+                    <a th:href="@{/review/detail(id=${review.reviewId})}">
+                        <table class="v-table">
+                            <tr>
+                                <td>
+                                    <p class="t5 bold" th:text="${review.storeId}"></p>
+                                </td>
+                                <td class="v-table-half right">
+                                    <p class="t6">댓글 수: 3</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p th:text="${review.content}"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="right">
+                                    <th:block th:each="num :${#numbers.sequence(0, review.star)}">
+                                        <span>★</span>
+                                    </th:block>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
+            </div>
+            <div class="store-result" th:if="${storeList}">
+                <h6 class="bold">가게</h6>
+                <div class="thumbnail lightgray" th:each="store : ${storeList}">
+                    <a th:href="@{/detail(storeId=${store.storeId})}">
+                        <table class="v-table">
+                            <tr>
+                                <td class="left">
+                                    <p class="t5 bold" th:text="${store.storeName}"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img th:src="${store.storeImagePath}? ${store.storeImagePath} : '/images/icons/bread.png'" alt="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right">
+                                    <p th:text="${store.phoneNumber}"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </a>
+                </div>
+            </div>
+            <h3 th:if="${noResult}" th:text="${noResult}"></h3>
+        </div>
+        <footer th:insert="ui/footer :: footer"></footer>
+    </div>
 </body>
+<script src = "/js/search.js"></script>
+<script th:inline="javascript">
+    var nameList = [[${nameList}]];
+    console.log(nameList);
+    autocomplete(document.querySelector("#searchInput"), nameList);
+
+</script>
 </html>
