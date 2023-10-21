@@ -30,4 +30,7 @@ public interface MenuDAO {
 
 	@Select("select menu_id, menu_name, price, menu_desc, menu_image_path from menu where store_id = #{storeId}")
 	public List<MenuDTO> readMenuBy(int storeId);
+
+	@Select("select menu_id, menu_name, price, menu_desc, menu_image_path from menu where menu_id = #{menuId}")
+	public MenuDTO readMenuById(int menuId);
 }

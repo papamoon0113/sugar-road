@@ -112,27 +112,35 @@ public class StoreController {
         return mav;
     }
 
-    // 이전
     @PostMapping("/store/edit") // 가게 수정
-    public String  updateStore(StoreDTO dto, String[] menuName, MultipartRequest mreq, int[] menuId, HttpSession session) {
+    public String updateStore(StoreDTO dto, String[] menuName, MultipartRequest mreq, int[] menuId, HttpSession session) {
         boolean result = dao.updateStore(dto);
         MenuDTO menuDto;
         String menuImagePath = "";
-        List<MultipartFile> menuList = mreq.getFiles("menuImages"); // 메뉴 이미지들
+        List<MultipartFile> menuList = mreq.getFiles("menuImages");
         for (int i = 0; i < menuList.size(); i++) {
-            menuImagePath = imageUtil.writeImage(menuList.get(i));
+            if (!menuList.get(i).isEmpty()) {
+                // 새로운 이미지가 업로드된 경우
+                menuImagePath = imageUtil.writeImage(menuList.get(i));
+            } else {
+                // 새로운 이미지를 업로드하지 않은 경우, 기존 이미지 URL 가져오기
+                MenuDTO existingMenu = mdao.readMenuById(menuId[i]);
+                if (existingMenu != null) {
+                    menuImagePath = existingMenu.getMenuImagePath();
+                }
+            }
             menuDto = new MenuDTO();
             menuDto.setMenuImagePath(menuImagePath);
-            menuDto.setStoreId(dto.getStoreId());// 앞서 저장한 가게 ID를 설정
-            menuDto.setMenuName(menuName[i]); // 메뉴 이름 저장
+            menuDto.setStoreId(dto.getStoreId());
+            menuDto.setMenuName(menuName[i]);
             menuDto.setMenuId(menuId[i]);
-            boolean menuResult = mdao.updateMenu(menuDto); // 메뉴 정보를 저장
+            boolean menuResult = mdao.updateMenu(menuDto);
             if (!menuResult) {
-                System.out.println("메뉴 수정을 실패했습니다.");
-                mav.setViewName("store/edit");
+                // 메뉴 수정 실패
+                return "redirect:/store/editView?storeId=" + dto.getStoreId();
             }
         }
-        System.out.println("가게 수정을 성공했습니다.");
+        // 가게 수정 성공
         return "redirect:/store/detail?storeId=" + dto.getStoreId();
     }
 
