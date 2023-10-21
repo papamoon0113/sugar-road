@@ -34,7 +34,7 @@ public class RecommendationController {
 	@ResponseBody
 	public RecommendationResultVO checkRecommendation(RecommendationDTO dto, HttpSession session){
 		dto.setUserId(session.getAttribute("nowLogin")!=null?session.getAttribute("nowLogin").toString():null);
-		System.out.println(dto.toString());
+
 		return RecommendationResultVO.builder()
 			.count(recommendationDAO.readRecommendationCount(dto))
 			.check(recommendationDAO.checkRecommendation(dto))
