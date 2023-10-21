@@ -6,38 +6,22 @@
     <title>Title</title>
     <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="/css/post.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
+<!--    <link rel="stylesheet" href="/css/bootstrap.css">-->
+    <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="post-index-container">
 <div class="app-body">
     <div class="content">
-    <div class="index-header">
-        <h1 class="bold">Free Board</h1>
-    </div>
+        <h3>Open Forum</h3>
 <div class="category">
-    <button onclick="location.href='/post?category=01'">
-        <div class="image-button">
-            <img src="/images/icons/bread.png" height="15px" alt="">
-            <span class="t6">빵리뷰</span>
-        </div>
-    </button>
-    <button onclick="location.href='/post?category=02'">
-        <div class="image-button">
-        <img src="/images/icons/daily.png" height="15px"  alt="">
-        <span class="t6">일상</span>
-        </div>
-    </button>
-    <button onclick="location.href='/post?category=03'">
-        <div class="image-button">
-        <img src="/images/icons/talk.png" height="15px" alt="">
-        <span class="t6">잡담</span>
-        </div>
-    </button>
+    <span>🍩빵리뷰</span>
+    <span>🚲일상</span>
+    <span>📝잡담</span>
 </div>
         <div class="search">
         <form action="/post" method="GET">
-            <img src="/images/icons/search.png" alt="">
+            <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
             <input type="text" class="input" name="search" placeholder="검색">
         </form>
         </div>
@@ -51,13 +35,13 @@
                     <p class="t5 bold" th:text="${l.title}"></p>
                 </td>
                 <td class="v-table-half right">
-                    <p class="t6">댓글 수: 3</p>
+                    <p class="t6" th:text="|댓글수: ${l.commentCount} 추천수:${l.recommendCount}|"></p>
                 </td>
 
             </tr>
             <tr class="center">
                 <td colspan="2">
-                    <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: 'https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg'" alt="img">
+                    <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: '/images/icons/sugarroad.png'" alt="img">
                 </td>
             </tr>
             <tr>

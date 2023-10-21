@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>title</title>
+</head>
+
+<body>
+<script th:inline="javascript">
+    var message = [[${msg}]];
+    var returnUrl = [[${url}]];
+    document.location.href = returnUrl;
+    alert(message);
+
+</script>
+</body>

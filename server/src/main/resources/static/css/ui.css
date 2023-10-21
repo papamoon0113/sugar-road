@@ -6,9 +6,10 @@
   --pink3:#F1ABCC;
   --skyblue:#C3DCF1;
   --purple:#AF96C7;
+  --lightlightgray:#eeeeee;
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
-  --white:#F5F5F5;  
+  --white:#fefefe;
 }
 
 .pink1 {
@@ -31,8 +32,14 @@
     background-color : var(--purple);
 }
 
+  .lightlightgray {
+      background-color : var(--lightlightgray);
+  }
 .lightgray {
     background-color : var(--lightgray);
+}
+.white {
+    background-color : var(--white);
 }
 
 .t-pink1 {
@@ -97,15 +104,17 @@ body > * {
   padding-top : 0.1%;
   display: block;
   background-color : var(--white);
+  overflow-y: hidden;
+  position: relative;
 }
 
 .content {
   width : 93.5%;
-  height : 90%;
+  height : 92vh;
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  border : 2px dotted #d3d3d3;  
+  /*border : 2px dotted #d3d3d3;*/
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -263,7 +272,32 @@ h6 {
     border : none;
 }
 
-/* 완성되면 밑에 지워야 함 */
-table, tr, th, td, div {
-  border : 0.5px dotted green
+.bottom_menu {
+  position: sticky;
+  bottom: 0;
+  left : 0;
+  margin : 0;
+  height : 8vh;
+  line-height: 8vh;
+
+  /* position: fixed; */
+  /* bottom: 0px; */
+  /* left: 0px; */
+  width: 100%;
+  /* height: 70px; */
+  z-index: 10;
+  border-top: 1px solid black;
+  background-color: var(--white);
+  border-radius: 20px 20px;
 }
+.bottom_menu > div {
+float: left;
+width: 20%;
+height: 100%;
+text-align: center;
+/* line-height: 100%; */
+}
+.bottom_menu > div:hover {
+background-color: rgb(240, 240, 240);
+}
+

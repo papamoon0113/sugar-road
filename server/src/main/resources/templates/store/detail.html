@@ -107,7 +107,6 @@
 
                 /*]]>*/
             </script>
-
             <button
                     is="custom-recommendation"
                     th:if="${session.nowLogin != null}"
@@ -121,12 +120,9 @@
             >리뷰 작성</a
             ><br/>
             <custom-review th:data-storeId="${list.storeId}"></custom-review>
-            <footer th:insert="ui/nav :: nav"></footer>
-        </div>
-        <div class="nav">
-            <footer th:insert="ui/nav :: nav"></footer>
         </div>
     </div>
+    <footer th:insert="ui/footer :: footer"></footer>
 </div>
 </body>
 <script src="/js/recommendation.js"></script>
