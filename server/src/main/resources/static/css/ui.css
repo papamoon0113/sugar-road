@@ -6,9 +6,10 @@
   --pink3:#F1ABCC;
   --skyblue:#C3DCF1;
   --purple:#AF96C7;
+  --lightlightgray:#eeeeee;
   --lightgray:#d3d3d3;
   --fontcolor:#333333;
-  --white:#FFFFFF;  
+  --white:#fefefe;
 }
 
 .pink1 {
@@ -31,8 +32,14 @@
     background-color : var(--purple);
 }
 
+  .lightlightgray {
+      background-color : var(--lightlightgray);
+  }
 .lightgray {
     background-color : var(--lightgray);
+}
+.white {
+    background-color : var(--white);
 }
 
 .t-pink1 {
@@ -107,7 +114,7 @@ body > * {
   margin-top : 1%;
   margin-left : auto;
   margin-right : auto;
-  border : 2px dotted #d3d3d3;  
+  /*border : 2px dotted #d3d3d3;*/
   overflow-y: scroll;
   overflow-x: hidden;
 }

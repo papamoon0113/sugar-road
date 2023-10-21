@@ -37,10 +37,11 @@ public class PostController {
     @Autowired
     PostCommentDAO postCommentDAO;
     @Autowired
+    RecommendationDAO recommendationDAO;
+    @Autowired
     ImageUtil imageUtil;
 
     boolean checkLongin(HttpSession session) {
-        System.out.println("nowLogin:" + session.getAttribute("nowLogin"));
         return session.getAttribute("nowLogin") != null;//
     }
 
@@ -96,8 +97,12 @@ public class PostController {
 //            list = postDAO.readPost();
 //        }
 
-        for (PostDTO p : list) {
+        for (PostDTO p : list) {//이미지 및 댓글 수 처리
             int id = p.getPostId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("P").referenceId(id).build();
+            p.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+            System.out.println("카운트:" + p.getRecommendCount());
+            p.setCommentCount(postCommentDAO.readPostCommentCount(id));
             List<String> iList = postImageDAO.readPostImage(id);
             if (iList != null) {
                 p.setPostImage(iList.toArray(new String[0]));
@@ -126,7 +131,7 @@ public class PostController {
 
         List<PostImageDTO> imageList = new ArrayList<>();
 
-        if (!dto.getUploadImages()[0].isEmpty()) {//파일 유무 검사
+        if (!dto.getUploadImages()[0].isEmpty()) { //파일 유무 검사
             imageList = saveImage(dto);//이미지 저장 및 dto 경로 저장
         } else {
             System.out.println("실행 안됨");

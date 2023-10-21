@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
   <title>Title</title>
   <link rel="stylesheet" href="/css/ui.css">
   <link rel="stylesheet" href="/css/review.css">
@@ -47,7 +49,7 @@
       </div>
       <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100">
       <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
-      <footer th:insert="ui/footer"></footer>
+      <footer th:insert="ui/footer :: footer"></footer>
   </div>
 </body>
 <script src="/js/recommendation.js"></script>

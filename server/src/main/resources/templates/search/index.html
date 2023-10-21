@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="/css/ui.css">
     <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="app-body">
+<div class="app-body">
         <div class="content">
             <div class="header center"><img src="/images/icons/sugarroad.png"></div>
             <div class="search-bar autocomplete">
@@ -98,7 +99,7 @@
             </div>
             <h3 th:if="${noResult}" th:text="${noResult}"></h3>
         </div>
-        <footer th:insert="ui/footer"></footer>
+        <footer th:insert="ui/footer :: footer"></footer>
     </div>
 </body>
 <script src = "/js/search.js"></script>

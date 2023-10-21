@@ -18,11 +18,17 @@
      border-radius: 10px;
 }
 .search{
+    display: flex;
+    height: 50px;
     width: 80%;
     border-radius: 10px;
     border: 2px solid #d3d3d3;
     margin: 0 auto;
     background-color: white;
+    align-items: center;
+}
+.search i{
+    font-size: 30px;
 }
 .search input{
     top: 6px;
