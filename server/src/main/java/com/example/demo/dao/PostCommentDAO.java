@@ -21,8 +21,8 @@ public interface PostCommentDAO {
     @Select("select count(*) from post_comment where post_id = #{postId}")
     public int readPostCommentCount(int postId);
 
+
     @Update("update post_comment set content = #{content},posted_date=now() where post_comment_id = #{postCommentId}")
-  
     public boolean updatePostComment(PostCommentDTO dto);
 
     @Delete("delete from post_comment where post_comment_id = #{postCommentId}")

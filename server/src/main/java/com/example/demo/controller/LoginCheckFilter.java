@@ -18,7 +18,7 @@ public class LoginCheckFilter implements Filter {
     //로그인이 필요하지 않은 페이지 url 요청들
     private static final String[] whitelist = { "/home", "/users/signup", "/users/login", "/logout",
             "/search", "/store", "/post", "/review/**", "/review", "/search/**", "/store/**", "/post/**",
-            "/images/**", "/js", "/js/**", "/css", "/css/**" };
+            "/images/**", "/js", "/js/**", "/css", "/css/**", "/comment/**", "/favicon.ico" };
 
     //화이트 리스트의 경우 인증 체크 스킵
     //simpleMatch : 파라미터 문자열이 특정 패턴에 매칭되는지를 검사
@@ -54,6 +54,14 @@ public class LoginCheckFilter implements Filter {
             //세션을 불러옴
             session = req.getSession(false);
             System.out.println("불러온 세션에 저장된 URL : " + requestURI);
+
+            if(requestURI.equals("/favicon.ico") || requestURI.equals("/favicon")){
+                requestURI = "/home";
+            }
+
+            if(requestURI.equals("/users/login.html")){
+                requestURI = "/home";
+            }
 
             if(session == null || session.getAttribute("nowLogin") == null){
                 //로그인 되지 않으면

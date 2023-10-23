@@ -15,9 +15,9 @@
         <div class="content">
             <h3>Open Forum</h3>
             <div class="category">
-                <span>🍩빵리뷰</span>
-                <span>🚲일상</span>
-                <span>📝잡담</span>
+                <span>🍩<br/>빵리뷰</span>
+                <span>🚲<br/>일상</span>
+                <span>📝<br/>정보</span>
             </div>
                     <div class="search">
                     <form action="/post" method="GET">
@@ -25,7 +25,17 @@
                         <input type="text" class="input" name="search" placeholder="검색">
                     </form>
                     </div>
-
+            <div class="right">
+                <label for="sort">
+                </label>
+                <form action="/post" method="GET" id="sort">
+                    <select class="form-select" name="cn" onchange="this.form.submit()" style="border: none;">
+                        <option value="" disabled selected>정렬</option>
+                        <option value="recommendation">인기순</option>
+                        <option value="posted_date">최신순</option>
+                    </select>
+                </form>
+            </div>
             <div class="post-list" th:if="${list}" >
                 <div th:each="l:${list}" class="post-thumbnail">
                 <a th:href=@{/post/detail(id=${l.postId})}>
@@ -46,7 +56,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="left">
-                                <span class="t5 bold" th:text="${l.userId}"></span>
+                                <span class="t5 bold" th:text="${l.userId}"></span>&nbsp
                                 <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
                             </td>
                         </tr>

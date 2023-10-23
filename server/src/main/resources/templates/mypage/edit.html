@@ -11,7 +11,8 @@
 <div class="app-body">
     <div class = "content">
 <!--        <div id="mypageBack">-->
-        <br>
+        <a href="javascript:history.back();" id="backBtn">◀</a>
+        <br><br><br>
         <h4 id="title">프로필 변경</h4>
         <br>
             <br>
@@ -42,7 +43,7 @@
             </form>
         </th:block>
             <h5 id="iframed" th:text="${msg}"></h5>
-        <div id="delete"><a href="/mypage/delete" style="text-decoration: none">회원정보 탈퇴</a></div>
+        <div id="delete"><a href="/mypage/delete" style="text-decoration: none">회원탈퇴</a></div>
 <!--        </div>-->
     </div>
 

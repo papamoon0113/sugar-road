@@ -17,14 +17,13 @@
     <link rel="icon" href="http://localhost:1023/favicon.ico">
     <style>
         .title{
-
         display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 130px;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
         }
         .main-title{
-            height: 60px;
+            height: 90px;
         }
         span > b {
         margin: 10px;
@@ -70,7 +69,7 @@ padding:20px 10px 5px;
         <div class="title">
             <img src="images/logonoback.png" class="main-title">
         </div>
-        <span><b>최근 등록한 가게🥐</b></span><br/>
+        <span><b>인기 급상승 게시물🥐</b></span><br/>
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" th:if="${list}" th:each="dto:${list}">
@@ -91,20 +90,20 @@ padding:20px 10px 5px;
         </div>
         <br/>
 
-        <span><b>최근 등록한 리뷰🧁</b></span><br/>
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" th:if="${list}" th:each="dto:${list}">
-                    <a th:href="@{/store/detail(storeId=${dto.storeId})}">
-                        <div class="storeBoxTop">
-                            <div class="store-like">좋아요 수 : <span>5</span></div>
-                        </div>
-                        <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
-                        <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
-                    </a>
-                </div>
-            </div>
-        </div>
+<!--        <span><b>최근 등록한 리뷰🧁</b></span><br/>-->
+<!--        <div class="swiper">-->
+<!--            <div class="swiper-wrapper">-->
+<!--                <div class="swiper-slide" th:if="${list}" th:each="dto:${list}">-->
+<!--                    <a th:href="@{/store/detail(storeId=${dto.storeId})}">-->
+<!--                        <div class="storeBoxTop">-->
+<!--                            <div class="store-like">좋아요 수 : <span>5</span></div>-->
+<!--                        </div>-->
+<!--                        <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>-->
+<!--                        <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <span><b>최근 등록한 게시글🧁</b></span><br/>
         <div class="swiper">
