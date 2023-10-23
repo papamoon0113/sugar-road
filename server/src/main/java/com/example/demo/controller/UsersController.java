@@ -5,6 +5,8 @@ import com.example.demo.domain.UsersDTO;
 import com.example.demo.util.ImageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +27,18 @@ public class UsersController {
     @Autowired
     ImageUtil imageUtil;
 
+    @Getter
+    @Setter
+    private String classRedirectURL; //GetMapping에서 리다이렉트URL을 전달받기 위한 전역변수
+
     @GetMapping({"/users/login", "/users/login.html"})
-    public String loginPage(){
+    public String loginPage(HttpServletRequest servletRequest,
+                            @RequestParam(defaultValue = "/home") String redirectURL){
+        System.out.println("getMapping으로 전달받은 URL : " + redirectURL);
+        servletRequest.setAttribute("redirectURL", redirectURL);
+        setClassRedirectURL(redirectURL); //전역 변수에 리다이렉트 URL 저장
+        System.out.println("전역 변수에 저장된 URL : " + getClassRedirectURL());
+
         return "users/login";
     }
 
@@ -65,28 +77,26 @@ public class UsersController {
     }
 
     //회원 로그인
-    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
+    @PostMapping(value = "/users/login")
     public String loginUsers(UsersDTO unknownDTO,
                              Model model,
-                             HttpServletRequest servletRequest,
-                             @RequestParam(defaultValue = "/home")String redirectURL,
-                             RedirectAttributes redirectAttributes){
+                             HttpServletRequest HttpRequest){
         List<UsersDTO> selectIdResult = usersDAO.readUserBy("user_id", unknownDTO.getUserId()); //입력한 아이디 검색 결과
+
+        String redirectURL = (String) HttpRequest.getAttribute("redirectURL"); //기존에 저장된 리다이렉트 URL 저장
+        System.out.println("PostMapping으로 전달받은 URL : " + redirectURL);
 
         if(selectIdResult.isEmpty()){
             System.out.println("존재하지 않는 아이디입니다");
-            //session.setAttribute("statusMsg", "존재하지 않는 아이디입니다");
             model.addAttribute("msg", "존재하지 않는 아이디입니다");
             return "/users/login";
         }
 
             String selectIdPwd = (selectIdResult.get(0)).getUserPassword(); //조회된 아이디의 패스워드
-
             //System.out.println("조회된 ID의 PW : " + selectIdPwd);
 
             if (selectIdPwd.compareTo(unknownDTO.getUserPassword()) != 0) { //입력한 패스워드와 계정의 패스워드가 일치하지 않으면
                 System.out.println("패스워드가 일치하지 않습니다");
-                //session.setAttribute("statusMsg", "패스워드가 일치하지 않습니다");
                 model.addAttribute("msg", "패스워드가 일치하지 않습니다");
                 return "/users/login";
             } else {
@@ -94,18 +104,17 @@ public class UsersController {
                 System.out.println("로그인에 성공했습니다");
 
                 //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
-                HttpSession session = servletRequest.getSession();
-                //String redirectURL = (String) servletRequest.getAttribute("redirectURL");
+                HttpSession session = HttpRequest.getSession();
 
                 //로그인 성공한 유저의 ID 정보를 값으로 갖는 "nowLogin" 세션 생성
                 session.setAttribute("nowLogin", selectIdResult.get(0).getUserId());
-                //session.setAttribute("statusMsg", "로그인에 성공하였습니다");
-                session.setAttribute("status", "loging");
+                //session.setAttribute("status", "loging");
 
-                System.out.println(redirectURL);
-                //로그인에 성공하면 마이페이지로 이동
-                //추후 홈.html으로 수정예정
-                return "redirect:" + redirectURL;
+                session.setAttribute("redirectURL", getClassRedirectURL()); //세션에 기존에 저장되었던 리다이렉트 URL 저장
+
+                System.out.println("새로 생성된 session에 저장된 URL : " + getClassRedirectURL());
+                //로그인에 성공하면 페이지 이동
+                return "redirect:" + getClassRedirectURL();
             }
     }
 

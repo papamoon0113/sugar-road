@@ -3,10 +3,10 @@ package com.example.demo.controller;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Component
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Bean
     public FilterRegistrationBean<Filter> logFilter(){

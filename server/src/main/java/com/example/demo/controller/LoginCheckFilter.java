@@ -17,7 +17,8 @@ public class LoginCheckFilter implements Filter {
 
     //로그인이 필요하지 않은 페이지 url 요청들
     private static final String[] whitelist = { "/home", "/users/signup", "/users/login", "/logout",
-            "/search", "/store", "/post", "/review/**", "/review", "/search/**", "/store/**", "/post/**", "/css/**" };
+            "/search", "/store", "/post", "/review/**", "/review", "/search/**", "/store/**", "/post/**",
+            "/images/**", "/js", "/js/**", "/css", "/css/**" };
 
     //화이트 리스트의 경우 인증 체크 스킵
     //simpleMatch : 파라미터 문자열이 특정 패턴에 매칭되는지를 검사
@@ -32,9 +33,18 @@ public class LoginCheckFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String requestURI = req.getRequestURI();
-        req.setAttribute("redirectURL", requestURI);
+        String redirectURL;
+
+        HttpSession session = req.getSession(false);
+        if(session != null) {
+            redirectURL = (String) session.getAttribute("redirectURL");
+        } else {
+            redirectURL = "redirectURL이 없음";
+        }
 
         System.out.println("인증 체크 필터 시작");
+        System.out.println("인증 체크 필터 시작 전 리퀘스트 URI : " + requestURI);
+        System.out.println("인증 체크 필터 시작 전 세션 속 리다이렉트 URI : " + redirectURL);
 
         //whitelist의 uri는 검증하지 않고 통과
         //isLoginCheckPath 메서드에서 매칭되지 않는 경우만 가져온다
@@ -42,7 +52,9 @@ public class LoginCheckFilter implements Filter {
         if(isLoginCheckPath(requestURI)){
             System.out.println("인증 체크 로직 실행 : " + requestURI);
             //세션을 불러옴
-            HttpSession session = req.getSession(false);
+            session = req.getSession(false);
+            System.out.println("불러온 세션에 저장된 URL : " + requestURI);
+
             if(session == null || session.getAttribute("nowLogin") == null){
                 //로그인 되지 않으면
                 System.out.println("인증되지 않은 사용자 요청");
@@ -51,6 +63,8 @@ public class LoginCheckFilter implements Filter {
                 res.sendRedirect("/users/login?redirectURL=" + requestURI);
                 return;
             }
+
+            session.setAttribute("redirectURL", redirectURL);
         }
         //로그인이 되어있으면 다음 단계로 넘어간다
         chain.doFilter(request, response);
