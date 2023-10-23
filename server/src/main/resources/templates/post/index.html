@@ -46,8 +46,8 @@
             </tr>
             <tr>
                 <td colspan="2" class="left">
-                    <span class="t5 bold" th:text="${l.userId}"></span>
-                    <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
+                    <span class="t5" th:text="${l.userId}"></span>
+                    &nbsp&nbsp<span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
                 </td>
             </tr>
         </table>

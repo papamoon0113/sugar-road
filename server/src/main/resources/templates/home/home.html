@@ -14,20 +14,18 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}"/>
     <style>
-        .title{
-
-        display: flex;
+    .title{
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 130px;
         }
         .main-title{
-            height: 60px;
+            height: 65px;
         }
         span > b {
         margin: 10px;
         }
-
         .text-box{
    height: 11vh;
     background-color: #fbe0e5;
@@ -45,7 +43,6 @@ padding:20px 10px 5px;
     background-color: #fefefe;
 }
     .swiper-slide{
-
     width: 28vw;
     height: 20vh;
     }
@@ -124,7 +121,7 @@ padding:20px 10px 5px;
 <script>
 const swiper = new Swiper('.swiper', {
 spaceBetween: 10,    // 슬라이드 사이 여백
- slidesPerView : '3', // 한 슬라이드에 보여줄 갯수
+ slidesPerView : '2.3', // 한 슬라이드에 보여줄 갯수
 centeredSlides: true,    //센터모드
 autoplay: {     //자동슬라이드 (false-비활성화)
     delay: 2500, // 시간 설정
@@ -133,21 +130,6 @@ autoplay: {     //자동슬라이드 (false-비활성화)
 loop: true,
 loopAdditionalSlides : 1
 });
-
-    <footer th:insert="ui/footer :: footer"></footer>
-</div>
-<script>
-    const swiper = new Swiper('.swiper', {
-    spaceBetween: 10,    // 슬라이드 사이 여백
-     slidesPerView : 2.3, // 한 슬라이드에 보여줄 갯수
-<!--    centeredSlides: true,   --> //센터모드
-    autoplay: {     //자동슬라이드 (false-비활성화)
-        delay: 1500, // 시간 설정
-        disableOnInteraction: false, // false-스와이프 후 자동 재생
-},
-    loop: true,
-    loopAdditionalSlides : 1
-    });
 </script>
 </body>
 </html>

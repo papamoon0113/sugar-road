@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.MenuDAO;
-import com.example.demo.dao.ReviewDAO;
-import com.example.demo.dao.StoreDAO;
+import com.example.demo.dao.*;
 import com.example.demo.domain.MenuDTO;
+import com.example.demo.domain.RecommendationDTO;
 import com.example.demo.domain.ReviewDTO;
 import com.example.demo.domain.StoreDTO;
 import com.example.demo.util.ImageUtil;
@@ -11,6 +10,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,13 +34,24 @@ public class StoreController {
     @Autowired
     ServletContext context;
     @Autowired
+    RecommendationDAO recommendationDAO;
+    @Autowired
     ImageUtil imageUtil;
+
+    boolean checkLongin(HttpSession session) {
+        return session.getAttribute("nowLogin") != null;//
+    }
     ModelAndView mav = new ModelAndView();
 
     @GetMapping("/store") // 글목록 출력
     public ModelAndView readStore() {
-        // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
         List<StoreDTO> list = dao.readStore();
+        for (StoreDTO s : list) {//이미지 및 댓글 수 처리
+            int id = s.getStoreId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("S").referenceId(id).build();
+            s.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+        }
+        System.out.println("추천 카운트"+list.get(0).getRecommendCount());
         if (list.size() != 0) {
             mav.addObject("list", list);
         } else {
@@ -62,7 +73,13 @@ public class StoreController {
     }
 
     @GetMapping("/store/write") // 글작성 페이지 출력
-    public String writePage() {
+    public String writePage(HttpSession session, Model model) {
+        if (!checkLongin(session)) {
+            model.addAttribute("msg", "로그인이 필요합니다");
+            model.addAttribute("url", "/users/login");
+            return "alert";
+//            return "redirect:/users/login.html";
+        }
         return "/store/write";
     }
 

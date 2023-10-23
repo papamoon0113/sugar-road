@@ -24,5 +24,5 @@ public class StoreDTO {
 	private String storeImagePath;
 	private String userId;
 	private List<MenuDTO> menuList;
-
+	private int recommendCount;
 }

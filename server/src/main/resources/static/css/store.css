@@ -13,7 +13,7 @@
       .btnList {
             margin-bottom: 13px;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: left;
       }
       .btnList > span {
         border: 1px solid rgb(228, 228, 228);
@@ -54,6 +54,7 @@
     border-radius: 10px;
     transition: .5s ease;
     cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
       }
       .storeBox > a{
       text-decoration: none;
@@ -75,15 +76,18 @@
         justify-content: space-between;
         height: 4vh;
       }
+         .storeBoxTop div > span{
+            font-size: 13px;
+         }
+           .btnList > span:hover{
+            background: whitesmoke;
+           }
         .store-name{
          font-weight: 600;
-             font-size: 17px;
+             font-size: 19px;
         }
         .store-desc{
             font-size: 14px;
-        }
-        .store-like{
-         font-size: 12px;
         }
       .storeImg {
         width: 100%;
@@ -160,7 +164,7 @@
                 }
  .store-insert-btnBox{
 display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 2vh;
     position: relative;
 bottom: -2vh;
