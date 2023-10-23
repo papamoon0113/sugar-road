@@ -9,7 +9,7 @@ body {
 }
 
 .top{
-    margin: 25% auto;
+    margin: 15% auto;
 }
 
 .formTop {
@@ -48,7 +48,7 @@ body {
 
 #signForm{
     width: 80%;
-    height: 43vh;
+    height: 46vh;
     padding-bottom: 5vh;
     border-radius: 10px;
     background: rgba(255, 255, 255, 80%);
