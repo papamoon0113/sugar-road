@@ -20,8 +20,9 @@ body {
 }
 
 #loginTitle{
-position: relative;
+    position: relative;
     top: 10%;
+    width: 60%;
 }
 
 #please{
