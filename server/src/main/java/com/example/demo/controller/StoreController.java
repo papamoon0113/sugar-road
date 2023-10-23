@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +41,8 @@ public class StoreController {
     @GetMapping("/store") // 글목록 출력
     public ModelAndView readStore() {
         // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
-        List<StoreDTO> list = dao.readStore();
-        if (list.size() != 0) {
+        List<StoreDTO> list = dao.readStoreLimit(0, 6);
+        if (!list.isEmpty()) {
             mav.addObject("list", list);
         } else {
             mav.addObject("msg", "추출된 결과가 없습니다.");
@@ -49,6 +50,28 @@ public class StoreController {
         mav.setViewName("store/store");
         return mav;
     }
+
+    @GetMapping("/store/get") // 글목록 출력
+    @ResponseBody
+    public List<StoreDTO> readStoreMore(
+        @RequestParam(value = "startPoint") int startPoint,
+        @RequestParam(value = "count") int count) {
+        // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
+        return dao.readStoreLimit(startPoint, count);
+    }
+
+//    @GetMapping("/store") // 글목록 출력
+//    public ModelAndView readStore() {
+//        // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
+//        List<StoreDTO> list = dao.readStore();
+//        if (list.size() != 0) {
+//            mav.addObject("list", list);
+//        } else {
+//            mav.addObject("msg", "추출된 결과가 없습니다.");
+//        }
+//        mav.setViewName("store/store");
+//        return mav;
+//    }
 
     @GetMapping("/store/detail") // 가게 상세정보 출력
     public ModelAndView readSelectStore(int storeId, HttpSession session) {

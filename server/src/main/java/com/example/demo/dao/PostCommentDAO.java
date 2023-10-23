@@ -12,7 +12,7 @@ public interface PostCommentDAO {
     public boolean createPostCommentChild(PostCommentDTO dto);
 
     @Insert("insert into post_comment ( content, posted_date, post_id, user_id) " +
-        "values (#{content},#{postedDate},#{postId},#{userId})")
+        "values (#{content},now(),#{postId},#{userId})")
     public boolean createPostComment(PostCommentDTO dto);
 
     @Select("select post_comment_id, content, posted_date, post_id, user_id, parent_comment from post_comment")
@@ -38,4 +38,15 @@ public interface PostCommentDAO {
         + "on u.user_id = c.user_id "
         + "order by ifnull(parent_comment, post_comment_id), posted_date;")
     public List<PostCommentDTO> readPostCommentBy(@Param("cn") String columnName, @Param("v") String value);
+
+    @Select("select post_comment_id, nickname, content, posted_date, post_id, c.user_id, parent_comment "
+        + "from (select post_comment_id, content, posted_date, post_id, user_id, parent_comment "
+        + "from post_comment "
+        + "where ${cn} = #{v}) as c "
+        + "join "
+        + "(select user_id, nickname from users) as u "
+        + "on u.user_id = c.user_id "
+        + "order by ifnull(parent_comment, post_comment_id), posted_date "
+        + "limit ${start}, ${count} ;")
+    public List<PostCommentDTO> readPostCommentByLimit(@Param("cn") String columnName, @Param("v") String value, @Param("start") int startPoint, @Param("count") int count);
 }

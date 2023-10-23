@@ -4,81 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="/css/bootstrap.css">-->
-    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="/css/ui.css">
     <link rel="stylesheet" href="/css/post.css">
-
+    <link rel="stylesheet" href="/css/loader.css">
+<!--    <link rel="stylesheet" href="/css/bootstrap.css">-->
     <script src="https://kit.fontawesome.com/64cc82a96f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="post-index-container">
-<div class="app-body">
-    <div class="content">
-        <h3>Open Forum</h3>
-<div class="category">
-    <span><a href="/post?category=01">🍩빵리뷰</a></span>
+    <div class="app-body">
+        <div class="content">
+            <h3>Open Forum</h3>
+            <div class="category">
+                <span>🍩빵리뷰</span>
+                <span>🚲일상</span>
+                <span>📝잡담</span>
+            </div>
+                    <div class="search">
+                    <form action="/post" method="GET">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
+                        <input type="text" class="input" name="search" placeholder="검색">
+                    </form>
+                    </div>
 
+            <div class="post-list" th:if="${list}" >
+                <div th:each="l:${list}" class="post-thumbnail">
+                <a th:href=@{/post/detail(id=${l.postId})}>
+                    <table class="v-table">
+                        <tr>
+                            <td>
+                                <p class="t5 bold" th:text="${l.title}"></p>
+                            </td>
+                            <td class="v-table-half right">
+                                <p class="t6" th:text="|댓글수: ${l.commentCount} 추천수:${l.recommendCount}|"></p>
+                            </td>
 
-        <span> <a href="/post?category=02">🚲일상</a></span>
-
-
-        <span><a href="/post?category=03">📝정보</a></span>
-
-</div>
-        <div class="search">
-        <form action="/post" method="GET">
-            <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
-            <input type="text" class="input" name="search" placeholder="검색">
-        </form>
+                        </tr>
+                        <tr class="center">
+                            <td colspan="2">
+                                <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: '/images/icons/sugarroad.png'" alt="img">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="left">
+                                <span class="t5 bold" th:text="${l.userId}"></span>
+                                <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)} : ${l.content}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </a>
+                </div>
+            </div>
+            <a class="post-button-index bold h5" th:if="${session.nowLogin != null}" th:href="@{/post/write}">글 작성</a>
         </div>
-        <div class="right">
-        <label for="sort">
-        </label>
-        <form  action="/post" method="GET" id="sort">
-            <select class="form-selector" name="cn" onchange="this.form.submit()" style="border: none">
-                <option value="" disabled selected>정렬</option>
-                <option value="recommendation">인기순</option>
-                <option value="posted_date">최신순</option>
-            </select>
-        </form>
-        </div>
-<div class="post-list" th:if="${list}" >
-    <div th:each="l:${list}" class="post-thumbnail">
-    <a th:href=@{/post/detail(id=${l.postId})}>
-        <table class="v-table">
-            <tr>
-                <td>
-                    <p class="t5 bold" th:text="${l.title}"></p>
-                </td>
-                <td class="v-table-half right">
-                    <p class="t6" th:text="|댓글수: ${l.commentCount} 추천수:${l.recommendCount}|"></p>
-                </td>
-
-            </tr>
-            <tr class="center">
-                <td colspan="2">
-                    <img th:src="${l.postImage.length} gt 0? ${l.postImage[0]}: '/images/icons/sugarroad.png'" alt="img">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="left">
-                    <span class="t5 bold" th:text="${l.userId}"></span>
-                    <span class="t5" th:text="${l.content.length} gt 20? ${#strings.substring(l.content, 0, 19)}+'...' : ${l.content}"></span>
-                </td>
-            </tr>
-        </table>
-    </a>
+    <div th:replace="ui/loader :: loader"></div>
+    <div th:replace="ui/loader :: pageLoader"></div>
+    <footer th:replace="ui/footer :: footer"></footer>
     </div>
-</div>
-<!--<div class="post-button-index">-->
-<!--    <button onclick="location.href='/post/write'"><span class="t6">작성</span></button>-->
-<!--    -->
-<!--</div>-->
-        <a class="post-button-index bold h5" th:if="${session.nowLogin != null}" th:href="@{/post/write}">글 작성</a>
-    </div>
-<footer th:insert="ui/footer :: footer"></footer>
-
-</div>
-</div>
 </body>
+<script src="/js/loader.js"></script>
+<script src="/js/post.js"></script>
 </html>

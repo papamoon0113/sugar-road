@@ -39,8 +39,8 @@ public class CommentController {
 
 	@GetMapping("/comment/post")
 	@ResponseBody
-	public List<PostCommentDTO> readPostComment(@RequestParam("id") int postId){
-		return postCommentDAO.readPostCommentBy("post_id", String.valueOf(postId));
+	public List<PostCommentDTO> readPostComment(@RequestParam("id") int postId, @RequestParam("startPoint") int startPoint, @RequestParam("count") int count){
+		return postCommentDAO.readPostCommentByLimit("post_id", String.valueOf(postId), startPoint, count);
 	}
 
 	@GetMapping("/comment/post/delete")
