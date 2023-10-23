@@ -15,6 +15,34 @@
     <link rel="stylesheet" href="/css/storeDetail.css"/>
     <link rel="stylesheet" href="/css/loader.css"/>
     <link rel="stylesheet" href="/css/review.css"/>
+    <style>
+        #recommendationBtn{
+        background: none;
+         border: none;
+        cursor: pointer;
+        }
+        #recommendationBtn:hover{
+            background: #c7c7c7;
+            border-radius: 10px;
+        }
+        #reviewWriteBtn{
+background: darkgrey;
+    color: #ffffff;
+    width: 150px;
+    height: 40px;
+    margin: 0 auto;
+    border: none;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin: 30px 0 10px;
+    cursor: pointer;
+        }
+#reviewWriteBtn:hover{
+background:#ffe2e7
+        }
+    </style>
 </head>
 <body>
 <div class="app-body">
@@ -26,7 +54,14 @@
         <div class="container">
             <div class="store-like-back">
                 <a href="javascript:history.back();">◀</a>
-                <span>💖</span>
+                <button id ="recommendationBtn"
+                        is="custom-recommendation"
+                        th:if="${session.nowLogin != null}"
+                        th:data-userId="${session.nowLogin}"
+                        data-referenceType="S"
+                        th:data-referenceId="${list.storeId}"
+                ></button>
+                <!--<span>💖</span>-->
             </div>
             <h3>
                 <div th:text="${list.storeName}" class="store-detail-name">가게명</div>
@@ -64,7 +99,7 @@
             </div>
             <!--메뉴 이름/이미지 없을 경우에 뜨지 않도록-->
             <div id="menu-container">
-                Menu
+                <b>Menu</b>
                 <hr/>
                 <div class="imageName-box">
                     <div th:each="mList : ${mlist}" id="menuBox">
@@ -76,13 +111,13 @@
                     </div>
                 </div>
             </div>
-            <div>가게 위치</div>
-            <button
+            <div id ="storeLocation"><b>가게 위치</b></div>
+     <!--       <button
                     is="custom-recommendation"
                     data-userId="추천테스트용"
                     data-referenceType="S"
                     th:data-referenceId="${list.storeId}"
-            ></button>
+            ></button>-->
 
             <div id="map" style="width: 100%; height: 200px"></div>
             <script th:inline="javascript">
@@ -109,18 +144,13 @@
 
                 /*]]>*/
             </script>
+<div>
             <button
-                    is="custom-recommendation"
-                    th:if="${session.nowLogin != null}"
-                    th:data-userId="${session.nowLogin}"
-                    data-referenceType="S"
-                    th:data-referenceId="${list.storeId}"
-            ></button>
-            <button
+                    id="reviewWriteBtn"
                     th:if="${session.nowLogin != null}"
                     th:onclick="'location.href=\'' + @{/review/write(storeId=${list.storeId})} + '\''"
             >리뷰 작성</button
-            ><br/>
+            ></div><br/>
             <custom-review th:data-storeId="${list.storeId}"></custom-review>
         </div>
     </div>

@@ -24,7 +24,7 @@
             </div>
             <hr>
             <div class="post-result" th:if="${postList}">
-                <h6>게시글</h6>
+                <h5 class="bold">게시글</h5>
                 <div class="thumbnail pink1" th:each="post : ${postList}">
                     <a th:href="@{/post/detail(id=${post.postId})}">
                     <table class="v-table">
@@ -38,8 +38,8 @@
 
                         </tr>
                         <tr>
-                            <td>
-                            <p th:text="${post.content}"></p>
+                            <td colspan="2">
+                            <p class="t5" th:text="${post.content}"></p>
                             </td>
                         </tr>
                     </table>
@@ -47,13 +47,13 @@
                 </div>
             </div>
             <div class="review-result" th:if="${reviewList}">
-                <h6>리뷰</h6>
+                <h5 class="bold">리뷰</h5>
                 <div class="thumbnail skyblue" th:each="review : ${reviewList}">
                     <a th:href="@{/review/detail(id=${review.reviewId})}">
                         <table class="v-table">
                             <tr>
                                 <td>
-                                    <p class="t5 bold" th:text="${review.storeId}"></p>
+                                    <p class="t5 bold" th:text="${review.userId}"></p>
                                 </td>
                                 <td class="v-table-half right">
                                     <p class="t6">댓글 수: 3</p>
@@ -76,8 +76,8 @@
                 </div>
             </div>
             <div class="store-result" th:if="${storeList}">
-                <h6 class="bold">가게</h6>
-                <div class="thumbnail lightgray" th:each="store : ${storeList}">
+                <h5 class="bold">가게</h5>
+                <div class="thumbnail lightlightgray" th:each="store : ${storeList}">
                     <a th:href="@{/store/detail(storeId=${store.storeId})}">
                         <table class="v-table">
                             <tr>
@@ -92,7 +92,7 @@
                             </tr>
                             <tr>
                                 <td class="right">
-                                    <p th:text="${store.phoneNumber}"></p>
+                                    <p th:text="${store.storeDesc}"></p>
                                 </td>
                             </tr>
                         </table>

@@ -42,6 +42,11 @@
                         <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/delete(id=${reviewDTO.reviewId})}">삭제</a>
                     </td>
                 </tr>
+                <tr>
+                  <td colspan="3" class = "review-image-box">
+                    <img th:src = ${reviewDTO.reviewImagePath} class = "review-image">
+                  </td>
+                </tr>
             </table>
             <link rel="stylesheet" href="/css/comment.css">
             <div is = "custom-comment" data-referenceType="review", th:data-referenceId="${reviewDTO.reviewId}" th:data-loginId="${session.nowLogin}" id = "comment-area"></div>

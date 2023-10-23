@@ -18,7 +18,7 @@ public interface ReviewCommentDAO {
         + "join "
         + "(select user_id, nickname from users) as u "
         + "on u.user_id = c.user_id "
-        + "order by ifnull(parent_comment, review_comment_id), posted_date;")
+        + "order by ifnull(parent_comment, review_comment_id), review_comment_id;")
     public List<ReviewCommentDTO> readReviewCommentBy(@Param("cn") String columnName, @Param("v") String value);
 
     @Select("select review_comment_id, nickname, content, posted_date, review_id, c.user_id, parent_comment "
@@ -28,7 +28,7 @@ public interface ReviewCommentDAO {
         + "join "
         + "(select user_id, nickname from users) as u "
         + "on u.user_id = c.user_id "
-        + "order by ifnull(parent_comment, review_comment_id), posted_date "
+        + "order by ifnull(parent_comment, review_comment_id), review_comment_id "
         + "limit ${start}, ${count} ;")
     public List<ReviewCommentDTO> readReviewCommentByLimit(@Param("cn") String columnName, @Param("v") String value, @Param("start") int startPoint, @Param("count") int count);
 
