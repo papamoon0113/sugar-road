@@ -10,16 +10,32 @@
     <link rel="stylesheet" href="/css/loader.css">
     <link rel="stylesheet" href="/css/comment.css">
     <style>
-        #comment-area{
-border: 1px solid lightgray;
+#comment-area{
+    border: 1px solid lightgray;
     border-radius: 5px;
+}
+#top-btn-box{
+    display: flex;
+    justify-content: space-between;
+}
+#recommendationBtn{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#recommendationBtn:hover{
+    background: #ebebeb;
+    border-radius: 10px;
 }
     </style>
 </head>
 <body>
 <div class="app-body">
     <div class="content">
+        <div id="top-btn-box">
         <a href="/post">◀</a>
+        <button is = "custom-recommendation" class = "no-border" data-referenceType="P" th:data-referenceId=${dto.postId} id="recommendationBtn"></button>
+        </div>
         <div class="post-header">
             <br/>
             <h4>자유 게시판</h4>
@@ -27,7 +43,7 @@ border: 1px solid lightgray;
         <hr class="hr-blue">
         <th:block th:if="${dto}">
             <div class="post-detail" style="min-height: 400px">
-            <h3 th:text="${dto.title}"></h3>
+            <h4 id ="post-title" th:text="${dto.title}"></h4>
                 <p class="right" th:text="${#temporals.format(dto.postedDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <hr>
                 <p th:text="${dto.content}"></p>
@@ -35,10 +51,7 @@ border: 1px solid lightgray;
                 <img th:src="${image}" alt="img">
             </div>
             </div>
-<!--            <div class="post-comment">-->
-<!--                <p>댓글 영역</p>-->
-<!--            </div>-->
-            <button is = "custom-recommendation" class = "no-border" data-referenceType="P" th:data-referenceId=${dto.postId}></button>
+
         </th:block>
         <div class="post-button" th:if="${session.nowLogin}==${dto.userId}">
             <button th:onclick="|location.href='@{/post/delete(id=${dto.postId})}'|">삭제</button>
