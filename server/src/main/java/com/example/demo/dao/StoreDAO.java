@@ -30,7 +30,7 @@ public interface StoreDAO {
     public List<StoreDTO> readStoreBy(@Param("cn") String columnName, @Param("v") String value);
 
     //R 가게 이름으로 불러오기
-    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_name like '%${search}%'")
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path from store where store_name like '%${search}%'")
     public List<StoreDTO> readStoreSearch(String search);
     // 수정할 가게 내용 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude from store where store_id =#{storeId}")

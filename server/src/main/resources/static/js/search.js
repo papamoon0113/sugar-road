@@ -4,7 +4,7 @@ function autocomplete(inp, arr) {
   var currentFocus;
   /*execute a function when someone writes in the text field:*/
   inp.addEventListener("input", function(e) {
-      console.log("input eventHandler!"); //                                                                                      *
+//      console.log("input eventHandler!"); //                                                                                      *
       var a, b, i, val = this.value;
       /*close any already open lists of autocompleted values*/
       closeAllLists();
@@ -35,7 +35,7 @@ function autocomplete(inp, arr) {
               (or any other open lists of autocompleted values:*/
               closeAllLists();
           });
-          console.log(b);
+//          console.log(b);
           a.appendChild(b);
         }
       }
