@@ -118,6 +118,9 @@
 }
 
 #logOut{
-
     text-align: center;
+}
+#logOut > a{
+       color: gray;
+       font-size: 14px;
 }

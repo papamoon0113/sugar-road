@@ -3,7 +3,7 @@
       margin-bottom: 4vh;
   }
 .store-like-back {
-margin: 1vh 2vh 5vh 0;
+margin: 1vh 0 5vh 0;
     display: flex;
     justify-content: space-between;
 }
@@ -23,7 +23,7 @@ text-decoration: none;
 }
 .store-image {
   width: 100%;
-height: 20vh;
+height: 25vh;
   object-fit: cover;
 }
 .address-phone-box {
@@ -53,6 +53,9 @@ font-size: 14px;
 }
 #menu-container > div{
 font-size: 18px;
+}
+#storeLocation{
+    margin: 10px 0 15px 5px;
 }
 .imageName-box{
 display: flex;

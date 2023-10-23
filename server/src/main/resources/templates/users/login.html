@@ -19,7 +19,7 @@
                 <br>
                 <input id="loginText2" type="password" name="userPassword" placeholder="Password" required><br>
                 <br>
-                <input type="submit" id="signIn" value="Sign in">
+                <input type="submit" id="signIn" value="Login">
              </form>
                 <h6 id="iframed" th:text="${msg}"></h6>
                 <br>
@@ -28,9 +28,7 @@
     </div>
     <div class = "nav">
         <footer th:insert="ui/footer :: footer"></footer>
-        <div th:replace="ui/loader :: pageLoader"></div>
     </div>
 </div>
 </body>
-<script src="/js/loader.js"></script>
 </html>
