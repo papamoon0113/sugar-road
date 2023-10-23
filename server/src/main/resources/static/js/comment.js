@@ -57,6 +57,19 @@ class Comment extends HTMLDivElement{
         .then(json => this.readJson(json))
         .then(() => {(document.querySelectorAll(".v-table")[nextIterator]).focus()});
     }
+    //진짜 난잡한 코드 댓글 구조 처음부터 다시짜고 제대로 다시 만들것
+    renderBeforeAll(){
+        this.innerHTML = "";
+        let lastIter = this.iterator + 1;
+        this.iterator = 0;
+
+        fetch(`/comment/${this.referenceType}?id=${this.referenceId}&startPoint=${0}&count=${lastIter}`)
+        .then(async (response) => {
+            if (!response.ok) throw await response.json();
+            return response.json();
+        })
+        .then(json => this.readJson(json));
+    }
 
     readJson(json){
         let comments = Object.values(json);
@@ -169,7 +182,7 @@ function writeComment(){
 
     fetch(api, commentInput.requestOptions)
     .then(() => {
-        document.querySelector("#comment-area").render();
+        document.querySelector("#comment-area").renderBeforeAll();
         commentInput.value = "";
         commentInput.requestOptions = {};
         commentInput.requestOptions.body = {};
