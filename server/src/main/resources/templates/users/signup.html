@@ -10,23 +10,26 @@
 <body>
 <div class="app-body">
     <div class = "content">
+        <div class="top">
             <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
+            <h5 id="iframed" th:text="${msg}"> </h5>
+        </div>
             <div id="signBox">
                 <form id="signForm" action="/users/signup" method="post" enctype="multipart/form-data">
+                    <div class="formTop">
                     <label class="photo" for="input-image">
                         <img src="../css/users/img/photo.png">
                     </label>
                     <h3 id="please">Please Sign Up</h3>
-                    <input id="inputText1" type="text" name="userId" placeholder="User Id" required><br>
-                    <input id="inputText2" type="password" name="userPassword" placeholder="Password" required><br>
-                    <input id="inputText3" type="text" name="userName" placeholder="User Name" required><br>
-                    <input id="inputText4" type="text" name="nickname" placeholder="User NickName" required><br>
-                    <input id="inputText5" type="text" name="userEmail" placeholder="User Email" required><br>
+                    </div>
+                    <input class="inputText" type="text" name="userId" placeholder="User Id" required><br>
+                    <input class="inputText" type="password" name="userPassword" placeholder="Password" required><br>
+                    <input class="inputText" type="text" name="userName" placeholder="User Name" required><br>
+                    <input class="inputText" type="text" name="nickname" placeholder="User NickName" required><br>
+                    <input class="inputText" type="text" name="userEmail" placeholder="User Email" required><br>
                     <input type="file" name="image" style="display:none" id="input-image"><br>
                     <input id="submitForm" type="submit" value="Sign Up"/>
                 </form>
-                <h5 id="iframed" th:text="${msg}"></h5>
-                <br>
             </div>
     </div>
     <div class = "nav">

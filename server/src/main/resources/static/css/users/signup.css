@@ -8,24 +8,17 @@ body {
     background-size: 140%;
 }
 
-#signBox{
-       position: relative;
-       top: 30%;
-       left: 10%;
-       width: 80%;
-       height: 50%;
-       border-radius: 10px;
-       background: rgba(255, 255, 255, 80%);
-       backdrop-filter: blur(2px);
+.top{
+
 }
 
 #loginTitle{
-position: relative;
+position: ;
     top: 10%;
 }
 
 #please{
-    position: relative;
+    position: ;
     right: 15%;
     top: 40px;
     font-weight: normal;
@@ -33,18 +26,18 @@ position: relative;
 }
 
 #signImg{
-position: relative;
+position: ;
     left: 30%;
     bottom: 8.5%;
 }
 
 #signForm{
-    position: relative;
+    position: ;
     bottom: 20%;
 }
 
-#inputText1{
-    position: relative;
+.inputText{
+    position: ;
         left: 3%;
         top: 65px;
         width: 70%;
@@ -57,64 +50,8 @@ position: relative;
         font-size: medium;
 }
 
-#inputText2{
-    position: relative;
-        left: 3%;
-        top: 80px;
-        width: 70%;
-        height: 30px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ADDFFB;
-        background: rgba(255, 255, 255, 0.0);
-        font-size: medium;
-}
-
-#inputText3{
-    position: relative;
-        left: 3%;
-        top: 95px;
-        width: 70%;
-        height: 30px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ADDFFB;
-        background: rgba(255, 255, 255, 0.0);
-        font-size: medium;
-}
-
-#inputText4{
-    position: relative;
-        left: 3%;
-        top: 110px;
-        width: 70%;
-        height: 30px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ADDFFB;
-        background: rgba(255, 255, 255, 0.0);
-        font-size: medium;
-}
-
-#inputText5{
-    position: relative;
-        left: 3%;
-        top: 125px;
-        width: 70%;
-        height: 30px;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        border-bottom: 1px solid #ADDFFB;
-        background: rgba(255, 255, 255, 0.0);
-        font-size: medium;
-}
-
 #iframed{
-        position: relative;
+        position: ;
         bottom: 120%;
 
         width: 100%;
@@ -124,13 +61,13 @@ position: relative;
 }
 
 .photo{
-    position: relative;
+    position: ;
     top: 70px;
     left: 30%;
 }
 
 #submitForm{
-    position: relative;
+    position: ;
     top: 125px;
     width: 60%;
     height: 39px;
