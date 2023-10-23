@@ -114,10 +114,10 @@
                     data-referenceType="S"
                     th:data-referenceId="${list.storeId}"
             ></button>
-            <a
+            <button
                     th:if="${session.nowLogin != null}"
-                    th:href="@{/review/write(storeId=${list.storeId})}"
-            >리뷰 작성</a
+                    th:onclick="'location.href=\'' + @{/review/write(storeId=${list.storeId})} + '\''"
+            >리뷰 작성</button
             ><br/>
             <custom-review th:data-storeId="${list.storeId}"></custom-review>
         </div>
