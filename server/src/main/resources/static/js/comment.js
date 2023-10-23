@@ -162,7 +162,7 @@ function editComment(id){
 function deleteComment(id){
     fetch(`/comment/${referenceTypeSave}/delete?id=${id}`)
     .then(() => {
-        document.querySelector("#comment-area").render();
+        document.querySelector("#comment-area").renderBeforeAll();
     });
 }
 
