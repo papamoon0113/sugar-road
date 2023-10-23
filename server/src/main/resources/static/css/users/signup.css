@@ -9,37 +9,59 @@ body {
 }
 
 .top{
+    margin: 25% auto;
+}
 
+.formTop {
+    display: flex;
+    justify-content: center;
 }
 
 #loginTitle{
-position: ;
-    top: 10%;
+    width: 60%;
 }
 
 #please{
-    position: ;
-    right: 15%;
-    top: 40px;
+    display: flex;
+    align-items: center;
+    margin-right: 5%;
+    margin-top: 11%;
     font-weight: normal;
     color: rgba(0, 0, 0, 0.60);
 }
 
+.photo{
+    position: relative;
+    bottom: 1vh;
+}
+
 #signImg{
-position: ;
+    position: ;
     left: 30%;
     bottom: 8.5%;
 }
 
-#signForm{
-    position: ;
-    bottom: 20%;
+.middle{
+    display: flex;
+    justify-content: center;
 }
 
+#signForm{
+    width: 80%;
+    height: 43vh;
+    padding-bottom: 5vh;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 80%);
+    backdrop-filter: blur(2px);
+}
+
+.formMiddle {
+    margin-top: 10%;
+}
+
+
 .inputText{
-    position: ;
-        left: 3%;
-        top: 65px;
+    margin-bottom: 5%;
         width: 70%;
         height: 30px;
         border-top: none;
@@ -58,12 +80,6 @@ position: ;
         height: 50px;
         border: none;
         color: crimson;
-}
-
-.photo{
-    position: ;
-    top: 70px;
-    left: 30%;
 }
 
 #submitForm{
