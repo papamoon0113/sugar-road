@@ -54,9 +54,7 @@
                 </a>
                 </div>
             </div>
-            <div class="post-button-index">
-                <button onclick="location.href='/post/write'"><span class="t6">작성</span></button>
-            </div>   
+            <a class="post-button-index bold h5" th:if="${session.nowLogin != null}" th:href="@{/post/write}">글 작성</a>
         </div>
     <div th:replace="ui/loader :: loader"></div>
     <div th:replace="ui/loader :: pageLoader"></div>

@@ -14,7 +14,7 @@
 <div class="app-body">
     <div class="content">
         <div class="post-header">
-            <a href="/post"><img src="/images/icons/back.png" alt="" width="10px"></a>
+            <a href="/post">◀</a>
             <h4>자유 게시판</h4>
 
         </div>
@@ -22,6 +22,7 @@
         <th:block th:if="${dto}">
             <div class="post-detail" style="min-height: 400px">
             <h3 th:text="${dto.title}"></h3>
+                <p class="right" th:text="${dto.postedDate}"></p>
                 <hr>
                 <p th:text="${dto.content}"></p>
             <div class="post-image" th:each=" image :${dto.postImage}">
@@ -38,13 +39,14 @@
             <button th:onclick="|location.href='@{/post/edit(id=${dto.postId})}'|">수정</button>
         </div>
         <div is = "custom-comment" data-referenceType="post" th:data-referenceId="${dto.postId}" th:data-loginId="${session.nowLogin}" id = "comment-area"></div>
+        <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100">
+        <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
     </div>
     <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100" style="width:90%">
     <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
     <div th:insert="ui/loader :: loader"></div>
     <footer th:insert="ui/footer :: footer"></footer>
     <div th:insert="ui/loader :: pageLoader"></div>
-
 </div>
 </body>
 <script src="/js/recommendation.js"></script>

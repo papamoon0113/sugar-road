@@ -273,6 +273,7 @@ h6 {
     border : none;
 }
 
+
 .bottom_menu {
   position: sticky;
   bottom: 0;
@@ -291,6 +292,7 @@ h6 {
   background-color: var(--white);
   border-radius: 20px 20px;
 }
+
 .bottom_menu > div {
 float: left;
 width: 20%;
@@ -301,4 +303,3 @@ text-align: center;
 .bottom_menu > div:hover {
 background-color: rgb(240, 240, 240);
 }
-

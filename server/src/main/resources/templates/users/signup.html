@@ -11,9 +11,13 @@
 <body>
 <div class="app-body">
     <div class = "content">
+        <div class="top">
             <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
+            <h5 id="iframed" th:text="${msg}"> </h5>
+        </div>
             <div id="signBox">
                 <form id="signForm" action="/users/signup" method="post" enctype="multipart/form-data">
+                    <div class="formTop">
                     <label class="photo" for="input-image">
                         <img src="../css/users/img/photo.png" id = "userImage">
                     </label>
@@ -26,8 +30,6 @@
                     <input type="file" name="image" style="display:none" id="input-image" onchange="changeProfile(this)"><br>
                     <input id="submitForm" type="submit" value="Sign Up"/>
                 </form>
-                <h5 id="iframed" th:text="${msg}"></h5>
-                <br>
             </div>
     </div>
     <div class = "nav">

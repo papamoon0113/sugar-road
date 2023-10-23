@@ -86,8 +86,18 @@ public class PostController {
                                  @RequestParam(required = false) String order) {
 
         ModelAndView mav = new ModelAndView();
-        System.out.println("index 실행"+search+cn+order);
-        List<PostDTO> list = postDAO.readPostOrderByLimit(search, cn , order, 0, 9);
+        System.out.println("index 실행"+search+cn);
+        List<PostDTO> list = null;
+        if(cn != null && cn.equals("recommendation")) {
+             list = postDAO.readPostByRecommendation();
+        }
+        else if(cn != null && cn.equals("posted_date")) {
+            order = "desc";
+            list = postDAO.readPostOrderByLimit(search, cn , order, 0, 9);
+        }
+        else {
+            list = postDAO.readPostOrderByLimit(search, cn , order, 0, 9);
+        }
 
         for (PostDTO p : list) {//이미지 및 댓글 수 처리
             int id = p.getPostId();
@@ -251,10 +261,10 @@ public class PostController {
 
     @GetMapping("/delete")
     public String deletePost(String id, HttpSession session) {
-        if (!checkLongin(session)) {
-            System.out.println("로그인 필요");
-            return "redirect:/users/login.html";
-        }
+//        if (!checkLongin(session)) {
+//            System.out.println("로그인 필요");
+//            return "redirect:/users/login.html";
+//        }
         if (postDAO.deletePost(id)) {
             System.out.println("성공");
         } else {
