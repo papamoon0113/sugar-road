@@ -158,8 +158,11 @@ function writeComment(){
     commentInput.requestOptions.method = "POST";
     commentInput.requestOptions.body[`${referenceTypeSave}Id`] = referenceIdSave;
     commentInput.requestOptions.body.content = commentInput.value;
-    let api = `/comment/${referenceTypeSave}/${commentInput.requestOptions.body["parentComment"]?"child/":""}${commentInput.requestOptions.body[referenceTypeSave + "CommentId"]?"edit":"write"}`
-
+    let commentId = commentInput.requestOptions.body[referenceTypeSave + "CommentId"];
+    let api = `/comment/${referenceTypeSave}/${commentInput.requestOptions.body["parentComment"]?"child/":""}${commentId?"edit":"write"}`
+    if(commentId){
+        document.querySelector(`#c${commentId}-content`).textContent = commentInput.value;
+    }
     console.log(commentInput.requestOptions);
 
     commentInput.requestOptions.body = JSON.stringify(commentInput.requestOptions.body);
