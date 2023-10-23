@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface PostCommentDAO {
     @Insert("insert into post_comment ( content, posted_date, post_id, user_id, parent_comment) " +
-            "values (#{content},#{postedDate},#{postId},#{userId},#{parentComment})")
+            "values (#{content},now(),#{postId},#{userId},#{parentComment})")
     public boolean createPostCommentChild(PostCommentDTO dto);
 
     @Insert("insert into post_comment ( content, posted_date, post_id, user_id) " +
@@ -21,8 +21,7 @@ public interface PostCommentDAO {
     @Select("select count(*) from post_comment where post_id = #{postId}")
     public int readPostCommentCount(int postId);
 
-    @Update("update post_comment set content = #{content},posted_date=#{postedDate}, " +
-            "user_id=#{memberId}, parent_comment=#{parentComment} where post_comment_id = #{postCommentId}")
+    @Update("update post_comment set content = #{content},posted_date=now() where post_comment_id = #{postCommentId}")
   
     public boolean updatePostComment(PostCommentDTO dto);
 
@@ -36,7 +35,7 @@ public interface PostCommentDAO {
         + "join "
         + "(select user_id, nickname from users) as u "
         + "on u.user_id = c.user_id "
-        + "order by ifnull(parent_comment, post_comment_id), posted_date;")
+        + "order by ifnull(parent_comment, post_comment_id), post_comment_id;")
     public List<PostCommentDTO> readPostCommentBy(@Param("cn") String columnName, @Param("v") String value);
 
     @Select("select post_comment_id, nickname, content, posted_date, post_id, c.user_id, parent_comment "
@@ -46,7 +45,7 @@ public interface PostCommentDAO {
         + "join "
         + "(select user_id, nickname from users) as u "
         + "on u.user_id = c.user_id "
-        + "order by ifnull(parent_comment, post_comment_id), posted_date "
+        + "order by ifnull(parent_comment, post_comment_id), post_comment_id "
         + "limit ${start}, ${count} ;")
     public List<PostCommentDTO> readPostCommentByLimit(@Param("cn") String columnName, @Param("v") String value, @Param("start") int startPoint, @Param("count") int count);
 }
