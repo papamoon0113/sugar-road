@@ -5,6 +5,7 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="../css/ui.css">
     <link rel="stylesheet" href="../css/users/signup.css">
+    <link rel="stylesheet" href="/css/loader.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
@@ -14,7 +15,7 @@
             <div id="signBox">
                 <form id="signForm" action="/users/signup" method="post" enctype="multipart/form-data">
                     <label class="photo" for="input-image">
-                        <img src="../css/users/img/photo.png">
+                        <img src="../css/users/img/photo.png" id = "userImage">
                     </label>
                     <h3 id="please">Please Sign Up</h3>
                     <input id="inputText1" type="text" name="userId" placeholder="User Id" required><br>
@@ -22,7 +23,7 @@
                     <input id="inputText3" type="text" name="userName" placeholder="User Name" required><br>
                     <input id="inputText4" type="text" name="nickname" placeholder="User NickName" required><br>
                     <input id="inputText5" type="text" name="userEmail" placeholder="User Email" required><br>
-                    <input type="file" name="image" style="display:none" id="input-image"><br>
+                    <input type="file" name="image" style="display:none" id="input-image" onchange="changeProfile(this)"><br>
                     <input id="submitForm" type="submit" value="Sign Up"/>
                 </form>
                 <h5 id="iframed" th:text="${msg}"></h5>
@@ -31,7 +32,20 @@
     </div>
     <div class = "nav">
         <footer th:insert="ui/footer :: footer"></footer>
+        <div th:replace="ui/loader :: pageLoader"></div>
     </div>
 </div>
 </body>
+<script src="/js/loader.js"></script>
+<script>
+function changeProfile(inputElement){ 	
+    document.querySelector("#userImage").src=URL.createObjectURL(inputElement.files[0]);
+    document.querySelector("#userImage").addEventListener("load", function(){
+        URL.revokeObjectURL(this.src);
+        this.style.width = "62px";
+        this.style.height = "62px";
+        this.style.borderRadius= "50%";
+    });
+} 
+</script>
 </html>

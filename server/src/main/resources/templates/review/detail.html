@@ -48,12 +48,9 @@
       </div>
       <input type="text" class = "v-item commentInput t5" id = "commentInput" th:disabled="${session.nowLogin == null}?'disabled'" maxlength="100">
       <button class = "t6 pink2 no-border" id = "commentBtn" onclick = "writeComment()" th:disabled="${session.nowLogin == null}?'disabled'">send</button>
-      <div id="loader" class = "loader display-none">
-        <div style = "margin : auto; text-align:center">
-            <div class ="dot-elastic"></div>
-        </div>
-      </div>
+      <div th:insert="ui/loader :: loader"></div>
       <footer th:insert="ui/footer :: footer"></footer>
+      <div th:insert="ui/loader :: pageLoader"></div>
   </div>
 </body>
 <script src="/js/recommendation.js"></script>

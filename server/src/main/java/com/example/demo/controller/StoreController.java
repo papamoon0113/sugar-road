@@ -41,7 +41,7 @@ public class StoreController {
     @GetMapping("/store") // 글목록 출력
     public ModelAndView readStore() {
         // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
-        List<StoreDTO> list = dao.readStoreLimit(0, 4);
+        List<StoreDTO> list = dao.readStoreLimit(0, 6);
         if (!list.isEmpty()) {
             mav.addObject("list", list);
         } else {

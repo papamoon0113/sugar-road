@@ -87,7 +87,7 @@ public class PostController {
 
         ModelAndView mav = new ModelAndView();
         System.out.println("index 실행"+search+cn+order);
-        List<PostDTO> list = postDAO.readPostOrderByLimit(search, cn , order, 0, 7);
+        List<PostDTO> list = postDAO.readPostOrderByLimit(search, cn , order, 0, 9);
 
         for (PostDTO p : list) {//이미지 및 댓글 수 처리
             int id = p.getPostId();
