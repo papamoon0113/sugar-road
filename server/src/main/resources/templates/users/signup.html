@@ -14,21 +14,25 @@
             <img id="loginTitle" src="../css/users/img/Sugar-Road Logo.png">
             <h5 id="iframed" th:text="${msg}"> </h5>
         </div>
-            <div id="signBox">
+            <div class="middle">
                 <form id="signForm" action="/users/signup" method="post" enctype="multipart/form-data">
                     <div class="formTop">
-                    <label class="photo" for="input-image">
-                        <img src="../css/users/img/photo.png">
-                    </label>
-                    <h3 id="please">Please Sign Up</h3>
+                        <h3 id="please">Please Sign Up</h3>
+                        <label class="photo" for="input-image">
+                            <img src="../css/users/img/photo.png">
+                        </label>
                     </div>
+                    <div class="formMiddle">
                     <input class="inputText" type="text" name="userId" placeholder="User Id" required><br>
                     <input class="inputText" type="password" name="userPassword" placeholder="Password" required><br>
                     <input class="inputText" type="text" name="userName" placeholder="User Name" required><br>
                     <input class="inputText" type="text" name="nickname" placeholder="User NickName" required><br>
                     <input class="inputText" type="text" name="userEmail" placeholder="User Email" required><br>
                     <input type="file" name="image" style="display:none" id="input-image"><br>
+                    </div>
+                    <div class="formBottom">
                     <input id="submitForm" type="submit" value="Sign Up"/>
+                    </div>
                 </form>
             </div>
     </div>
