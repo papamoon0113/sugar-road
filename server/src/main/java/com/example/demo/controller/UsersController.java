@@ -36,7 +36,9 @@ public class UsersController {
                             @RequestParam(defaultValue = "/home") String redirectURL){
         System.out.println("getMapping으로 전달받은 URL : " + redirectURL);
         servletRequest.setAttribute("redirectURL", redirectURL);
+
         setClassRedirectURL(redirectURL); //전역 변수에 리다이렉트 URL 저장
+
         System.out.println("전역 변수에 저장된 URL : " + getClassRedirectURL());
 
         return "users/login";

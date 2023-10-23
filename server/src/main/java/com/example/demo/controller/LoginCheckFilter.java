@@ -55,6 +55,14 @@ public class LoginCheckFilter implements Filter {
             session = req.getSession(false);
             System.out.println("불러온 세션에 저장된 URL : " + requestURI);
 
+            if(requestURI.equals("/favicon.ico") || requestURI.equals("/favicon")){
+                requestURI = "/home";
+            }
+
+            if(requestURI.equals("/users/login.html")){
+                requestURI = "/home";
+            }
+
             if(session == null || session.getAttribute("nowLogin") == null){
                 //로그인 되지 않으면
                 System.out.println("인증되지 않은 사용자 요청");
