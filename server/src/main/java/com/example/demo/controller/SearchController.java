@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.PostDAO;
-import com.example.demo.dao.ReviewDAO;
-import com.example.demo.dao.StoreDAO;
+import com.example.demo.dao.*;
 import com.example.demo.domain.PostDTO;
+import com.example.demo.domain.RecommendationDTO;
 import com.example.demo.domain.ReviewDTO;
 import com.example.demo.domain.StoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,10 @@ public class SearchController {
     @Autowired
     PostDAO postDAO;
     @Autowired
+    PostCommentDAO postCommentDAO;
+    @Autowired
+    RecommendationDAO recommendationDAO;
+    @Autowired
     StoreDAO storeDAO;
     @Autowired
     ReviewDAO reviewDAO;
@@ -41,8 +44,14 @@ public class SearchController {
         List<String> nameList = storeDAO.readStoreName();
         mav.addObject("nameList", nameList);
         List<PostDTO> postList = postDAO.readPostBySearch(search);
-        if (!postList.isEmpty())
+
+        if (!postList.isEmpty()) {
+            for(PostDTO p:postList){
+                p.setCommentCount(postCommentDAO.readPostCommentCount(p.getPostId()));
+                p.setRecommendCount(recommendationDAO.readRecommendationCount(RecommendationDTO.builder().referenceType("p").referenceId(p.getPostId()).build()));
+            }
             mav.addObject("postList", postList);
+        }
 
         List<ReviewDTO> reviewList = reviewDAO.readReviewSearch(search);
         if (!reviewList.isEmpty())
