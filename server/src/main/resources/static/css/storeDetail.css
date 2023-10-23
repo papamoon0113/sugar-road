@@ -27,7 +27,7 @@ height: 25vh;
   object-fit: cover;
 }
 .address-phone-box {
-  padding: 2vh 0 2vh 2vh;
+  padding: 4vh 0 3vh 2vh;
       font-size: 15px;
 }
 .addressBox,
@@ -45,7 +45,31 @@ font-size: 14px;
 .addressBox > i, .phoneBox > i, .descBox > i{
     margin-right: 10px;
 }
-#menu-container {
+ .swiper {
+    width: 600px;
+    border: 2px solid lightgray;
+    padding: 10px;
+    border-radius: 10px;
+    height: 30vh;
+    margin-bottom: 20px;
+}
+<!-- .swiper-slide{
+ width: 300px;
+ height: 300px;
+ }-->
+.swiper-slide > img{
+ width: 200px;
+height: 200px;
+    object-fit: cover;
+ }
+.swiper-slide > div{
+text-align: center;
+    margin-top: 5px;
+    line-height: 23px;
+    height: 23px;
+    font-size: 14px;
+ }
+/*#menu-container {
   border: 2px solid #cdcdcd;
   padding: 1vh;
   border-radius: 10px;
@@ -76,4 +100,4 @@ text-align: center;
     line-height: 23px;
     height: 23px;
     font-size: 14px;
-}
+}*/

@@ -157,14 +157,13 @@
                 overflow: hidden;
                 border: 0;*/
             }
-
             h6{
                 margin: 25px ;
                 font-weight: 700;
                 }
  .store-insert-btnBox{
 display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 2vh;
     position: relative;
 bottom: -2vh;
@@ -217,7 +216,7 @@ margin: 10px 0 10px 3vh;
 }
 .edit-menu-item > div > span{
 display: inline-block;
-    width: 25vw;
+    width: 90px;
         font-size: 13px;
 }
 .edit-menu-item > div > input{

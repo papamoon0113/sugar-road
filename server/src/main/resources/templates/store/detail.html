@@ -10,7 +10,12 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
-    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <title>가게 상세</title>
     <link rel="stylesheet" href="/css/ui.css"/>
     <link rel="stylesheet" href="/css/storeDetail.css"/>
 </head>
@@ -61,11 +66,11 @@
                 </div>
             </div>
             <!--메뉴 이름/이미지 없을 경우에 뜨지 않도록-->
-            <div id="menu-container">
-                Menu
+            <div class="swiper">
+                <b>Menu</b>
                 <hr/>
-                <div class="imageName-box">
-                    <div th:each="mList : ${mlist}" id="menuBox">
+                <div class="swiper-wrapper">
+                    <div th:each="mList : ${mlist}" class="swiper-slide">
                         <img
                                 th:src="@{|${mList.menuImagePath}|}"
                                 alt="메뉴 이미지"
@@ -74,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div>가게 위치</div>
+            <div><b>가게 위치</b></div>
             <button
                     is="custom-recommendation"
                     data-userId="추천테스트용"
@@ -104,7 +109,6 @@
                         map.setCenter(coords);
                     }
                 });
-
                 /*]]>*/
             </script>
             <button
@@ -124,6 +128,16 @@
     </div>
     <footer th:insert="ui/footer :: footer"></footer>
 </div>
+<script>
+    const swiper = new Swiper('.swiper', {
+    spaceBetween: 20,    // 슬라이드 사이 여백
+     slidesPerView :3, // 한 슬라이드에 보여줄 갯수
+    centeredSlides: true,    //센터모드
+    autoplay: false,
+    loop: true,
+    loopAdditionalSlides : 1
+    });
+</script>
 </body>
 <script src="/js/recommendation.js"></script>
 <script src="/js/review.js"></script>
