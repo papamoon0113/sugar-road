@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="loader">
-    <link rel="stylesheet" href="/css/loader.css">
 
-<div id="loader">
-    <div class ="dot-elastic"></div>
+<div th:fragment="loader" id="loader" class = "loader display-none">
+    <div style = "margin : auto; text-align:center">
+        <div class ="dot-elastic"></div>
+    </div>
 </div>
+
+<div th:fragment="pageLoader" id="page-loader" class = "display-none page-shadower">
+    <div style = "margin : auto; text-align:center; margin-top:50%;">
+        <div class ="dot-elastic"></div>
+    </div>
 </div>
 
 </body>

@@ -4,6 +4,11 @@ let referenceIdSave;
 let focusComment;
 let commentSave;
 let loader = document.querySelector("#loader");
+const sleep = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("foo");
+    }, 2000);
+});
 
 commentInput.requestOptions = {};
 commentInput.requestOptions.body = {};
@@ -27,13 +32,15 @@ class Comment extends HTMLDivElement{
         this.distance = 8;
         commentSave = this;
         document.querySelector(".content").addEventListener("scrollend", function(){
-            console.log("scroll-end!");
-            loader.style.display = "block";
-            loader.focus();
-            commentSave.render()
-            .then(() => {
-                // loader.style.display = "none";
-                console.log("loader remove!")}
+            toggleLoader();
+            sleep.then(commentSave.render()
+                    .then(() => {
+                        toggleLoader();
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                        toggleLoader();
+                    })
             );
         });
 
@@ -41,15 +48,23 @@ class Comment extends HTMLDivElement{
     }
 
     render(){
-        return fetch(`/comment/${this.referenceType}?id=${this.referenceId}&startPoint=${(this.iterator++)*this.distance}&count=${this.distance}`)
-        .then(response => {return response.json();})
-        .then(json => this.readJson(json));
+        let nextIterator = document.querySelectorAll(".v-table").length;
+        return fetch(`/comment/${this.referenceType}?id=${this.referenceId}&startPoint=${this.iterator}&count=${this.distance}`)
+        .then(async (response) => {
+            if (!response.ok) throw await response.json();
+            return response.json();
+        })
+        .then(json => this.readJson(json))
+        .then(() => {(document.querySelectorAll(".v-table")[nextIterator]).focus()});
     }
 
     readJson(json){
-        console.log(json);
-        Object.values(json).forEach(
+        let comments = Object.values(json);
+        this.iterator += comments.length;
+        comments.forEach(
             (comment) => {
+                console.log(comment);
+
                 this.innerHTML += `
 
                     <table class="v-table ${comment["parentComment"]?"child-comment":"comment"} ${comment["userId"] === this.loginId?"pink1":""}" id = "c${comment[this.referenceType + "CommentId"]}">
@@ -158,6 +173,8 @@ function writeComment(){
     });
 
 }
+
+
 // 답글이면 색깔 바꾸고 값 변경하는 기능
 
 // 수정 삭제 버튼 누르면 작동하는 기능

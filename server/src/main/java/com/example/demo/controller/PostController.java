@@ -87,15 +87,7 @@ public class PostController {
 
         ModelAndView mav = new ModelAndView();
         System.out.println("index 실행"+search+cn+order);
-        List<PostDTO> list = postDAO.readPostOrderBy(search, cn , order);
-//        if(search != null){
-//            list = postDAO.readPostBySearch(search);
-//        }
-//        else if(cn != null && order != null){
-//            list = postDAO.readPostOrderBY(cn, order);
-//        } else {
-//            list = postDAO.readPost();
-//        }
+        List<PostDTO> list = postDAO.readPostOrderByLimit(search, cn , order, 0, 7);
 
         for (PostDTO p : list) {//이미지 및 댓글 수 처리
             int id = p.getPostId();
@@ -113,6 +105,32 @@ public class PostController {
 
         mav.setViewName("post/index");
         return mav;
+    }
+
+    @GetMapping("/get")
+    @ResponseBody
+    public List<PostDTO> readPostMore(@RequestParam(required = false) String search,
+        @RequestParam(required = false) String cn,
+        @RequestParam(required = false) String order,
+        @RequestParam(value = "startPoint") int startPoint,
+        @RequestParam(value = "count") int count) {
+
+        ModelAndView mav = new ModelAndView();
+        System.out.println("index 실행"+search+cn+order);
+        List<PostDTO> list = postDAO.readPostOrderByLimit(search, cn , order, startPoint, count);
+
+        for (PostDTO p : list) {//이미지 및 댓글 수 처리
+            int id = p.getPostId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("P").referenceId(id).build();
+            p.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+            System.out.println("카운트:" + p.getRecommendCount());
+            p.setCommentCount(postCommentDAO.readPostCommentCount(id));
+            List<String> iList = postImageDAO.readPostImage(id);
+            if (iList != null) {
+                p.setPostImage(iList.toArray(new String[0]));
+            }
+        }
+        return list;
     }
 
     @GetMapping("/write")

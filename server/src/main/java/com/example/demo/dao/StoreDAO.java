@@ -12,6 +12,12 @@ public interface StoreDAO {
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  from store order by store_id desc")
     public List<StoreDTO> readStore();
 
+    @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path  "
+        + "from store "
+        + "order by store_id desc "
+        + "limit ${start}, ${count} ;")
+    public List<StoreDTO> readStoreLimit( @Param("start") int startPoint, @Param("count") int count);
+
     // 선택한 게시물 가게정보, 메뉴 불러오기
     @Select("select store_id, store_name, address, phone_number, store_desc, latitude, longitude, store_image_path, user_id  from store where store_id =#{storeId}")
     public StoreDTO readSelectStoreBy(int storeId);

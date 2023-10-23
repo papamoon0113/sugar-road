@@ -10,6 +10,7 @@
     <!-- <link rel="stylesheet" href="/src/main/resources/static/css/ui.css" /> -->
     <link rel="stylesheet" href="/css/ui.css"/>
     <link rel="stylesheet" href="/css/store.css"/>
+    <link rel="stylesheet" href="/css/loader.css">
 </head>
 <body>
 <div class="app-body">
@@ -36,10 +37,17 @@
                 </div>
             </div>
         </div>
+        <div id="loader" class = "loader display-none">
+            <div style = "margin : auto; text-align:center">
+                <div class ="dot-elastic"></div>
+            </div>
+        </div>
         <a class="store-insertBtn bold h5" th:if="${session.nowLogin != null}" th:href="@{/store/write}">가게
             등록</a>
     </div>
     <footer th:insert="ui/footer :: footer"></footer>
 </div>
 </body>
+<script src="/js/loader.js"></script>
+<script src="/js/store.js"></script>
 </html>

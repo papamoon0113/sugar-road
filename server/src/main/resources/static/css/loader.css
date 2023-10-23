@@ -11,9 +11,9 @@ https://codepen.io/nzbin/pen/GGrXbp
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  background-color: var(--pink2);
+  background-color: var(--pink3);
   color: var(--pink2);
-  animation: dot-elastic 1s infinite linear;
+  animation: dot-elastic 0.5s infinite linear;
 }
 .dot-elastic::before, .dot-elastic::after {
   content: "";
@@ -26,18 +26,18 @@ https://codepen.io/nzbin/pen/GGrXbp
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: var(--pink2);
+  background-color: var(--pink3);
   color: var(--pink2);
-  animation: dot-elastic-before 1s infinite linear;
+  animation: dot-elastic-before 0.5s infinite linear;
 }
 .dot-elastic::after {
   left: 15px;
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: var(--pink2);
+  background-color: var(--pink3);
   color: var(--pink2);
-  animation: dot-elastic-after 1s infinite linear;
+  animation: dot-elastic-after 0.5s infinite linear;
 }
 
 @keyframes dot-elastic-before {
@@ -92,90 +92,92 @@ https://codepen.io/nzbin/pen/GGrXbp
   }
 }
 
-.loader {
-    z-index: 99999;
-    position: absolute;
-    background-color: var(--white);
-    width : 100%;
-    height: 100%;
-    top : 0;
-    left : 0;
-}
-.fade-in {
-    animation: fadein 0.6s;
-    -moz-animation: fadein 0.6s; 
-    -webkit-animation: fadein 0.6s; 
-    -o-animation: fadein 0.6s; 
-}
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@-moz-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@-webkit-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@-o-keyframes fadein { 
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+#loader {
+  z-index: 99999;
+  position: absolute;
+  background-color: transparent;
+/*     opacity: 0.7; */
+  width : 100%;
+/*     height: 100%; */
+  top : 78vh;
+  left : 0;
 }
 
-.fade-out {
-    animation: fadeout 0.6s;
-  -moz-animation: fadeout 0.6s; /* Firefox */
-  -webkit-animation: fadeout 0.6s; /* Safari and Chrome */
-  -o-animation: fadeout 0.6s; /* Opera */
-  animation-fill-mode: forwards;
+.display-none {
+  display : none;
 }
-@keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+
+.fade-in {
+  animation: fadein 1s;
+  animation-iteration-count: initial;
+  -moz-animation: fadein 1s; 
+  -webkit-animation: fadein 1s; 
+  -o-animation: fadein 1s; 
 }
-@-moz-keyframes fadeout { /* Firefox */
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+@keyframes fadein {
+  from {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0;
+  }
 }
-@-webkit-keyframes fadeout { /* Safari and Chrome */
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+@-moz-keyframes fadein {
+  from {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0;
+  }
 }
-@-o-keyframes fadeout { /* Opera */
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+@-webkit-keyframes fadein {
+  from {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0;
+  }
+}
+@-o-keyframes fadein { 
+  from {
+      opacity: 0;
+  }
+
+  50% {
+      opacity: 1;
+  }
+
+  to {
+      opacity: 0;
+  }
+}
+
+#page-loader {
+  z-index: 99999;
+  position: absolute;
+  background-color: transparent;
+  width : 100%;
+  height: 100%; 
+  /* background-color: var(--white);  */
+  background-color: transparent; 
+
+  opacity: 0.7; 
+  top : 0;
+  left : 0;
+  padding-top:50%
 }
