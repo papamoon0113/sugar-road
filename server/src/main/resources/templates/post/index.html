@@ -25,7 +25,17 @@
                         <input type="text" class="input" name="search" placeholder="검색">
                     </form>
                     </div>
-
+            <div class="right">
+                <label for="sort">
+                </label>
+                <form action="/post" method="GET" id="sort">
+                    <select class="form-select" name="cn" onchange="this.form.submit()" style="border: none;">
+                        <option value="" disabled selected>정렬</option>
+                        <option value="recommendation">인기순</option>
+                        <option value="posted_date">최신순</option>
+                    </select>
+                </form>
+            </div>
             <div class="post-list" th:if="${list}" >
                 <div th:each="l:${list}" class="post-thumbnail">
                 <a th:href=@{/post/detail(id=${l.postId})}>

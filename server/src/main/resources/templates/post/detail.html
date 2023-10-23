@@ -27,6 +27,7 @@
     background: #ebebeb;
     border-radius: 10px;
 }
+
     </style>
 </head>
 <body>
@@ -44,7 +45,7 @@
         <th:block th:if="${dto}">
             <div class="post-detail" style="min-height: 400px">
             <h4 id ="post-title" th:text="${dto.title}"></h4>
-                <p class="right" th:text="${#temporals.format(dto.postedDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                <p class="t6 right" th:text="${#temporals.format(dto.postedDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
                 <hr>
                 <p th:text="${dto.content}"></p>
             <div class="post-image" th:each=" image :${dto.postImage}">
