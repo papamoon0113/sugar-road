@@ -10,50 +10,55 @@
 <body>
 <div class="app-body">
     <div class = "content">
-<!--        <div id="mypageBack">-->
-            <br>
-            <br>
-        <h4 id="title">MyPage</h4>
-            <br>
-            <br>
-            <th:block th:if="${userInfo}">
-                <img th:src="${userInfo.userImagePath}? ${userInfo.userImagePath} : '../css/users/img/default_user.png'" id="userImage">
-            <div class = "userInfo" th:each="vo : ${userInfo}">
-                <h5>[[${vo.nickname }]]</h5>
-                <h6>[[${vo.userEmail }]]</h6>
-            </div>
-        </th:block>
-        <h3 th:if="${msg}"  th:text="${msg}"></h3>
+        <div class="top">
+            <h4 id="title">MyPage</h4>
 
+            <th:block th:if="${userInfo}">
+                <div class="profileBox">
+                    <div class="imageDiv">
+                        <img th:src="${userInfo.userImagePath}? ${userInfo.userImagePath} : '../css/users/img/default_user.png'" id="userImage">
+                    </div>
+                    <div class = "userInfo" th:each="vo : ${userInfo}">
+                        <h5>[[${vo.nickname }]]</h5>
+                        <h6>[[${vo.userEmail }]]</h6>
+                    </div>
+                </div>
+            </th:block>
+                <h3 id="msg" th:if="${msg}" th:text="${msg}"></h3>
+        </div>
+        <div class="middle">
             <div class="menu">
                 <a href="/mypage/edit" style="text-decoration: none">
-                    <div class="menuButton" id="edit">
-                    <img src="../css/mypage/img/menuImg1.png" id="menuImg1">
-                        <h5><span class="menuText1">프로필 수정</span></h5>
+                    <div class="menuButton" id="button1">
+                    <img src="../css/mypage/img/menuImg1.png" class="menuImg">
+                        <h5 id="menuText1">프로필 수정</h5>
                     </div>
                 </a>
                 <a href="/mypage/mypost" style="text-decoration: none">
                     <div class="menuButton" id="button2">
-                    <img src="../css/mypage/img/menuImg2.png" id="menuImg2">
-                        <h5><span class="menuText2">내가 작성한 글</span></h5>
+                    <img src="../css/mypage/img/menuImg2.png" class="menuImg">
+                        <h5 id="menuText2">내가 작성한 글</h5>
                     </div>
                 </a>
                 <a href="/mypage" style="text-decoration: none">
                     <div class="menuButton" id="button3">
-                    <img src="../css/mypage/img/menuImg3.png" id="menuImg3">
-                        <h5><span class="menuText3">내가 작성한 댓글</span></h5>
+                    <img src="../css/mypage/img/menuImg3.png" class="menuImg">
+                        <h5 id="menuText3">내가 작성한 댓글</h5>
                     </div>
                 </a>
                 <a href="/mypage/mylike" style="text-decoration: none">
                     <div class="menuButton" id="button4">
-                    <img src="../css/mypage/img/menuImg4.png" id="menuImg4">
-                        <h5><span class="menuText4">좋아요 한 글</span></h5>
+                    <img src="../css/mypage/img/menuImg4.png" class="menuImg">
+                        <h5 id="menuText4">좋아요 한 글</h5>
                     </div>
                 </a>
             </div>
-
-        <div id="logOut"><a href="/logout" style="text-decoration: none">로그아웃</a></div>
-<!--        </div>-->
+        </div>
+        <div class="bottom">
+            <div id="logOut">
+                <a href="/logout" style="text-decoration: none">로그아웃</a>
+            </div>
+        </div>
     </div>
     <div class = "nav">
         <footer th:insert="ui/footer :: footer"></footer>

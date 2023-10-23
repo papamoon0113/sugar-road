@@ -16,13 +16,13 @@ public class LogFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+        //HttpServletResponse res = (HttpServletResponse) response;
 
         String requestURI = req.getRequestURI();
 
-        System.out.println("---Request(" + requestURI + ") 필터---");
+        System.out.println("---before chain.doFilter Request(" + requestURI + ") 필터---");
         chain.doFilter(request, response);
-        System.out.println("---Request(" + requestURI + ") 필터---");
+        System.out.println("---after chain.doFilter Request(" + requestURI + ") 필터---");
     }
 
     @Override
