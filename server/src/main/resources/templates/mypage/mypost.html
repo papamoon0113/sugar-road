@@ -17,17 +17,27 @@
             <div th:each="post : ${postList}" class="thumbnail">
                 <a th:href=@{/post/detail(id=${post.postId})}>
                     <table class="v-table">
-                        <tr>
-                            <td class="v-table-third" rowspan="2">
-                                <img th:src="${post.postImage.length} gt 0 ?${post.postImage[0]} :'/images/icons/sugarroad.png'" alt=""></td>
-                            <td th:text="${post.title}"></td>
-                        </tr>
-                        <tr>
-                            <td th:text="${post.content}"></td>
-                        </tr>
+                        <th:block th:if="${post.postImage.length} gt 0">
+                            <tr>
+                                <td class="v-table-third" rowspan="2">
+                                    <img th:src="${post.postImage.length} gt 0 ?${post.postImage[0]} :'/images/icons/sugarroad.png'" alt=""></td>
+                                <td class="bold" th:text="${post.title}"></td>
+                            </tr>
+                            <tr>
+                                <td th:text="${post.content}"></td>
+                            </tr>
+                        </th:block>
+                        <th:block th:unless="${post.postImage.length} gt 0">
+                            <tr>
+                                <td class="bold" th:text="${post.title}"></td>
+                            </tr>
+                            <tr>
+                                <td th:text="${post.content}"></td>
+                            </tr>
+                        </th:block>
                     </table>
                 </a>
-                <hr style="hr-blue">
+                <hr>
             </div>
 
         </div>

@@ -1,3 +1,9 @@
+/*mypost*/
+/*mylike*/
+.thumbnail > a {
+    text-decoration: none;
+}
+
 /* post/index */
 select option[value=""][disabled] {
 	display: none;
@@ -174,3 +180,5 @@ td > img{
       .post-button-index:hover{
          background-color: #cab9dc;
       }
+
+

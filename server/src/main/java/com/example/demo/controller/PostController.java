@@ -235,10 +235,10 @@ public class PostController {
 
     @GetMapping("/delete")
     public String deletePost(String id, HttpSession session) {
-        if (!checkLongin(session)) {
-            System.out.println("로그인 필요");
-            return "redirect:/users/login.html";
-        }
+//        if (!checkLongin(session)) {
+//            System.out.println("로그인 필요");
+//            return "redirect:/users/login.html";
+//        }
         if (postDAO.deletePost(id)) {
             System.out.println("성공");
         } else {

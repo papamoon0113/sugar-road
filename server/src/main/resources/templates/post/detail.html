@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="css/ui.css">
     <link rel="stylesheet" href="/css/post.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
@@ -20,6 +20,7 @@
         <th:block th:if="${dto}">
             <div class="post-detail" style="min-height: 400px">
             <h3 th:text="${dto.title}"></h3>
+                <p class="right" th:text="${dto.postedDate}"></p>
                 <hr>
                 <p th:text="${dto.content}"></p>
             <div class="post-image" th:each=" image :${dto.postImage}">
