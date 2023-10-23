@@ -8,10 +8,26 @@
     <link rel="stylesheet" href="/css/post.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
+<style>
+    #title{
+font-size: 20px;
+}
+    .v-table-third > img{
+    width: 120px;
+    object-fit: cover;
+    height: 120px;
+    margin-right: 15px;
+    }
+    #backBtn{
+    text-decoration: none;
+}
+</style>
 <body>
 <div class="app-body">
     <div class="content">
-        <h3>작성한 게시글 목록</h3>
+        <a href="javascript:history.back();" id="backBtn">◀</a>
+        <br/><br/>
+        <div id = "title"><b>작성한 게시글 목록</b></div>
         <hr>
         <div class="post-list" th:if="${postList}">
             <div th:each="post : ${postList}" class="thumbnail">

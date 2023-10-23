@@ -3,8 +3,8 @@ class Recommendation extends HTMLButtonElement {
         super();
         this.referenceType = this.getAttribute("data-referenceType");
         this.referenceId = this.getAttribute("data-referenceId");
-        this.btnText = document.createElement("h4");
-        this.appendChild(this.btnText);
+        this.classList.add("t4");
+        this.classList.add("bold");
 
         this.render();
         this.addEventListener("click", this.recommend);
@@ -21,16 +21,16 @@ class Recommendation extends HTMLButtonElement {
           .then(json => this.readJson(json));
     }
     readJson(json){
-      this.btnText.textContent = "♥ " + json['count'];
+      this.textContent = "♥ " + json['count'];
       this.check = json['check'];
       this.mark();
     }
     mark(){
       if (this.check === true){
-          this.btnText.style.color = 'var(--pink3)';
+          this.style.color = 'var(--pink3)';
       }
       else {
-          this.btnText.style.color = 'var(--lightgray)';
+          this.style.color = 'var(--lightgray)';
       }
     }
   }

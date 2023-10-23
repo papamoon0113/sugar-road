@@ -49,7 +49,7 @@
       }
       .storeBox {
     border: 2px solid var(--lightgray);
-    padding: 13px 8px;
+    padding: 13px 8px 0 8px;
     margin-bottom: 2vh;
     border-radius: 10px;
     transition: .5s ease;
