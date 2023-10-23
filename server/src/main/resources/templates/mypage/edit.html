@@ -24,7 +24,7 @@
             </label>
             <form id="editForm" action="/users/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="userId" th:value="${userInfo.userId}">
-                <input type="file" name="image" style="display:none" id="input-image">
+                <input type="file" name="image" style="display:none" id="input-image" onchange="changeProfile(this)">
                 <h5 class="editText">PW</h5>
                 <br>
                 <input class="editBox" type="password" name="userPassword" required><br>
@@ -51,4 +51,12 @@
     </div>
 </div>
 </body>
+<script>
+function changeProfile(inputElement){ 	
+    document.querySelector("#userImage").src=URL.createObjectURL(inputElement.files[0]);
+    document.querySelector("#userImage").addEventListener("load", function(){
+        URL.revokeObjectURL(this.src);
+    })
+} 
+</script>
 </html>

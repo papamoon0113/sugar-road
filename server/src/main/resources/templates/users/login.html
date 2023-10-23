@@ -5,6 +5,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="../css/ui.css">
     <link rel="stylesheet" href="../css/users/login.css">
+    <link rel="stylesheet" href="/css/loader.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <body>
@@ -27,7 +28,9 @@
     </div>
     <div class = "nav">
         <footer th:insert="ui/footer :: footer"></footer>
+        <div th:replace="ui/loader :: pageLoader"></div>
     </div>
 </div>
 </body>
+<script src="/js/loader.js"></script>
 </html>

@@ -6,6 +6,7 @@
   <title>Title</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
   <link rel="stylesheet" href="/css/review.css">
+  <link rel="stylesheet" href="/css/loader.css">
   <link rel="stylesheet" href="/css/ui.css">
 </head>
 <body>
@@ -58,6 +59,7 @@
     </form>
   </div>
   <footer th:insert="ui/footer"></footer>
+  <div th:insert="ui/loader :: pageLoader"></div>
 </div>
 </body>
 <script>
@@ -73,4 +75,5 @@ stars.forEach((star, index1) => {
   });
 });
 </script>
+<script src="/js/loader.js"></script>
 </html>

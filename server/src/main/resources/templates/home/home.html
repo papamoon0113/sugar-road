@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <title>Title</title>
     <link rel="stylesheet" href="/css/ui.css" th:href="@{/css/ui.css}"/>
+    <link rel="stylesheet" href="/css/loader.css">
+
     <style>
         .title{
 
@@ -119,6 +121,7 @@ padding:20px 10px 5px;
             </div>
         </div>
     </div>
+    <div th:insert="ui/loader :: pageLoader"></div>
     <footer th:insert="ui/footer :: footer"></footer>
 </div>
 <script>
@@ -134,13 +137,12 @@ loop: true,
 loopAdditionalSlides : 1
 });
 
-    <footer th:insert="ui/footer :: footer"></footer>
-</div>
-<script>
+</script>
+<!-- <script>
     const swiper = new Swiper('.swiper', {
     spaceBetween: 10,    // 슬라이드 사이 여백
-     slidesPerView : 2.3, // 한 슬라이드에 보여줄 갯수
-<!--    centeredSlides: true,   --> //센터모드
+     slidesPerView : 2.3, // 한 슬라이드에 보여줄 갯수 
+    centeredSlides: true,    //센터모드
     autoplay: {     //자동슬라이드 (false-비활성화)
         delay: 1500, // 시간 설정
         disableOnInteraction: false, // false-스와이프 후 자동 재생
@@ -148,6 +150,8 @@ loopAdditionalSlides : 1
     loop: true,
     loopAdditionalSlides : 1
     });
-</script>
+</script> -->
 </body>
+<script src="/js/loader.js"></script>
+
 </html>
