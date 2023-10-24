@@ -16,19 +16,19 @@
     <link rel="stylesheet" href="/css/loader.css"/>
     <link rel="stylesheet" href="/css/review.css"/>
     <style>
-        #recommendationBtn{
-        background: none;
-         border: none;
-        cursor: pointer;
-        }
-        #recommendationBtn:hover{
-            background: #ebebeb;
-            border-radius: 10px;
-        }
-        #reviewWriteBtn{
-background: darkgrey;
+    #recommendationBtn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    }
+    #recommendationBtn:hover{
+    background: #ebebeb;
+    border-radius: 10px;
+    }
+    #reviewWriteBtn{
+    background: darkgrey;
     color: #ffffff;
-    width: 150px;
+    width: 130px;
     height: 40px;
     margin: 0 auto;
     border: none;
@@ -39,8 +39,8 @@ background: darkgrey;
     margin: 30px 0 10px;
     cursor: pointer;
         }
-#reviewWriteBtn:hover{
-background:#ffe2e7
+    #reviewWriteBtn:hover{
+    background:#ffe2e7
         }
     </style>
 </head>
@@ -121,6 +121,10 @@ background:#ffe2e7
                     center: new kakao.maps.LatLng(33.450701, 126.570667),
                     level: 3
                 };
+                var icon = new kakao.maps.MarkerImage(
+                    '../../css/marker/Marker.png',
+                    new kakao.maps.Size(53, 60)
+                );
                 var map = new kakao.maps.Map(container, options);
                 var zoomControl = new kakao.maps.ZoomControl();
                 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
@@ -130,7 +134,8 @@ background:#ffe2e7
                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                         var marker = new kakao.maps.Marker({
                             map: map,
-                            position: coords
+                            position: coords,
+                            image: icon
                         });
                         map.setCenter(coords);
                     }

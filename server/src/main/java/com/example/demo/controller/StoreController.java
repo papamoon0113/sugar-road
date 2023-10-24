@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.MenuDAO;
+import com.example.demo.dao.RecommendationDAO;
 import com.example.demo.dao.ReviewDAO;
 import com.example.demo.dao.StoreDAO;
 import com.example.demo.domain.MenuDTO;
+import com.example.demo.domain.RecommendationDTO;
 import com.example.demo.domain.ReviewDTO;
 import com.example.demo.domain.StoreDTO;
 import com.example.demo.util.ImageUtil;
@@ -36,13 +38,20 @@ public class StoreController {
     ServletContext context;
     @Autowired
     ImageUtil imageUtil;
+    @Autowired
+    RecommendationDAO recommendationDAO;
     ModelAndView mav = new ModelAndView();
 
     @GetMapping("/store") // 글목록 출력
     public ModelAndView readStore() {
-        // 게시물 제목, (작성자 아이디), 조회수, 댓글수, 좋아요, 이미지가 담기고 최신순으로 3개가 담긴 storeDTO배열
-        List<StoreDTO> list = dao.readStoreLimit(0, 6);
-        if (!list.isEmpty()) {
+        List<StoreDTO> list = dao.readStore();
+        for (StoreDTO s : list) {//이미지 및 댓글 수 처리
+            int id = s.getStoreId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("S").referenceId(id).build();
+            s.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+        }
+        System.out.println("추천 카운트"+list.get(0).getRecommendCount());
+        if (list.size() != 0) {
             mav.addObject("list", list);
         } else {
             mav.addObject("msg", "추출된 결과가 없습니다.");

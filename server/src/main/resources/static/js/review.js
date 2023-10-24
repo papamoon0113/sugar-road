@@ -32,7 +32,7 @@ class Review extends HTMLElement {
                     </tr>
                     <tr>
                         <td colspan="2" class = "review-image-box">
-                          <img src = ${r["reviewImagePath"]} class = "review-image">
+                          <img src = '${r["reviewImagePath"]}' class = "review-image" style=${r["reviewImagePath"]==undefined?"display:none":""}>
                         </td>
                     </tr>
                     <tr>

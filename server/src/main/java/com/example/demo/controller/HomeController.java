@@ -31,7 +31,14 @@ public class HomeController {
     ModelAndView mav = new ModelAndView();
     @GetMapping("/home")
     public ModelAndView main(){
+
         List<StoreDTO> list = dao.readStore();
+        for (StoreDTO s : list) {//이미지 및 댓글 수 처리
+            int id = s.getStoreId();
+            RecommendationDTO recommendationDTO = RecommendationDTO.builder().referenceType("S").referenceId(id).build();
+            s.setRecommendCount(recommendationDAO.readRecommendationCount(recommendationDTO));
+            System.out.println("추천수"+s.getRecommendCount());
+        }
        mav.addObject("list", list);
 
 

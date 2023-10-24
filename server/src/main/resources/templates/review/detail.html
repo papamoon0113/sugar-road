@@ -14,7 +14,8 @@
 <body>
   <div class = "app-body">
       <div class = "content">
-            <div class ="center"><h3>자세히 보기</h3></div>
+          <a href="javascript:history.back();" id="backBtn" style="text-decoration:none">◀</a><br>
+          <div class ="center"><h3>자세히 보기</h3></div>
             <table class="v-table pink1">
                 <tr>
                     <td class = "v-table-half t4 bold">
@@ -36,14 +37,14 @@
                         <button is = "custom-recommendation" class = "no-border" data-referenceType="R" th:data-referenceId=${reviewDTO.reviewId}></button>
                     </td>
                     <td class = "t5 t-lightgray right">
-                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/edit(id=${reviewDTO.reviewId})}">수정</a>
+                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/edit(id=${reviewDTO.reviewId})}" style="text-decoration:none">수정</a>
                     </td>
                     <td class = "t5 center t-lightgray">
-                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:href = "@{/review/delete(id=${reviewDTO.reviewId})}">삭제</a>
+                        <a th:if="${session.nowLogin} == ${reviewDTO.userId}" th:onclick = "|fetch('/review/delete?id=${reviewDTO.reviewId}').then(()=>history.back())|">삭제</a>
                     </td>
                 </tr>
                 <tr>
-                  <td colspan="3">
+                  <td colspan="3" th:if = "${reviewDTO.reviewImagePath!=null}">
                     <img th:src = ${reviewDTO.reviewImagePath} class = "review-image">
                   </td>
                 </tr>

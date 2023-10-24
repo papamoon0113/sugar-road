@@ -45,8 +45,10 @@ public class ReviewController {
 	public String writeReview(ReviewDTO dto) {
 		System.out.println(dto.toString());
 		MultipartFile imageFile = dto.getUploadImage();
-		String reviewImagePath = imageUtil.writeImage(imageFile);
-		dto.setReviewImagePath(reviewImagePath);
+		if (!imageFile.isEmpty()){
+			String reviewImagePath = imageUtil.writeImage(imageFile);
+			dto.setReviewImagePath(reviewImagePath);
+		}
 		reviewDAO.createReview(dto);
 		return "redirect:/store/detail?storeId=" + dto.getStoreId();
 	}

@@ -12,6 +12,7 @@
 <body>
 <div class = "app-body">
   <div class = "content">
+    <a href="javascript:history.back();" id="backBtn" style="text-decoration:none">◀</a><br>
     <div class = "center t4 bold">리뷰 수정<span class = "t-lightgray t5">review</span></div>
     <form method = "post" action = "/review/edit" enctype="multipart/form-data">
       <input type ="hidden" th:value="${reviewDTO.userId}" name ="userId" required>

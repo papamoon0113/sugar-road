@@ -19,7 +19,7 @@
                 <form action="/search" method="GET">
                     <i class="fa-solid fa-magnifying-glass" style="color: #d2d7e0;"></i>
                     <input type="text" class="input" name="search"
-                        th:value="${search}? ${search}" placeholder="찾고 싶은 가게 또는 디저트를 입력하세요" id = "searchInput" required>
+                        th:value="${search}? ${search}" placeholder="찾고 싶은 가게 또는 디저트를 입력하세요" id = "searchInput"  autocomplete='off' required>
                 </form>
             </div>
             <hr>

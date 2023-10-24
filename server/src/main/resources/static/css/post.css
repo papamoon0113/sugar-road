@@ -3,7 +3,9 @@
 .thumbnail > a {
     text-decoration: none;
 }
-
+.form-select{
+margin: 10px;
+}
 /* post/index */
 select option[value=""][disabled] {
 	display: none;
@@ -164,7 +166,7 @@ td > img{
       .post-button-index{
        text-decoration: none;
        padding: 10px;
-       width: 96%;
+       width: 94%;
        display: inline-block;
        position: sticky;
        background-color: #C3DCF1;
