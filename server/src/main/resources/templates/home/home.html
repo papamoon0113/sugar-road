@@ -23,20 +23,20 @@
         height: 150px;
         }
         .main-title{
-            height: 90px;
+            height: 100px;
         }
         span > b {
         margin: 10px;
         }
 
         .text-box{
-   height: 11vh;
+   height: 10vh;
     background-color: #fbe0e5;
     color: #ffffff;
         text-align: center;
 }
   .text-box > h4{
-padding:20px 10px 5px;
+padding: 3vh 10px 5px;
       color: #ffffff;
   }
         .swiper {
@@ -44,9 +44,9 @@ padding:20px 10px 5px;
     height: 25vh;
     padding: 10px;
     background-color: #fefefe;
+    margin-top: 5px;
 }
     .swiper-slide{
-
     width: 28vw;
     height: 20vh;
     }
@@ -61,6 +61,10 @@ padding:20px 10px 5px;
         font-size: 12px;
         text-align: right;
         }
+        #text-second-box{
+          background-color: #c3dcf1;
+          margin-top: 4vh;
+        }
     </style>
 </head>
 <body>
@@ -69,13 +73,13 @@ padding:20px 10px 5px;
         <div class="title">
             <img src="images/logonoback.png" class="main-title">
         </div>
-        <span><b>인기 급상승 게시물🥐</b></span><br/>
+        <span><b>최근 등록한 가게🥐</b></span><br/>
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" th:if="${list}" th:each="dto:${list}">
                     <a th:href="@{/store/detail(storeId=${dto.storeId})}">
 
-                        <div class="store-like">좋아요 수 : <span>5</span></div>
+                        <div class="store-like">👍<span th:text="${dto.recommendCount}"></span></div>
 
                         <img th:src="@{|${dto.storeImagePath}|}" class="storeImg" alt="가게 대표 이미지"></img>
                         <div th:text="${dto.storeName}" class="store-name"><b>가게명</b></div>
@@ -105,19 +109,22 @@ padding:20px 10px 5px;
 <!--            </div>-->
 <!--        </div>-->
 
-        <span><b>최근 등록한 게시글🧁</b></span><br/>
+        <span><b>인기 급상승 게시글🧁</b></span><br/>
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" th:if="${postList}" th:each="dto:${postList}">
                     <a th:href="@{/post/detail(id=${dto.postId})}">
                         <div class="storeBoxTop">
-                            <div class="store-like">좋아요 수 : <span th:text="${dto.recommendCount}"></span></div>
+                            <div class="store-like">👍<span th:text="${dto.recommendCount}"></span></div>
                         </div>
                         <img th:src="${dto.postImage.length} gt 0? ${dto.postImage[0]} : '/images/icons/sugarroad.png' " class="storeImg" alt="가게 대표 이미지"></img>
                         <div th:text="${dto.title}" class="store-name"></div>
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="text-box" id ="text-second-box">
+            <h4>Recent Dessert</h4>i love sugar you too? hahaha
         </div>
     </div>
     <div th:insert="ui/loader :: pageLoader"></div>
@@ -126,7 +133,7 @@ padding:20px 10px 5px;
 <script>
 const swiper = new Swiper('.swiper', {
 spaceBetween: 10,    // 슬라이드 사이 여백
- slidesPerView : '3', // 한 슬라이드에 보여줄 갯수
+ slidesPerView : '2.3', // 한 슬라이드에 보여줄 갯수
 centeredSlides: true,    //센터모드
 autoplay: {     //자동슬라이드 (false-비활성화)
     delay: 2500, // 시간 설정

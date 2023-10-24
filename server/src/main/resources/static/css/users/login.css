@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family: 'NanumSquareNeo-Variable';
+}
 body {
   text-align:center;
 }
@@ -22,14 +37,14 @@ body {
 #loginTitle{
     position: relative;
     top: 10%;
-    width: 50%;
+    width: 60%;
 }
 
 #please{
     position: relative;
     right: 15%;
     top: 40px;
-    font-weight: normal;
+ /*   font-weight: normal;*/
     color: rgba(0, 0, 0, 0.60);
 }
 
@@ -50,7 +65,7 @@ position: relative;
         border-right: none;
         border-bottom: 1px solid #ADDFFB;
         background: rgba(255, 255, 255, 0.0);
-        font-size: large;
+        font-size: smaller;
 }
 
 #loginText2{
@@ -64,7 +79,7 @@ position: relative;
         border-right: none;
         border-bottom: 1px solid #ADDFFB;
         background: rgba(255, 255, 255, 0.0);
-        font-size: large;
+        font-size: smaller;
 }
 
 #iframed{

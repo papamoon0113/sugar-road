@@ -28,6 +28,7 @@
 <body>
 <div class = "app-body">
   <div class = "content">
+    <a href="javascript:history.back();" id="backBtn" style="text-decoration:none">◀</a><br>
     <div class = "center t4 bold">리뷰 작성<span class = "t-lightgray t5">review</span></div>
     <form method = "post" action = "/review/write" enctype="multipart/form-data">
       <input type ="hidden" name ="userId" th:value="${session.nowLogin}" required>

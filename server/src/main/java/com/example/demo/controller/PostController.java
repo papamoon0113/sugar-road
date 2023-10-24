@@ -48,29 +48,12 @@ public class PostController {
     //이미지 저장 method
     List<PostImageDTO> saveImage(PostDTO dto) {
         System.out.println("saveImage 실행");
-//        String path = "/images/post";
-//        String abPath = "C:/git/sugar-road/server/src/main/resources/static/images/post";
-//        File isDir = new File(abPath);
-//        if (!isDir.isDirectory()) {
-//            isDir.mkdirs();
-//        }
+
         List<PostImageDTO> imageList = new ArrayList<>();
         for (MultipartFile mfile : dto.getUploadImages()) {
             String postImagePath = imageUtil.writeImage(mfile);
             PostImageDTO postImageDTO = PostImageDTO.builder().postImagePath(postImagePath).build();
             imageList.add(postImageDTO);
-//            postImageDTO.setPostImagePath(path + "/" + fileName);
-//            String uuid = UUID.randomUUID().toString();
-//            String fileName = uuid + mfile.getOriginalFilename();
-//            PostImageDTO postImageDTO = new PostImageDTO();
-//            try {
-//                File f = new File(abPath + "/" + fileName);
-//                mfile.transferTo(f);
-//                postImageDTO.setPostImagePath(path + "/" + fileName);
-//                imageList.add(postImageDTO);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         }
         return imageList;
     }
