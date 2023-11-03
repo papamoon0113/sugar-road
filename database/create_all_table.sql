@@ -1,116 +1,256 @@
-CREATE TABLE users (
-   user_id VARCHAR(20) PRIMARY KEY,
-   user_password VARCHAR(20) NOT NULL,
-   user_name VARCHAR(20) NOT NULL,
-   nickname VARCHAR(20) NOT NULL,
-   user_email VARCHAR(40) NOT NULL,
-   user_image_path VARCHAR(255) 
+CREATE TABLE `dessert` (
+  `dessert_id` varchar(2) NOT NULL,
+  `dessert_desc` varchar(20) NOT NULL,
+  PRIMARY KEY (`dessert_id`)
 );
 
-CREATE TABLE dessert (
-   dessert_id VARCHAR(2) PRIMARY KEY ,
-   dessert_desc VARCHAR(20) NOT NULL
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_name` varchar(20) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `menu_desc` varchar(30) DEFAULT NULL,
+  `menu_image_path` varchar(255) DEFAULT NULL,
+  `dessert_id` varchar(2) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`menu_id`),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE
 );
 
-CREATE TABLE post_category (
-   post_category_id VARCHAR(2) PRIMARY KEY,
-   post_category_desc VARCHAR(20) NOT NULL
+CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(1000) NOT NULL,CREATE TABLE `dessert` (
+  `dessert_id` varchar(2) NOT NULL,
+  `dessert_desc` varchar(20) NOT NULL,
+  PRIMARY KEY (`dessert_id`)
 );
 
-CREATE TABLE store(
-   store_id INT PRIMARY KEY AUTO_INCREMENT,
-   store_name VARCHAR(20) NOT NULL,
-   address VARCHAR(40) NOT NULL,
-   phone_number VARCHAR(20) NOT NULL,
-   store_desc VARCHAR(100) NOT NULL,
-   latitude FLOAT, /* 위도 */
-   longitude FLOAT, /* 경도 */
-   store_image_path VARCHAR(255),
-   user_id VARCHAR(255),
-   
-   FOREIGN KEY(user_id) REFERENCES users(user_id)
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_name` varchar(20) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `menu_desc` varchar(30) DEFAULT NULL,
+  `menu_image_path` varchar(255) DEFAULT NULL,
+  `dessert_id` varchar(2) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`menu_id`),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE
+); 
+
+CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(1000) NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `post_category_id` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+); 
+
+CREATE TABLE `post_category` (
+  `post_category_id` varchar(2) NOT NULL,
+  `post_category_desc` varchar(20) NOT NULL,
+  PRIMARY KEY (`post_category_id`)
+); 
+
+CREATE TABLE `post_comment` (
+  `post_comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `content` varchar(100) NOT NULL,
+  `posted_date` date DEFAULT NULL,
+  `parent_comment` int(11) DEFAULT NULL,
+  PRIMARY KEY (`post_comment_id`),
+  KEY `user_id` (`user_id`),
+  KEY `post_id` (`post_id`),
+  KEY `parent_comment` (`parent_comment`),
+  CONSTRAINT `post_comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `post_comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
+  CONSTRAINT `post_comment_ibfk_3` FOREIGN KEY (`parent_comment`) REFERENCES `post_comment` (`post_comment_id`) ON DELETE CASCADE
+); 
+
+CREATE TABLE `post_image` (
+  `post_image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_image_path` varchar(255) DEFAULT NULL,
+  `post_id` int(11) NOT NULL,
+  PRIMARY KEY (`post_image_id`),
+  KEY `post_id` (`post_id`),
+  CONSTRAINT `post_image_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
+); 
+
+CREATE TABLE `recommendation` (
+  `recommendation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(1) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `reference_id` int(11) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  PRIMARY KEY (`recommendation_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `recommendation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+); 
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  `star` int(11) NOT NULL,
+  `review_image_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`review_id`),
+  KEY `user_id` (`user_id`),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE
+); 
+
+CREATE TABLE `review_comment` (
+  `review_comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `review_id` int(11) NOT NULL,
+  `content` varchar(100) NOT NULL,
+  `posted_date` date DEFAULT NULL,
+  `parent_comment` int(11) DEFAULT NULL,
+  PRIMARY KEY (`review_comment_id`),
+  KEY `user_id` (`user_id`),
+  KEY `review_id` (`review_id`),
+  KEY `parent_comment` (`parent_comment`),
+  CONSTRAINT `review_comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `review_comment_ibfk_2` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
+  CONSTRAINT `review_comment_ibfk_3` FOREIGN KEY (`parent_comment`) REFERENCES `review_comment` (`review_comment_id`) ON DELETE CASCADE
+); 
+
+CREATE TABLE `store` (
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_name` varchar(20) NOT NULL,
+  `address` varchar(40) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
+  `store_desc` varchar(100) NOT NULL,
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `store_image_path` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`store_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `store_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+); 
+
+CREATE TABLE `users` (
+  `user_id` varchar(20) NOT NULL,
+  `user_password` varchar(20) NOT NULL,
+  `user_name` varchar(20) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `user_email` varchar(40) NOT NULL,
+  `user_image_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+); 
+
+  `title` varchar(20) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `post_category_id` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`post_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 );
-   
-CREATE TABLE menu(
-   menu_id INT PRIMARY KEY AUTO_INCREMENT,
-   menu_name VARCHAR(20) NOT NULL,
-   price INT,
-   menu_desc VARCHAR(30),
-   menu_image_path VARCHAR(255),
-   dessert_id VARCHAR(2),
-   store_id INT NOT NULL,
-   
-   FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+
+CREATE TABLE `post_category` (
+  `post_category_id` varchar(2) NOT NULL,
+  `post_category_desc` varchar(20) NOT NULL,
+  PRIMARY KEY (`post_category_id`)
 );
 
-CREATE TABLE post (
-   post_id INT PRIMARY KEY AUTO_INCREMENT,
-   content VARCHAR(1000) NOT NULL,
-   title VARCHAR(20) NOT NULL,
-   posted_date DATE NOT NULL,
-   user_id VARCHAR(20) NOT NULL,
-   post_category_id VARCHAR(2) NOT NULL,
-
-   FOREIGN KEY(user_id) REFERENCES users(user_id)
+CREATE TABLE `post_comment` (
+  `post_comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `content` varchar(100) NOT NULL,
+  `posted_date` date DEFAULT NULL,
+  `parent_comment` int(11) DEFAULT NULL,
+  PRIMARY KEY (`post_comment_id`),
+  KEY `user_id` (`user_id`),
+  KEY `post_id` (`post_id`),
+  KEY `parent_comment` (`parent_comment`),
+  CONSTRAINT `post_comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `post_comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE,
+  CONSTRAINT `post_comment_ibfk_3` FOREIGN KEY (`parent_comment`) REFERENCES `post_comment` (`post_comment_id`) ON DELETE CASCADE
 );
 
-CREATE TABLE post_image (
-   post_image_id INT PRIMARY KEY AUTO_INCREMENT,
-   post_image_path VARCHAR(255),
-   post_id INT NOT NULL,
-   
-   FOREIGN KEY(post_id) REFERENCES post(post_id) ON DELETE CASCADE
+CREATE TABLE `post_image` (
+  `post_image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_image_path` varchar(255) DEFAULT NULL,
+  `post_id` int(11) NOT NULL,
+  PRIMARY KEY (`post_image_id`),
+  KEY `post_id` (`post_id`),
+  CONSTRAINT `post_image_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`) ON DELETE CASCADE
 );
 
-CREATE TABLE post_comment (
-   post_comment_id INT PRIMARY KEY AUTO_INCREMENT,
-   user_id VARCHAR(15) NOT NULL,
-   post_id INT NOT NULL,
-   content VARCHAR(100) NOT NULL,
-   posted_date DATE NOT NULL,
-   parent_comment INT,
-   
-   FOREIGN KEY(user_id) REFERENCES users(user_id),
-   FOREIGN KEY(post_id) REFERENCES post(post_id) ON DELETE CASCADE
+CREATE TABLE `recommendation` (
+  `recommendation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `reference_type` varchar(1) NOT NULL,
+  `user_id` varchar(20) NOT NULL,
+  `reference_id` int(11) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  PRIMARY KEY (`recommendation_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `recommendation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 );
 
-ALTER TABLE post_comment
-ADD FOREIGN KEY(parent_comment) REFERENCES post_comment(post_comment_id) ON DELETE CASCADE;
-
-CREATE TABLE review (
-   review_id INT PRIMARY KEY AUTO_INCREMENT,
-   user_id VARCHAR(15) NOT NULL,
-   store_id INT NOT NULL,
-   content VARCHAR(1000) NOT NULL,
-   posted_date DATE NOT NULL,
-   star INT NOT NULL,
-   review_image_path VARCHAR(255),
-   
-   FOREIGN KEY(user_id) REFERENCES users(user_id),
-   FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `posted_date` datetime NOT NULL,
+  `star` int(11) NOT NULL,
+  `review_image_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`review_id`),
+  KEY `user_id` (`user_id`),
+  KEY `store_id` (`store_id`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE CASCADE
 );
 
-CREATE TABLE review_comment(
-   review_comment_id INT PRIMARY KEY AUTO_INCREMENT,
-   user_id VARCHAR(15) NOT NULL,
-   review_id INT NOT NULL,
-   content VARCHAR(100) NOT NULL,
-   posted_date DATE NOT NULL,
-   parent_comment INT,
-
-   FOREIGN KEY(user_id) REFERENCES users(user_id),
-   FOREIGN KEY(review_id) REFERENCES review(review_id) ON DELETE CASCADE
+CREATE TABLE `review_comment` (
+  `review_comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(15) NOT NULL,
+  `review_id` int(11) NOT NULL,
+  `content` varchar(100) NOT NULL,
+  `posted_date` date DEFAULT NULL,
+  `parent_comment` int(11) DEFAULT NULL,
+  PRIMARY KEY (`review_comment_id`),
+  KEY `user_id` (`user_id`),
+  KEY `review_id` (`review_id`),
+  KEY `parent_comment` (`parent_comment`),
+  CONSTRAINT `review_comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `review_comment_ibfk_2` FOREIGN KEY (`review_id`) REFERENCES `review` (`review_id`) ON DELETE CASCADE,
+  CONSTRAINT `review_comment_ibfk_3` FOREIGN KEY (`parent_comment`) REFERENCES `review_comment` (`review_comment_id`) ON DELETE CASCADE
 );
 
-ALTER TABLE review_comment
-ADD FOREIGN KEY(parent_comment) REFERENCES review_comment(review_comment_id) ON DELETE CASCADE;
+CREATE TABLE `store` (
+  `store_id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_name` varchar(20) NOT NULL,
+  `address` varchar(40) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
+  `store_desc` varchar(100) NOT NULL,
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `store_image_path` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`store_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `store_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+);
 
-CREATE TABLE recommendation(
-   recommendation_id INT PRIMARY KEY AUTO_INCREMENT,
-   reference_type VARCHAR(1) NOT NULL,
-   user_id VARCHAR(20) NOT NULL,
-   reference_id INT NOT NULL,
-   posted_date DATE NOT NULL,
-   
-   FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+CREATE TABLE `users` (
+  `user_id` varchar(20) NOT NULL,
+  `user_password` varchar(20) NOT NULL,
+  `user_name` varchar(20) NOT NULL,
+  `nickname` varchar(20) NOT NULL,
+  `user_email` varchar(40) NOT NULL,
+  `user_image_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
 );
