@@ -18,6 +18,31 @@
 - **로그인 최소화** : 사용자가 손쉽게 여러 기능을 사용할 수 있도록
 - **전원 풀스택 개발** : 모든 팀원들이 풀스택 경험을 쌓을 수 있도록
 
+## 스택
+
+<h3>Environment</h3>
+<p>
+    <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" style = "display:inline">
+    <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/intellij idea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
+</p>
+<h3>Database</h3>
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<h3>Backend</h3>
+<img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+<h3>Frontend</h3>
+<p>
+    <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+    <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+    <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+</p>
+<h3>Communication</h3>
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+
+## 마일스톤 🚩
+
+![Untitled](readme_images/Untitled%204.png)
+
 ## 멋진 팀원들(+ `담당 기능`) 👏
 <table>
     <tbody>
@@ -74,30 +99,6 @@
     </tbody>
 </table>
 
-## 마일스톤 🚩
-
-![Untitled](readme_images/Untitled%204.png)
-
-## 스택
-
-<h3>Environment</h3>
-<p>
-    <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" style = "display:inline">
-    <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-    <img src="https://img.shields.io/badge/intellij idea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
-</p>
-<h3>Database</h3>
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
-<h3>Backend</h3>
-<img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
-<h3>Frontend</h3>
-<p>
-    <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-    <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-    <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
-</p>
-<h3>Communication</h3>
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 
 ## 시작 가이드
 
