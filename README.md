@@ -5,13 +5,13 @@
 배포 준비 중 😅
 
 ## 프로젝트 소개
-### 디저트 정보 공유 웹, **sugar road**
-#### (`2023.10.4` ~ `2023.10.24` | **20 days**)
+#### 디저트 정보 공유 웹, **sugar road**
+##### (`2023.10.4` ~ `2023.10.24` | **20 days**)
 
 - **“디저트 정보를 공유하고 소통할 수 있는 커뮤니티가 없어!”** 디저트를 사랑하는 팀원이 불편함을 느끼고 제안하여 시작된 프로젝트입니다.
 - sugar-road에서는 디저트 가게 정보를 손쉽게 찾아볼 수 있으며 커뮤니티에서 디저트를 사랑하는 사람들과 소통할 수 있습니다.
 
-### 신경 쓴 점 😁
+#### 신경 쓴 점 😁
 
 - **Mobile first** : 어디든 주변에 있는 디저트 가게를 볼 수 있도록
 - **Kakao map API** : 가게 정보와 더불어 위치도 쉽게 확인할 수 있도록
@@ -101,13 +101,13 @@
 
 ## 시작 가이드
 
-### Requirements
+#### Requirements
 
 - `Jdk 17` ([download](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html))
 - `MySQL` ([download](https://dev.mysql.com/downloads/mysql/))
 - `IntelliJ` ([download](https://www.jetbrains.com/idea/download/?section=windows)) : Optional, but recommended
 
-### Installation
+#### Installation
 
 1️⃣ **Git clone**
 
